@@ -16,6 +16,4 @@ public class Customer extends Person {
     public int getNumberOfUsers() {
         return numberOfUsers;
     }
-
-
 }
