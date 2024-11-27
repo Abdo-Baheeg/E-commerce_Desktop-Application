@@ -1,4 +1,4 @@
-package source.Products;
+package src.entities;
 public class Product {
     private int id;
     private String name;
@@ -37,7 +37,7 @@ public class Product {
         return name;
     }
     public void setCategory(String category) {
-        this.category = category;
+        this.category.name= category;
     }
     public String getDescription() {
         return description;
@@ -70,5 +70,13 @@ public class Product {
 
     public void setSoldItems(int soldItems) {
         this.soldItems = soldItems;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

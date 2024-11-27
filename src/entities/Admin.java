@@ -1,4 +1,4 @@
-package source.people;
+package src.entities;
 
 public class Admin extends Person {
     private String workingHours;

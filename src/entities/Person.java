@@ -1,4 +1,4 @@
-package source.people;
+package src.entities;
 
 import java.util.Date;
 import java.util.Calendar;
@@ -18,6 +18,14 @@ public abstract class Person {
     this.phone = phone;
     this.username = username;
     this.password = password;
+    }
+
+    public Person() {
+
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public enum Gender {
@@ -82,7 +90,6 @@ public abstract class Person {
 
     public void setAge() {
         Date today = new Date();
-
         // Convert both dates to Calendar objects
         Calendar dobCal = Calendar.getInstance();
         dobCal.setTime(this.dateOfBirth);

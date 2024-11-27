@@ -1,4 +1,4 @@
-package source.people;
+package src.entities;
 
 public class Customer extends Person {
     private float balance;
@@ -7,6 +7,11 @@ public class Customer extends Person {
         super(name, age, gender, address, phone, email);
         numberOfUsers++ ;
     }
+
+    public Customer(String username, String password, String dateOfBirth, double balance, String address, String gender) {
+        super();
+    }
+
     public float getBalance() {
         return balance;
     }
