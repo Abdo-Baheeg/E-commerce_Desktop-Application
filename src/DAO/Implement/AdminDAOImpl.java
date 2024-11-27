@@ -4,7 +4,7 @@ import src.DAO.AdminDAO;
 import src.entities.Admin;
 import src.entities.Customer;
 import src.entities.Product;
-import src.dataBase.DataBase;
+import src.database.Database;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,12 +15,12 @@ public class AdminDAOImpl implements AdminDAO {
     // Product Management
     @Override
     public void addProduct(Product product) {
-        DataBase.Products.add(product);
+        Database.Products.add(product);
     }
 
     @Override
     public Product getProductById(int productId) {
-        for (Product product : DataBase.Products) {
+        for (Product product : Database.Products) {
             if (product.getId() == productId) {
                 return product;
             }
@@ -30,9 +30,9 @@ public class AdminDAOImpl implements AdminDAO {
 
     @Override
     public void updateProduct(Product product) {
-        for (int i = 0; i < DataBase.Products.size(); i++) {
-            if (DataBase.Products.get(i).getId() == product.getId()) {
-                DataBase.Products.set(i, product);
+        for (int i = 0; i < Database.Products.size(); i++) {
+            if (Database.Products.get(i).getId() == product.getId()) {
+                Database.Products.set(i, product);
                 return;
             }
         }
@@ -40,18 +40,18 @@ public class AdminDAOImpl implements AdminDAO {
 
     @Override
     public void deleteProduct(int productId) {
-        DataBase.Products.removeIf(product -> product.getId() == productId);
+        Database.Products.removeIf(product -> product.getId() == productId);
     }
 
     @Override
     public List<Product> getAllProducts() {
-        return DataBase.Products;
+        return Database.Products;
     }
 
     // Admin Profile Management
     @Override
     public Admin getAdmin(String username) {
-        for (Admin admin : DataBase.Admins) {
+        for (Admin admin : Database.Admins) {
             if (admin.getUsername().equals(username)) {
                 return admin;
             }
@@ -62,12 +62,12 @@ public class AdminDAOImpl implements AdminDAO {
     // Customer Management
     @Override
     public ArrayList<Customer> getAllCustomers() {
-        return DataBase.Customers;
+        return Database.Customers;
     }
 
     @Override
     public Customer getCustomer(String username) {
-        for (Customer customer : DataBase.Customers) {
+        for (Customer customer : Database.Customers) {
             if (customer.getUsername().equals(username)) {
                 return customer;
             }
@@ -77,9 +77,9 @@ public class AdminDAOImpl implements AdminDAO {
 
     @Override
     public void updateCustomer(Customer customer) {
-        for (int i = 0; i < DataBase.Customers.size(); i++) {
-            if (DataBase.Customers.get(i).getUsername().equals(customer.getUsername())) {
-                DataBase.Customers.set(i, customer);
+        for (int i = 0; i < Database.Customers.size(); i++) {
+            if (Database.Customers.get(i).getUsername().equals(customer.getUsername())) {
+                Database.Customers.set(i, customer);
                 return;
             }
         }
@@ -87,6 +87,6 @@ public class AdminDAOImpl implements AdminDAO {
 
     @Override
     public void deleteCustomer(String username) {
-        DataBase.Customers.removeIf(customer -> customer.getUsername().equals(username));
+        Database.Customers.removeIf(customer -> customer.getUsername().equals(username));
     }
 }

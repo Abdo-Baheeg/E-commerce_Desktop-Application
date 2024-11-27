@@ -1,11 +1,8 @@
 package testCases;
-import src.dataBase.*;
-import src.entities.*;
-import src.DAO.*;
-import src.service.*;
+import src.database.*;
 
 public class Main {
-    DataBase db = new DataBase();
+    Database db = new Database();
     public static void main(String[] args) {
 
     }

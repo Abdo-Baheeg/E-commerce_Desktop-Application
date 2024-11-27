@@ -1,4 +1,4 @@
-package src.dataBase;
+package src.database;
 
 import src.entities.Category;
 import src.entities.Product;
@@ -7,7 +7,7 @@ import src.entities.Customer;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DataBase {
+public class Database {
     public static ArrayList<Customer> Customers = new ArrayList<>();
     public static ArrayList<Admin> Admins = new ArrayList<>();
     public static ArrayList<Product> Products = new ArrayList<>();
@@ -17,7 +17,7 @@ public class DataBase {
     public static ArrayList<Category> Categories = new ArrayList<>();
     public static ArrayList<String> Coupons = new ArrayList<>();
 
-    public DataBase(){}
+    public Database(){}
 
     public void initDummyData(){
 
