@@ -7,6 +7,7 @@ public class Product {
     private int quantity;
     private String image;
     private Category category;
+    private  int soldItems = 0;
     public Product(String name ,String description, double price, int quantity) {
         this.name = name;
         this.description = description;
@@ -61,5 +62,13 @@ public class Product {
     }
     public void setCategory() {
         this.category = category;
+    }
+
+    public int getSoldItems() {
+        return soldItems;
+    }
+
+    public void setSoldItems(int soldItems) {
+        this.soldItems = soldItems;
     }
 }
