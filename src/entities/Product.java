@@ -58,7 +58,7 @@ public class Product {
         this.quantity = quantity;
     }
     public String getCategory() {
-        return category;
+        return category.toString();
     }
     public void setCategory() {
         this.category = category;
@@ -79,4 +79,6 @@ public class Product {
     public void setId(int id) {
         this.id = id;
     }
+
+
 }

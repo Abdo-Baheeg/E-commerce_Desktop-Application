@@ -9,7 +9,6 @@ import src.database.Database;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class AdminDAOImpl implements AdminDAO {
 
     // Product Management

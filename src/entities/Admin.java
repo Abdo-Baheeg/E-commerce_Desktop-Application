@@ -20,7 +20,5 @@ public class Admin extends Person {
       this.role = role;
   }
 
-
-
 }
 
