@@ -1,37 +1,45 @@
 package src.entities;
 
 import java.util.List;
+import src.database.*;
 
 public class Order {
-    private int id;
+    private int index;
     private Customer customer;
     private payMethod payMethod;
-    private String status;
+    private Status status;
+    private static int numberOfOrders=0;
 
-    public Order(Order.payMethod payMethod, String status) {
+    public Order(Customer customer , Order.payMethod payMethod) {
         this.payMethod = payMethod;
+        this.customer = customer;
+        this.status = Status.PENDING;
+        this.index = numberOfOrders+1;
+        numberOfOrders++;
+    }
+
+    public static int getNumberOfOrders() {
+        return numberOfOrders;
+    }
+
+
+    public static void setNumberOfOrders(int numberOfOrders) {
+        Order.numberOfOrders = numberOfOrders;
+    }
+
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
         this.status = status;
     }
 
-
-    public Object getStatus() {
-        return null;
-    }
-
-    public void setStatus(String canceled) {
-    }
-
     public List<Product> getProductList() {
-        return null;
+        return Database.products;
     }
 
-    public int getId() {
-        return 0;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public Order.payMethod getPayMethod() {
         return payMethod;
@@ -54,5 +62,14 @@ public class Order {
     }
     public enum payMethod{
         CARD, CASH, DIGITAL_WALLET
+    }
+    public int getIndex() {
+        return index;
+    }
+    public void setIndex(int index) {
+        this.index = index;
+    }
+    public boolean isValid(Order order) {
+        return order != null ;
     }
 }

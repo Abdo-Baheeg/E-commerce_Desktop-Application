@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.Calendar;
 
 public abstract class Person {
+
     private String name;
     private String username;
     private String password;
@@ -47,7 +48,6 @@ public abstract class Person {
     public void setPassword(String password) {
         this.password = password;
     }
-
     public void setUsername(String username) {
         this.username = username;
     }

@@ -1,6 +1,7 @@
 package src.entities;
 public class Product {
     private int id;
+    private int ghv;
     private String name;
     private String description;
     private double price;
@@ -81,4 +82,11 @@ public class Product {
     }
 
 
+    public int getGhv() {
+        return ghv;
+    }
+
+    public void setGhv(int ghv) {
+        this.ghv = ghv;
+    }
 }
