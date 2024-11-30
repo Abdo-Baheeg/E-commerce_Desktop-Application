@@ -3,6 +3,7 @@ package src.entities;
 public class Admin extends Person {
     private String workingHours;
     private String role;
+    private int salary;
 
   public Admin(String name, int age, Gender gender, String address, String phone, String username, String password) {
       super(name, age, gender, address, phone, username,password);
