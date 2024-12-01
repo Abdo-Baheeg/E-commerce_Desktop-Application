@@ -2,9 +2,8 @@ package src.database;
 
 import src.entities.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.io.*;
+import java.util.*;
 
 public class Database {
     public static ArrayList<Customer> customers = new ArrayList<>();
@@ -16,6 +15,9 @@ public class Database {
     public static ArrayList<Category> categories = new ArrayList<>();
     public static ArrayList<String> coupons = new ArrayList<>();
     public static ArrayList<Product> soldProducts = new ArrayList<>();
+    public static PriorityQueue<Map.Entry< Integer, Integer>> pq = new PriorityQueue<>(
+            (a, b) -> b.getValue() - a.getValue()
+    );
 
     public Database(){}
 
@@ -27,26 +29,28 @@ public class Database {
 
         // initialize customers:
 
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 10; i++) {
             Random rand = new Random();
             int age = rand.nextInt(100);
             customers.add(new Customer("Customer"+i, age, Person.Gender.MALE, "Address"+i,null,null ));
         }
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 15; i++) {
             Random rand = new Random();
             int quantity = rand.nextInt(10);
             float price = rand.nextFloat(10000);
             products.add(new Product("product"+i, "description"+i, price,quantity));
         }
     }
-    public void saveData(){}
+    public void saveData(){
+    }
+    public void loadData(){
 
-    public void loadData(){}
+    }
 
     public String generateSalesReport(){return null;}
 
     public List<Product> getTopSellingProducts(){
-        ArrayList<Product> products = new ArrayList<>();
+        ArrayList<Product> topProducts = new ArrayList<>();
 
         return products;
     }

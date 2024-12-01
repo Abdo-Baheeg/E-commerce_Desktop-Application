@@ -49,8 +49,8 @@ public class LoginScreen {
 
             if (success) {
                 messageLabel.setText("Login successful!");
-                MainDashboard dashboard = new MainDashboard(primaryStage, role, username);
-                primaryStage.setScene(new Scene(dashboard.getView(), 600, 400));
+//                MainDashboard dashboard = new MainDashboard(primaryStage, role, username);
+//                primaryStage.setScene(new Scene(dashboard.getView(), 600, 400));
             } else {
                 messageLabel.setText("Invalid credentials.");
             }
@@ -67,8 +67,8 @@ public class LoginScreen {
 
             if (success) {
                 messageLabel.setText("Login successful!");
-                MainDashboard dashboard = new MainDashboard(primaryStage, role, username);
-                primaryStage.setScene(new Scene(dashboard.getView(), 600, 400));
+//                MainDashboard dashboard = new MainDashboard(primaryStage, role, username);
+//                primaryStage.setScene(new Scene(dashboard.getView(), 600, 400));
 
             }
         });

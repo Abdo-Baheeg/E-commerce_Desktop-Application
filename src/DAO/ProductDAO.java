@@ -15,8 +15,11 @@ public class ProductDAO implements CRUD<Product> {
     }
 
     @Override
-    public Product read(int id) {
+    public Product read(Object id) {
+        return null;
+    }
 
+    public void read(int id) {
     }
 
     @Override
@@ -31,8 +34,13 @@ public class ProductDAO implements CRUD<Product> {
 
     @Override
     public void delete(Object id) {
+
+    }
+
+
+    public void delete(int id) {
         for (Product p : Database.products){
-            if (p.getId().equals(id)){
+            if (p.getId() == id){
                 Database.products.remove(p);
             }
         }

@@ -26,11 +26,9 @@ public class CustomerService {
         return true;
     }
 
-    public void
     public void addToCart(Customer customer, Cart cart) {
 
     }
-
 
     public void getAllProduct() {
         List<Product> products = productDAO.getAll();
