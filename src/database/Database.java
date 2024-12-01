@@ -22,18 +22,20 @@ public class Database {
     public Database(){}
 
     public static void initDummyData(){
-        // initialize admins:
+        // initialize 5 admins:
         for (int i = 0; i < 5; i++) {
             admins.add(new Admin("Admin"+i,34, Person.Gender.MALE ,"Address"+i ,"0107823323"+i , "admin" , "admin"));
         }
 
-        // initialize customers:
+        // initialize 10 customers:
 
         for (int i = 0; i < 10; i++) {
             Random rand = new Random();
             int age = rand.nextInt(100);
             customers.add(new Customer("Customer"+i, age, Person.Gender.MALE, "Address"+i,null,null ));
         }
+
+        // initialize 15 Products
         for (int i = 0; i < 15; i++) {
             Random rand = new Random();
             int quantity = rand.nextInt(10);
@@ -45,10 +47,10 @@ public class Database {
     public void saveData(){
     }
     public void loadData(){
-
     }
 
-    public String generateSalesReport(){return null;}
+    public String generateSalesReport(){
+        return null;}
 
     public List<Product> getTopSellingProducts(){
         ArrayList<Product> topProducts = new ArrayList<>();
