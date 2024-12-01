@@ -1,4 +1,4 @@
-package src.DAO.Implement;
+package src.DAO;
 
 public class CategoryDAO {
 }

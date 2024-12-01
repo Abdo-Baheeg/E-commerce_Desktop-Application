@@ -1,92 +1,85 @@
 package src.entities;
+
+import javafx.scene.image.Image;
+
+import java.nio.file.Path;
+
 public class Product {
-    private int id;
-    private int ghv;
+    private final int id;
+    private static int idCounter=1;
     private String name;
     private String description;
-    private double price;
+    private float price;
     private int quantity;
-    private String image;
     private Category category;
-    private  int soldItems = 0;
-    public Product(String name ,String description, double price, int quantity) {
+
+    public Product(String name, String description, float price, int quantity) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.quantity = quantity;
+        this.id = idCounter++;
     }
-    public Product(String name, String description, double price, int quantity, Category category) {
+
+    public Product(String name, String description, float price, int quantity, Category category) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.quantity = quantity;
         this.category = category;
+        this.id = idCounter++;
     }
 
-    public Product(int id, String productName, double price, int quantity, Category category) {
-        this.id = id;
+    public Product(String productName, float price, int quantity, Category category) {
         this.name = productName;
         this.price = price;
         this.quantity = quantity;
+        this.id = idCounter++;
         this.category = category;
     }
 
     public void setName(String name) {
         this.name = name;
     }
+
     public String getName() {
         return name;
     }
+
     public void setCategory(String category) {
-        this.category.name= category;
+        this.category.setName(category);
     }
+    public String getCategory() {
+        return category.toString();
+    }
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
     public String getDescription() {
         return description;
     }
     public void setDescription(String description) {
         this.description = description;
     }
-    public double getPrice() {
+
+    public float getPrice() {
         return price;
     }
-    public void setPrice(double price) {
+    public void setPrice(float price) {
         this.price = price;
     }
+
     public int getQuantity() {
         return quantity;
     }
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
-    public String getCategory() {
-        return category.toString();
-    }
-    public void setCategory() {
-        this.category = category;
-    }
-
-    public int getSoldItems() {
-        return soldItems;
-    }
-
-    public void setSoldItems(int soldItems) {
-        this.soldItems = soldItems;
-    }
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
-
-    public int getGhv() {
-        return ghv;
-    }
-
-    public void setGhv(int ghv) {
-        this.ghv = ghv;
-    }
 }

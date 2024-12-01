@@ -1,17 +1,23 @@
 package src.entities;
 
 public class Admin extends Person {
-    private String workingHours;
+    private int workingHours;
     private String role;
     private int salary;
 
   public Admin(String name, int age, Gender gender, String address, String phone, String username, String password) {
       super(name, age, gender, address, phone, username,password);
   }
-  public String getWorkingHours() {
+  public Admin() {
+      super();
+  }
+  public Admin(String name, String username, String password) {
+      super(name,username,password);
+  }
+  public int getWorkingHours() {
       return workingHours;
   }
-  public void setWorkingHours(String workingHours) {
+  public void setWorkingHours(int workingHours) {
       this.workingHours = workingHours;
   }
   public String getRole() {
@@ -21,5 +27,12 @@ public class Admin extends Person {
       this.role = role;
   }
 
+    public int getSalary() {
+        return salary;
+    }
+
+    public void setSalary(int salary) {
+        this.salary = salary;
+    }
 }
 
