@@ -7,5 +7,11 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" exported="" name="lib" level="application" />
+    <orderEntry type="library" exported="" name="java" level="application" />
+    <orderEntry type="library" exported="" name="jar_files" level="application" />
+    <orderEntry type="library" exported="" name="commons-codec-1.17.0" level="application" />
+    <orderEntry type="library" name="commons-codec-1.17.1" level="application" />
+    <orderEntry type="library" name="java1" level="application" />
   </component>
 </module>

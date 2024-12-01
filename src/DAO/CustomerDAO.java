@@ -1,6 +1,5 @@
-package src.DAO.Implement;
+package src.DAO;
 
-import src.DAO.CRUD;
 import src.entities.Customer;
 
 import java.util.List;
@@ -14,6 +13,11 @@ public class CustomerDAO implements CRUD<Customer> {
 
     @Override
     public Customer read(Object id) {
+        return null;
+    }
+
+    @Override
+    public Customer readByID(int id) {
         return null;
     }
 
