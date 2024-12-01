@@ -39,6 +39,7 @@ public class Database {
             int quantity = rand.nextInt(10);
             float price = rand.nextFloat(10000);
             products.add(new Product("product"+i, "description"+i, price,quantity));
+            //thank you for the leader Eng.Abdo bahig
         }
     }
     public void saveData(){
