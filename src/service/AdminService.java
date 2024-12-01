@@ -24,7 +24,9 @@ public class AdminService {
             return false;
         }
     }
-    public boolean register(String username, String password) {}
+    public boolean register(String username, String password) {
+        return adminDAO.read(username).equals(adminDAO.read(password)) ;
+    }
 
     public void updatePassword(String username, String password) {}
 
