@@ -36,4 +36,8 @@ public class CustomerService {
             System.out.println(product);
         }
     }
+    public void searchProduct(String productName) {
+        List<Product> products = productDAO.getByName(productName);
+    }
+
 }
