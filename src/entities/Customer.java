@@ -1,6 +1,7 @@
 package src.entities;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Customer extends Person {
     private float balance;
@@ -21,6 +22,10 @@ public class Customer extends Person {
 
     public Customer(String s) {
 
+    }
+
+    public Customer(String name, Gender genderEnum, String address, String phone, String email, String username, String password, Date dob) {
+        super( name,  genderEnum,  address,  phone, email,username,password,dob);
     }
 
     public float getBalance() {

@@ -1,9 +1,10 @@
 package src.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Calendar;
 
-public abstract class Person {
+public abstract class Person implements Serializable {
     private int id;
     private static int idCounter = 1;
     private String name;
@@ -27,6 +28,19 @@ public abstract class Person {
         this.password = password;
         this.id = idCounter++;
         this.name =username;
+    }
+
+    public Person(String name, Gender genderEnum, String address, String phone, String email, String username, String password , Date dateOfBirth) {
+    this.name = name;
+    this.gender = genderEnum;
+    this.address = address;
+    this.phone = phone;
+    this.email = email;
+    this.username = username;
+    this.password = password;
+    this.id = idCounter++;
+    this.dateOfBirth = dateOfBirth;
+    this.setAge();
     }
 
     public Gender getGender() {

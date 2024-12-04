@@ -1,5 +1,7 @@
 package src.entities;
 
+import java.io.Serializable;
+
 public class Admin extends Person {
     private int workingHours;
     private String role;

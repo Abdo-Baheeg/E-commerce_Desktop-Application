@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="src.gui.controllers.RegisterController" prefWidth="400" prefHeight="600">
+    <VBox alignment="CENTER" spacing="15" layoutX="50" layoutY="50" prefWidth="300" prefHeight="500">
+        <TextField fx:id="nameField" promptText="Your name"/>
+        <TextField fx:id="phoneField" promptText="Phone Number"/>
+        <TextField fx:id="addressField" promptText="Address"/>
+        <TextField fx:id="emailField" promptText="Email Address"/>
+        <PasswordField fx:id="passwordField" promptText="Password"/>
+        <TextField fx:id="usernameField" promptText="Username"/>
+        <HBox alignment="CENTER" spacing="20">
+            <RadioButton text="Female" toggleGroup="$genderToggleGroup"/>
+            <RadioButton text="Male" toggleGroup="$genderToggleGroup"/>
+        </HBox>
+        <DatePicker fx:id="dobPicker" promptText="Your Date of Birth"/>
+        <Button fx:id="registerButton" text="Register" onAction="#handleRegister"/>
+        <Hyperlink fx:id="loginLink" text="Log in" onAction="#goToLogin"/>
+    </VBox>
+</AnchorPane>
+
