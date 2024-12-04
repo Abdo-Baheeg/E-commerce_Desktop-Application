@@ -1,4 +1,6 @@
 package src.entities;
 
-public class Cart {
+import java.io.Serializable;
+
+public class Cart implements Serializable {
 }

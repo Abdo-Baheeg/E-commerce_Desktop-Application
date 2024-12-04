@@ -1,7 +1,9 @@
 package src.entities;
 
 
-public abstract class Category {
+import java.io.Serializable;
+
+public abstract class Category implements Serializable {
     private String name;
     private final int id;
     private static int idCounter=0;

@@ -10,8 +10,8 @@ public class Database {
     public static ArrayList<Admin> admins = new ArrayList<>();
     public static ArrayList<Product> products = new ArrayList<>();
     public static ArrayList<Product> availableProducts = new ArrayList<>();
-    public static ArrayList<Product> carts = new ArrayList<>();
-    public static ArrayList<Product> orders = new ArrayList<>();
+    public static ArrayList<Cart> carts = new ArrayList<>();
+    public static ArrayList<Order> orders = new ArrayList<>();
     public static ArrayList<Category> categories = new ArrayList<>();
     public static ArrayList<String> coupons = new ArrayList<>();
     public static ArrayList<Product> soldProducts = new ArrayList<>();
@@ -43,9 +43,139 @@ public class Database {
             products.add(new Product("product"+i, "description"+i, price,quantity));
         }
     }
-    public void saveData(){
+    public static void saveDatabase() throws IOException {
+        saveAdmins();
+        saveCustomers();
+        saveOrders();
+        saveCategories();
+        saveProducts();
+        saveCarts();
     }
-    public void loadData(){
+
+    private static void saveCarts() throws IOException {
+        File file = new File("src/database/carts.csv");
+        FileOutputStream fos = new FileOutputStream(file);
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
+        oos.writeObject(carts);
+    }
+
+    private static void saveProducts() throws IOException {
+        File file = new File("src/database/products.csv");
+        FileOutputStream fos = new FileOutputStream(file);
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
+        oos.writeObject(products);
+    }
+
+    private static void saveCategories() throws IOException {
+        File file = new File("src/database/categories.csv");
+        FileOutputStream fos = new FileOutputStream(file);
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
+        oos.writeObject(categories);
+    }
+
+    private static void saveOrders() throws IOException {
+        File file = new File("src/database/orders.csv");
+        FileOutputStream fos = new FileOutputStream(file);
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
+        oos.writeObject(orders);
+    }
+
+    private static void saveCustomers() throws IOException {
+        File file = new File("src/database/customers.csv");
+        FileOutputStream fos = new FileOutputStream(file);
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
+        oos.writeObject(customers);
+    }
+    private static void saveAdmins() throws IOException {
+        File file = new File("src/database/admins.csv");
+        FileOutputStream fos = new FileOutputStream(file);
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
+        oos.writeObject(admins);
+    }
+    public static void loadDatabase() throws IOException, ClassNotFoundException {
+        loadAdmins();
+        loadCustomers();
+        loadOrders();
+        loadCategories();
+        loadProducts();
+        loadCarts();
+    }
+
+    private static void loadAdmins() throws IOException, ClassNotFoundException {
+        File file = new File("src/database/admins.csv");
+        if (file.exists() && file.length() > 0) {
+        try{
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
+            admins = (ArrayList<Admin>) ois.readObject();
+        }
+        catch (Exception e){e.printStackTrace();}}
+        else {
+        System.out.println("Admins file is empty. Initializing with default values.");
+    }
+    }
+
+    private static void loadCustomers() throws IOException, ClassNotFoundException {
+        File file = new File("src/database/customers.csv");
+        if (file.exists() && file.length() > 0) {
+            try{
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
+        customers = (ArrayList<Customer>) ois.readObject();}
+            catch (Exception e){e.printStackTrace();}}
+         else {
+            System.out.println("Customers file is empty. Initializing with default values.");
+    }
+    }
+
+    private static void loadOrders() throws IOException, ClassNotFoundException {
+        File file = new File("src/database/orders.csv");
+        if (file.exists() && file.length() > 0) {
+            try {
+                ObjectInputStream ois = new ObjectInputStream(new FileInputStream("src/database/orders.csv"));
+                orders = (ArrayList<Order>) ois.readObject();
+            }catch (Exception e){e.printStackTrace();}
+        } else {
+            System.out.println("Orders file is empty. Initializing with default values.");
+        }
+
+    }
+
+    private static void loadCategories() throws IOException, ClassNotFoundException {
+        File file = new File("src/database/categories.csv");
+        if (file.exists() && file.length() > 0) {
+            try {
+                ObjectInputStream ois = new ObjectInputStream(new FileInputStream("src/database/categories.csv"));
+                categories = (ArrayList<Category>) ois.readObject();
+            }catch (Exception e){e.printStackTrace();}
+        } else {
+            System.out.println("Category file is empty. Initializing with default values.");
+        }
+
+    }
+
+    private static void loadProducts() throws IOException, ClassNotFoundException {
+        File file = new File("src/database/products.csv");
+        if (file.exists() && file.length() > 0) {
+            try {
+                ObjectInputStream ois = new ObjectInputStream(new FileInputStream("src/database/products.csv"));
+                products = (ArrayList<Product>) ois.readObject();
+            }catch (Exception e){e.printStackTrace();}
+        } else {
+            System.out.println("Products file is empty. Initializing with default values.");
+        }
+
+    }
+
+    private static void loadCarts() throws IOException, ClassNotFoundException {
+        File file = new File("src/database/carts.csv");
+        if (file.exists() && file.length() > 0) {
+            try {
+                ObjectInputStream ois = new ObjectInputStream(new FileInputStream("src/database/carts.csv"));
+                carts =(ArrayList<Cart>) ois.readObject();
+            }catch (Exception e){e.printStackTrace();}
+        } else {
+            System.out.println("Carts file is empty. Initializing with default values.");
+        }
+
     }
 
     public String generateSalesReport(){
@@ -55,6 +185,17 @@ public class Database {
         ArrayList<Product> topProducts = new ArrayList<>();
 
         return products;
+    }
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+        // testing
+//        //Database.initDummyData();
+//       // Database.saveDatabase();
+//        System.out.println(admins);
+//        Database.loadDatabase();
+//        for (Admin admin : admins) {
+//            System.out.println(admin.getName() +" "+admin.getAge() +"  "+admin.getGender());
+//        }
+//        System.out.println(orders);
     }
 
 }

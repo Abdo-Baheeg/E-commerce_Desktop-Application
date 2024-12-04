@@ -1,10 +1,11 @@
 package src.entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import src.database.*;
 
-public class Order {
+public class Order implements Serializable {
     private final int id;
     private static int idCounter=1;
     private Customer customer;

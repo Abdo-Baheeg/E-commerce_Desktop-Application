@@ -2,9 +2,10 @@ package src.entities;
 
 import javafx.scene.image.Image;
 
+import java.io.Serializable;
 import java.nio.file.Path;
 
-public class Product {
+public class Product implements Serializable {
     private final int id;
     private static int idCounter=1;
     private String name;
