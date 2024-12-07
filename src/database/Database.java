@@ -10,14 +10,11 @@ public class Database {
     public static ArrayList<Admin> admins = new ArrayList<>();
     public static ArrayList<Product> products = new ArrayList<>();
     public static ArrayList<Product> availableProducts = new ArrayList<>();
-    public static ArrayList<Cart> carts = new ArrayList<>();
-    public static ArrayList<Order> orders = new ArrayList<>();
-    public static ArrayList<Category> categories = new ArrayList<>();
     public static ArrayList<String> coupons = new ArrayList<>();
     public static ArrayList<Product> soldProducts = new ArrayList<>();
-    public static PriorityQueue<Map.Entry< Integer, Integer>> pq = new PriorityQueue<>(
-            (a, b) -> b.getValue() - a.getValue()
-    );
+
+    public static Customer currentCustomer;
+    public static Admin currentAdmin;
 
     public Database(){}
 
@@ -29,11 +26,11 @@ public class Database {
 
         // initialize 10 customers:
 
-        for (int i = 0; i < 10; i++) {
-            Random rand = new Random();
-            int age = rand.nextInt(100);
-            customers.add(new Customer("Customer"+i, age, Person.Gender.MALE, "Address"+i,null,null ));
-        }
+//        for (int i = 0; i < 10; i++) {
+//            Random rand = new Random();
+//            int age = rand.nextInt(100);
+//            customers.add(new Customer("Customer"+i, age, Person.Gender.MALE, "Address"+i,null,null ));
+//        }
 
         // initialize 15 Products
         for (int i = 0; i < 15; i++) {
@@ -46,18 +43,10 @@ public class Database {
     public static void saveDatabase() throws IOException {
         saveAdmins();
         saveCustomers();
-        saveOrders();
-        saveCategories();
         saveProducts();
-        saveCarts();
     }
 
-    private static void saveCarts() throws IOException {
-        File file = new File("src/database/carts.csv");
-        FileOutputStream fos = new FileOutputStream(file);
-        ObjectOutputStream oos = new ObjectOutputStream(fos);
-        oos.writeObject(carts);
-    }
+
 
     private static void saveProducts() throws IOException {
         File file = new File("src/database/products.csv");
@@ -65,21 +54,6 @@ public class Database {
         ObjectOutputStream oos = new ObjectOutputStream(fos);
         oos.writeObject(products);
     }
-
-    private static void saveCategories() throws IOException {
-        File file = new File("src/database/categories.csv");
-        FileOutputStream fos = new FileOutputStream(file);
-        ObjectOutputStream oos = new ObjectOutputStream(fos);
-        oos.writeObject(categories);
-    }
-
-    private static void saveOrders() throws IOException {
-        File file = new File("src/database/orders.csv");
-        FileOutputStream fos = new FileOutputStream(file);
-        ObjectOutputStream oos = new ObjectOutputStream(fos);
-        oos.writeObject(orders);
-    }
-
     private static void saveCustomers() throws IOException {
         File file = new File("src/database/customers.csv");
         FileOutputStream fos = new FileOutputStream(file);
@@ -95,10 +69,7 @@ public class Database {
     public static void loadDatabase() throws IOException, ClassNotFoundException {
         loadAdmins();
         loadCustomers();
-        loadOrders();
-        loadCategories();
         loadProducts();
-        loadCarts();
     }
 
     private static void loadAdmins() throws IOException, ClassNotFoundException {
@@ -126,31 +97,6 @@ public class Database {
     }
     }
 
-    private static void loadOrders() throws IOException, ClassNotFoundException {
-        File file = new File("src/database/orders.csv");
-        if (file.exists() && file.length() > 0) {
-            try {
-                ObjectInputStream ois = new ObjectInputStream(new FileInputStream("src/database/orders.csv"));
-                orders = (ArrayList<Order>) ois.readObject();
-            }catch (Exception e){e.printStackTrace();}
-        } else {
-            System.out.println("Orders file is empty. Initializing with default values.");
-        }
-
-    }
-
-    private static void loadCategories() throws IOException, ClassNotFoundException {
-        File file = new File("src/database/categories.csv");
-        if (file.exists() && file.length() > 0) {
-            try {
-                ObjectInputStream ois = new ObjectInputStream(new FileInputStream("src/database/categories.csv"));
-                categories = (ArrayList<Category>) ois.readObject();
-            }catch (Exception e){e.printStackTrace();}
-        } else {
-            System.out.println("Category file is empty. Initializing with default values.");
-        }
-
-    }
 
     private static void loadProducts() throws IOException, ClassNotFoundException {
         File file = new File("src/database/products.csv");
@@ -165,18 +111,6 @@ public class Database {
 
     }
 
-    private static void loadCarts() throws IOException, ClassNotFoundException {
-        File file = new File("src/database/carts.csv");
-        if (file.exists() && file.length() > 0) {
-            try {
-                ObjectInputStream ois = new ObjectInputStream(new FileInputStream("src/database/carts.csv"));
-                carts =(ArrayList<Cart>) ois.readObject();
-            }catch (Exception e){e.printStackTrace();}
-        } else {
-            System.out.println("Carts file is empty. Initializing with default values.");
-        }
-
-    }
 
     public String generateSalesReport(){
         return null;}
@@ -185,6 +119,13 @@ public class Database {
         ArrayList<Product> topProducts = new ArrayList<>();
 
         return products;
+    }
+    public void setAvailableProducts(){
+        for (Product p : products) {
+            if(p.getStock() > 0){
+                availableProducts.add(p);
+            }
+        }
     }
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         // testing

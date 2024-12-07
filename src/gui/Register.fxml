@@ -1,23 +1,111 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="src.gui.controllers.RegisterController" prefWidth="400" prefHeight="600">
-    <VBox alignment="CENTER" spacing="15" layoutX="50" layoutY="50" prefWidth="300" prefHeight="500">
-        <TextField fx:id="nameField" promptText="Your name"/>
-        <TextField fx:id="phoneField" promptText="Phone Number"/>
-        <TextField fx:id="addressField" promptText="Address"/>
-        <TextField fx:id="emailField" promptText="Email Address"/>
-        <PasswordField fx:id="passwordField" promptText="Password"/>
-        <TextField fx:id="usernameField" promptText="Username"/>
-        <HBox alignment="CENTER" spacing="20">
-            <RadioButton text="Female" toggleGroup="$genderToggleGroup"/>
-            <RadioButton text="Male" toggleGroup="$genderToggleGroup"/>
-        </HBox>
-        <DatePicker fx:id="dobPicker" promptText="Your Date of Birth"/>
-        <Button fx:id="registerButton" text="Register" onAction="#handleRegister"/>
-        <Hyperlink fx:id="loginLink" text="Log in" onAction="#goToLogin"/>
-    </VBox>
+<?import com.gluonhq.charm.glisten.control.ToggleButtonGroup?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="561.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.gui.controllers.RegisterController">
+   <children>
+      <VBox alignment="CENTER" layoutX="40.0" layoutY="47.0" prefHeight="513.0" prefWidth="320.0">
+         <children>
+            <TextField fx:id="name" promptText="Name" style="-fx-background-radius: 30;">
+               <font>
+                  <Font name="Times New Roman Italic" size="20.0" />
+               </font>
+            </TextField>
+            <Separator opacity="0.0" prefHeight="10.0" prefWidth="320.0" />
+            <TextField fx:id="email" promptText="Email address" style="-fx-background-radius: 30;">
+               <font>
+                  <Font name="Times New Roman Italic" size="20.0" />
+               </font>
+            </TextField>
+            <Separator opacity="0.0" prefHeight="10.0" prefWidth="320.0" />
+            <TextField fx:id="address" prefWidth="320.0" promptText="Address" style="-fx-background-radius: 30;">
+               <font>
+                  <Font name="Times New Roman Italic" size="20.0" />
+               </font>
+            </TextField>
+            <Separator opacity="0.0" prefHeight="10.0" prefWidth="320.0" />
+            <TextField fx:id="phone" promptText="Phone Number" style="-fx-background-radius: 30;">
+               <font>
+                  <Font name="Times New Roman" size="20.0" />
+               </font>
+            </TextField>
+            <Separator opacity="0.0" prefHeight="10.0" prefWidth="320.0" />
+            <TextField fx:id="username" promptText="Username" style="-fx-background-radius: 30;">
+               <font>
+                  <Font name="Times New Roman" size="20.0" />
+               </font>
+            </TextField>
+            <Separator opacity="0.0" prefHeight="10.0" prefWidth="320.0" />
+            <PasswordField fx:id="password" promptText="Password" style="-fx-background-radius: 30;">
+               <font>
+                  <Font name="Times New Roman Italic" size="20.0" />
+               </font>
+            </PasswordField>
+            <Separator opacity="0.0" prefHeight="10.0" prefWidth="320.0" />
+            <TextField fx:id="confirmPassword" prefHeight="37.0" prefWidth="320.0" promptText="Confirm Password" style="-fx-background-radius: 30;">
+               <font>
+                  <Font name="Times New Roman" size="18.0" />
+               </font>
+            </TextField>
+            <HBox prefHeight="24.0" prefWidth="319.0">
+               <children>
+                  <Separator opacity="0.0" orientation="VERTICAL" prefHeight="43.0" prefWidth="79.0" />
+                  <ToggleButtonGroup selectionType="SINGLE">
+                      <toggles>
+                        <RadioButton fx:id="Female" mnemonicParsing="false" prefHeight="43.0" prefWidth="110.0" text="Female">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </RadioButton>
+                        <RadioButton fx:id="Male" mnemonicParsing="false" prefHeight="43.0" prefWidth="73.0" text="Male">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </RadioButton>
+                      </toggles>
+                  </ToggleButtonGroup>
+                  <Separator opacity="0.0" orientation="VERTICAL" prefHeight="58.0" prefWidth="86.0" />
+               </children>
+            </HBox>
+            <DatePicker fx:id="datePicker" prefHeight="33.0" prefWidth="245.0" promptText="Date of Birth" style="-fx-background-color: black;" />
+            <Label fx:id="messageLabel" alignment="CENTER" prefHeight="33.0" prefWidth="320.0" textFill="RED">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <HBox prefHeight="40.0" prefWidth="320.0">
+               <children>
+                <Button fx:id="submit" mnemonicParsing="false" prefHeight="45.0" prefWidth="90.0" style="-fx-background-radius: 30;" text="Submit">
+                     <font>
+                        <Font name="Times New Roman Italic" size="18.0" />
+                     </font>
+                  </Button>
+                  <Separator opacity="0.0" orientation="VERTICAL" prefHeight="17.0" prefWidth="60.0" />
+                  <Button fx:id="reset" mnemonicParsing="false" onAction="#reset" prefHeight="45.0" prefWidth="90.0" style="-fx-background-radius: 30;" text="Reset">
+                     <font>
+                        <Font name="Times New Roman Italic" size="18.0" />
+                     </font>
+                  </Button>
+                  <Separator opacity="0.0" orientation="VERTICAL" prefHeight="39.0" prefWidth="60.0" />
+                  <Button fx:id="cancel" mnemonicParsing="false" prefHeight="45.0" prefWidth="90.0" style="-fx-background-radius: 30;" text="Cancel">
+                     <font>
+                        <Font name="Times New Roman Italic" size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
 </AnchorPane>
-

@@ -1,9 +1,6 @@
 package src.entities;
 
-import javafx.scene.image.Image;
-
 import java.io.Serializable;
-import java.nio.file.Path;
 
 public class Product implements Serializable {
     private final int id;
@@ -11,30 +8,31 @@ public class Product implements Serializable {
     private String name;
     private String description;
     private float price;
-    private int quantity;
+    private int stock;
     private Category category;
+    private int soldItems=0;
 
-    public Product(String name, String description, float price, int quantity) {
+    public Product(String name, String description, float price, int stock) {
         this.name = name;
         this.description = description;
         this.price = price;
-        this.quantity = quantity;
+        this.stock = stock;
         this.id = idCounter++;
     }
 
-    public Product(String name, String description, float price, int quantity, Category category) {
+    public Product(String name, String description, float price, int stock, Category category) {
         this.name = name;
         this.description = description;
         this.price = price;
-        this.quantity = quantity;
+        this.stock = stock;
         this.category = category;
         this.id = idCounter++;
     }
 
-    public Product(String productName, float price, int quantity, Category category) {
+    public Product(String productName, float price, int stock, Category category) {
         this.name = productName;
         this.price = price;
-        this.quantity = quantity;
+        this.stock = stock;
         this.id = idCounter++;
         this.category = category;
     }
@@ -71,11 +69,11 @@ public class Product implements Serializable {
         this.price = price;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public int getStock() {
+        return stock;
     }
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setStock(int stock) {
+        this.stock = stock;
     }
 
     public int getId() {
@@ -83,4 +81,11 @@ public class Product implements Serializable {
     }
 
 
+    public int getSoldItems() {
+        return soldItems;
+    }
+
+    public void setSoldItems(int soldItems) {
+        this.soldItems = soldItems;
+    }
 }

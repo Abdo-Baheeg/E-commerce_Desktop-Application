@@ -1,8 +1,6 @@
 package src.service;
 
-import src.DAO.CartDAO;
 import src.DAO.CustomerDAO;
-import src.DAO.OrderDAO;
 import src.DAO.ProductDAO;
 import src.entities.Cart;
 import src.entities.Customer;
@@ -14,8 +12,6 @@ public class CustomerService {
 
     CustomerDAO customerDAO = new CustomerDAO();
     ProductDAO productDAO = new ProductDAO();
-    OrderDAO orderDAO = new OrderDAO();
-    CartDAO cartDAO = new CartDAO();
     Cart cart = new Cart();
 
     public boolean login(String username, String password) {
@@ -36,8 +32,8 @@ public class CustomerService {
             System.out.println(product);
         }
     }
-    public void searchProduct(String productName) {
-        List<Product> products = productDAO.getByName(productName);
-    }
+//    public void searchProduct(String productName) {
+//        List<Product> products = productDAO.getByName(productName);
+//    }
 
 }
