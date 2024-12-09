@@ -1,2 +1,6 @@
-
-
+.loginPane {
+    -fx-background-image: url("img/background.jpg");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}

@@ -78,12 +78,14 @@ import src.entities.Product;
 
 import java.util.List;
 
+import static src.database.Database.currentAdmin;
+
 public class AdminService {
     private final AdminDAO adminDAO = new AdminDAO();
     private final ProductDAO productDAO = new ProductDAO();
 
     // Login method
-    public String login(String username, String password) {
+    public   String login(String username, String password) {
         Admin admin = adminDAO.read(username);
         if (admin == null) {
             return "Admin not found.";
@@ -117,17 +119,8 @@ public class AdminService {
     }
 
     // Update admin username
-    public String updateUsername(String username, String newUsername) {
-        Admin admin = adminDAO.read(username);
-        if (admin == null) {
-            return "Admin not found.";
-        }
-        if (adminDAO.read(newUsername) != null) {
-            return "New username is already taken.";
-        }
-        admin.setUsername(newUsername);
-        adminDAO.update(admin);
-        return "Username updated successfully.";
+    public boolean updateUsername( String newUsername) {
+        return adminDAO.updateUsername(currentAdmin, newUsername);
     }
 
     // Create a new product
@@ -135,7 +128,6 @@ public class AdminService {
         if(Database.products.contains(product)) {
             return false;
         };
-
         if (product.getName() == null || product.getPrice() < 0) {
 
             return false;
@@ -179,4 +171,6 @@ public class AdminService {
 //    public Product readProduct(int id) {
 //        return productDAO.read(id);
 //    }
+
+
 }

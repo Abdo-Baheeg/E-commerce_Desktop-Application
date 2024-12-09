@@ -76,7 +76,7 @@ public class AdminDAO implements CRUD <Admin> {
     }
 
     @Override
-    public Admin read(String username) {
+    public  Admin read(String username) {
         for (Admin admin : admins) {
             if (admin.getUsername().equals(username)) {
                 return admin;

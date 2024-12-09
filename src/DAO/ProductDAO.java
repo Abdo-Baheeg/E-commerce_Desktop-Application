@@ -3,6 +3,7 @@ package src.DAO;
 import src.database.Database;
 import src.entities.Cart;
 import src.entities.Category;
+import src.entities.Order;
 import src.entities.Product;
 import src.gui.MainApp;
 
@@ -109,5 +110,28 @@ public class ProductDAO implements CRUD<Product> {
         Product p = this.read(id);
         products.remove(p);
      }
+
+     public static List<Product> search(String name) {
+        List<Product> products = new ArrayList<>();
+        for (Product product : Database.products) {
+            if (product.getName().equals(name)) {
+                products.add(product);
+            }
+        }
+        return products;
+     }
+
+     public boolean placeOrder(Order.payMethod payMethod) {
+        if (!currentCustomer.getCart().getProducts().isEmpty()) {
+            Order order = new Order(currentCustomer.getCart().getProducts());
+            order.setStatus(Order.Status.PENDING);
+            order.setPayMethod(payMethod);
+            currentCustomer.setOrder(order);
+            return true;
+        }
+        return false;
+     }
+
+
 
  }

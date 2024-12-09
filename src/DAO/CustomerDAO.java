@@ -6,6 +6,8 @@ import src.entities.Customer;
 import src.entities.Order;
 import src.entities.Product;
 
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.List;
 import static src.database.Database.*;
 
@@ -50,6 +52,17 @@ public  class CustomerDAO implements CRUD<Customer> {
                 username.matches("^[A-Za-z0-9_]{4,20}$") &&
                 !username.matches("^\\d+$")&& !exist; // Prevent all-numeric usernames
     }
+    public static boolean validOrder() {
+        return !customers.isEmpty();
+    }
+    public static boolean validDateOfBirth(LocalDate dateOfBirth) {
+        LocalDate allowedAge = LocalDate.of(2020, Month.DECEMBER,20);
+        if(dateOfBirth == null) {
+            return false;
+        } else
+            return !dateOfBirth.isAfter(allowedAge);
+    }
+
 
     @Override
     public void create(Customer entity) {

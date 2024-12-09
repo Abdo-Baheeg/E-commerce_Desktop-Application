@@ -6,27 +6,31 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import src.database.Database;
-import src.entities.Admin;
-import src.entities.Customer;
 
 import java.io.IOException;
 import java.util.Objects;
 
 public class MainApp extends Application {
+    
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage primaryStage) throws IOException {
         try {
-            // Load the FXML file for the registration screen
-           FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("chat.fxml"));
             Parent root = loader.load();
-            // Set up the scene
+
+            // Create a Scene using the loaded root
             Scene scene = new Scene(root);
-            // Configure the stage
-            stage.setTitle("EcoMARKET - Registration");
-            stage.setScene(scene);
-            stage.show();
+
+            // Set the Stage
+            primaryStage.setTitle("Login/Register Sliding Pane");
+            primaryStage.setScene(scene);
+            primaryStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("utils/icons/icon.png"))));
+            primaryStage.setMaxWidth(400);
+            primaryStage.setMaxHeight(400);
+            primaryStage.show();
         } catch (Exception e) {
+            System.out.println("Errorrrrrrrrr");
+            System.out.println(e);
             System.out.println(e.getMessage());
         }
     }
