@@ -1,91 +1,127 @@
 package src.gui.controllers;
 
-
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
-import src.entities.Customer;
-import src.entities.Person;
-import src.service.CustomerService;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
+import javax.xml.validation.Validator;
 import java.util.Date;
 
 public class RegisterController {
-    CustomerService customerService = new CustomerService();
+    @FXML
+    private TextField username;
+    @FXML
+    private TextField password;
+    @FXML
+    private TextField confirmPassword;
+    @FXML
+    private TextField email;
+    @FXML
+    private TextField phone;
+    @FXML
+    private TextField address;
+    @FXML
+    private TextField name;
+    @FXML
+    private DatePicker birthday;
+    @FXML
+    private RadioButton Male;
+    @FXML
+    private RadioButton Female;
+    @FXML
+    private Button submit;
+    @FXML
+    private Button reset;
+    @FXML
+    private Button back;
+    @FXML
+    private Label messageLabel;
+
 
     @FXML
-    private TextField nameField;
+    public void reset(ActionEvent event) {
+        username.setText("");
+        password.setText("");
+        confirmPassword.setText("");
+        email.setText("");
+        phone.setText("");
+        address.setText("");
+        name.setText("");
+        birthday.setValue(null);
+        Male.setSelected(false);
+        Female.setSelected(false);
+        submit.setDisable(false);
+        reset.setDisable(false);
+        back.setDisable(false);
+    }
 
-    @FXML
-    private TextField phoneField;
-
-    @FXML
-    private TextField addressField;
-
-    @FXML
-    private TextField emailField;
-
-    @FXML
-    private PasswordField passwordField;
-
-    @FXML
-    private TextField usernameField;
-
-    @FXML
-    private ToggleGroup genderToggleGroup;
-
-    @FXML
-    private DatePicker dobPicker;
-
-    @FXML
-    private Button registerButton;
-
-    @FXML
-    private Hyperlink loginLink;
-
-    @FXML
-    void handleRegister(MouseEvent event) {
-        // Collect data from fields
-        String name = nameField.getText();
-        String phone = phoneField.getText();
-        String address = addressField.getText();
-        String email = emailField.getText();
-        String password = passwordField.getText();
-        String username = usernameField.getText();
-        LocalDate dobLocalDate = dobPicker.getValue();
-        Date dob = null;
-        if (dobLocalDate != null) {
-            // Convert LocalDate to Date
-            dob = Date.from(dobLocalDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+    void isValidName() {
+        if(name.getText().equals("")) {
+            messageLabel.setText("Name is required");
+        } else if (name.getText().length() < 5) {
+            messageLabel.setText("Name is too short");
         }
-        RadioButton selectedGender = (RadioButton) genderToggleGroup.getSelectedToggle();
-        String gender = selectedGender != null ? selectedGender.getText() : "Unspecified";
-        Person.Gender genderEnum = Person.Gender.valueOf(gender);
-
-        // Validate fields (example)
-        if (name.isEmpty() || phone.isEmpty() || email.isEmpty() || password.isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, "Validation Error", "Please fill all required fields.");
-            return;
+    }
+    void isValidPassword() {
+        if(password.getText().equals("")) {
+            messageLabel.setText("Password is required");
+        }
+        else if (password.getText().length() < 6) {
+            messageLabel.setText("Password is too short");
+        }
+    }
+    void isValidEmail() {
+        if(email.getText().equals("")) {
+            messageLabel.setText("Email is required");
+        }
+        String regex = "^[A-Za-z0-9+_.-]+@(.+)$";
+       if( !email.getText().matches(regex)){
+           messageLabel.setText("Email is not valid");
+       }
+    }
+    void isValidPhone() {
+        if(phone.getText().equals("")) {
+            messageLabel.setText("Phone is required");
+        }
+        else if (phone.getText().length() < 11) {
+            messageLabel.setText("Phone is too short");
+        }
+    }
+    void isValidAddress() {
+        if(address.getText().equals("")) {
+            messageLabel.setText("Address is required");
+        }
+        else if (address.getText().length() < 5) {
+            messageLabel.setText("Address is too short");
+        }
+    }
+    void isValidBirthday() {
+        Date date = new Date();
+        date.setYear(2008);
+        if(birthday.getValue() == null) {
+            messageLabel.setText("Birthday is required");
+        }
+        else if (birthday.getValue().getYear() > date.getYear()  ) {
+            messageLabel.setText("You are not Eligible to use the site");
+        }
+    }
+    void isValidMale() {
+        if(!Male.isSelected() && !Female.isSelected()) {
+            messageLabel.setText("Gender is required");
         }
 
-        // Register logic
-        System.out.println("Registering user: " + name);
-        Customer c = new Customer(name ,genderEnum,address,phone,email,username,password,dob);
-        customerService.register(c);
+    }
+    void isValidConfirmedPassword() {
+        if(confirmPassword.getText().equals("")) {
+            messageLabel.setText("Password Confirmation is required");
+        }
+        else if (confirmPassword.getText().length() < 6) {
+            messageLabel.setText("Password Confirmation is too short");
+        }
+        else if (!confirmPassword.getText().equals( password.getText())) {
+            messageLabel.setText("Password Confirmation is incorrect");
+        }
     }
 
-    @FXML
-    void goToLogin(MouseEvent event) {
-        System.out.println("Redirecting to login screen...");
 
-    }
-
-    private void showAlert(Alert.AlertType type, String title, String message) {
-        Alert alert = new Alert(type);
-        alert.setTitle(title);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
 }

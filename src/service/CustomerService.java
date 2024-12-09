@@ -1,21 +1,19 @@
 package src.service;
 
-import src.DAO.CartDAO;
 import src.DAO.CustomerDAO;
-import src.DAO.OrderDAO;
 import src.DAO.ProductDAO;
+import src.database.Database;
 import src.entities.Cart;
 import src.entities.Customer;
 import src.entities.Product;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerService {
 
     CustomerDAO customerDAO = new CustomerDAO();
     ProductDAO productDAO = new ProductDAO();
-    OrderDAO orderDAO = new OrderDAO();
-    CartDAO cartDAO = new CartDAO();
     Cart cart = new Cart();
 
     public boolean login(String username, String password) {
@@ -24,10 +22,17 @@ public class CustomerService {
     public boolean register(Customer customer) {
         customerDAO.create(customer);
         return true;
+
     }
 
-    public void addToCart(Customer customer, Cart cart) {
-
+    public boolean addToCart(Product p, int quantity) {
+        if(p.getStock() <= quantity) {
+        Database.currentCustomer.getCart().getProducts().add(p);
+        return true;
+        }
+        else {
+            return false;
+        }
     }
 
     public void getAllProduct() {
@@ -36,8 +41,9 @@ public class CustomerService {
             System.out.println(product);
         }
     }
-    public void searchProduct(String productName) {
-        List<Product> products = productDAO.getByName(productName);
+    public List<Product> searchProduct(String productName) {
+        return productDAO.search(productName);
+
     }
 
 }

@@ -2,21 +2,17 @@ package src.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
-import src.database.*;
 
 public class Order implements Serializable {
     private final int id;
     private static int idCounter=1;
-    private Customer customer;
     private ArrayList<Product>product = new ArrayList<>();
     private payMethod payMethod;
     private Status status;
+    private float totalPrice;
 
-
-    public Order(Customer customer , Order.payMethod payMethod) {
-        this.payMethod = payMethod;
-        this.customer = customer;
+    public Order(ArrayList<Product> products) {
+        this.product = products;
         this.status = Status.PENDING;
         this.id = idCounter++;
     }
@@ -37,14 +33,6 @@ public class Order implements Serializable {
         this.payMethod = payMethod;
     }
 
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
     public int getId() {
         return id;
     }
@@ -57,10 +45,29 @@ public class Order implements Serializable {
         this.product = product;
     }
 
+    public float getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(float totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
     public enum Status{
         PENDING, CONFIRMED, DELIVERED
     }
+
+
     public enum payMethod{
-        CARD, CASH, DIGITAL_WALLET
+        card, cash, wallet
     }
+    public boolean card(String cardNumber, String expireDate,int cvv){
+        this.payMethod = payMethod.card;
+        return true;
+    }
+    public boolean wallet(String number, String password){
+        this.payMethod = payMethod.wallet;
+        return true;
+    }
+
 }
