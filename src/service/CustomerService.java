@@ -12,38 +12,107 @@ import java.util.List;
 
 public class CustomerService {
 
-    CustomerDAO customerDAO = new CustomerDAO();
-    ProductDAO productDAO = new ProductDAO();
-    Cart cart = new Cart();
+    private final CustomerDAO customerDAO = new CustomerDAO();
+    private final ProductDAO productDAO = new ProductDAO();
 
     public boolean login(String username, String password) {
-        return customerDAO.read(username).equals(customerDAO.read(password));
+        Customer customer = customerDAO.read(username);
+        return customer != null && customer.getPassword().equals(password);
     }
+
     public boolean register(Customer customer) {
-        customerDAO.create(customer);
-        return true;
-
+        if (customerDAO.read(customer.getUsername()) == null) {
+            customerDAO.create(customer);
+            return true;
+        }
+        return false;
     }
 
-    public boolean addToCart(Product p, int quantity) {
-        if(p.getStock() <= quantity) {
-        Database.currentCustomer.getCart().getProducts().add(p);
-        return true;
+    public boolean addToCart(Product product, int quantity) {
+        if (product.getStock() >= quantity) {
+            Cart cart = Database.currentCustomer.getCart();
+            if (cart == null) {
+                cart = new Cart();
+                Database.currentCustomer.setCart(cart);
+            }
+
+            for (int i = 0; i < quantity; i++) {
+                cart.addProduct(product);
+            }
+            product.setStock(product.getStock() - quantity);
+            return true;
         }
-        else {
-            return false;
-        }
+        return false;
     }
 
-    public void getAllProduct() {
+    public boolean removeFromCart(Product product, int quantity) {
+        Cart cart = Database.currentCustomer.getCart();
+        if (cart != null && cart.getProducts() != null && cart.getProducts().contains(product)) {
+            int count = 0;
+
+            // Count how many times the product appears in the cart
+            for (Product p : cart.getProducts()) {
+                if (p.getId() == product.getId()) {
+                    count++;
+                }
+            }
+
+            if (count >= quantity) {
+                // Remove the specified quantity
+                int removed = 0;
+                List<Product> products = new ArrayList<>(cart.getProducts());
+                for (Product p : products) {
+                    if (p.getId() == product.getId() && removed < quantity) {
+                        cart.getProducts().remove(p);
+                        removed++;
+                    }
+                }
+
+                // Update the product stock accordingly
+                product.setStock(product.getStock() + quantity);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void getAllProducts() {
         List<Product> products = productDAO.getAll();
         for (Product product : products) {
             System.out.println(product);
         }
     }
+
     public List<Product> searchProduct(String productName) {
         return productDAO.search(productName);
-
     }
 
+    public Cart viewCart() {
+        return Database.currentCustomer.getCart();
+    }
+
+    public boolean checkout() {
+        Cart cart = Database.currentCustomer.getCart();
+        if (cart != null && !cart.getProducts().isEmpty()) {
+            customerDAO.calcTotalPrice();
+            boolean orderPlaced = customerDAO.placeOrder();
+            if (orderPlaced) {
+                customerDAO.deleteCart();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean resetPassword(String email, String newPassword) {
+        for (Customer customer : Database.customers) {
+            if (customer.getEmail().equals(email)) {
+                if (CustomerDAO.validPassword(newPassword)) {
+                    customer.setPassword(newPassword);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }
