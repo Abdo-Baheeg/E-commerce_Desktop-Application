@@ -5,9 +5,11 @@ import src.DAO.ProductDAO;
 import src.database.Database;
 import src.entities.Cart;
 import src.entities.Customer;
+import src.entities.Person;
 import src.entities.Product;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class CustomerService {
@@ -20,9 +22,11 @@ public class CustomerService {
         return customer != null && customer.getPassword().equals(password);
     }
 
-    public boolean register(Customer customer) {
-        if (customerDAO.read(customer.getUsername()) == null) {
-            customerDAO.create(customer);
+    public boolean register(String name, String email, String address, String username, String password, String phone, Person.Gender gender, Date dob) {
+        if (customerDAO.read(username) != null) {
+            return false;
+        } else if (CustomerDAO.validName(username) && CustomerDAO.validEmail(email) && CustomerDAO.validAddress(address) && CustomerDAO.validPhone(phone) ) {
+            customerDAO.create(new Customer(name,gender,address,phone,email,username,password,dob));
             return true;
         }
         return false;
@@ -30,17 +34,7 @@ public class CustomerService {
 
     public boolean addToCart(Product product, int quantity) {
         if (product.getStock() >= quantity) {
-            Cart cart = Database.currentCustomer.getCart();
-            if (cart == null) {
-                cart = new Cart();
-                Database.currentCustomer.setCart(cart);
-            }
-
-            for (int i = 0; i < quantity; i++) {
-                cart.addProduct(product);
-            }
-            product.setStock(product.getStock() - quantity);
-            return true;
+            customerDAO.getCurrentCustomer();
         }
         return false;
     }

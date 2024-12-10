@@ -11,6 +11,8 @@ import static src.database.Database.customers;
 
 public class AdminDAO implements CRUD <Admin> {
 
+    private static Admin currentAdmin;
+
     // validators : ............//
     public static boolean validName(String name) {
         return name != null &&
@@ -98,6 +100,12 @@ public class AdminDAO implements CRUD <Admin> {
     public void delete(Admin a) {
         admins.remove(a);
     }
+
+    @Override
+    public List<Admin> getAll() {
+        return admins;
+    }
+
     public boolean delete(int id) {
         for (Admin admin : admins) {
             if (admin.getID() == id) {
@@ -108,10 +116,6 @@ public class AdminDAO implements CRUD <Admin> {
         return false;
     }
 
-    @Override
-    public List<Admin> getAll() {
-        return admins;
-    }
 
     public boolean updateName(Admin entity, String name) {
         if(validName(name)) {
@@ -129,33 +133,33 @@ public class AdminDAO implements CRUD <Admin> {
         else
             return false;
     }
-    public boolean updatePassword(Admin entity, String password) {
+    public boolean updatePassword( String password) {
         if(validPassword(password)) {
-            entity.setPassword(password);
+            currentAdmin.setPassword(password);
             return true;
         }
         else
             return false;
     }
-    public boolean updatePhone(Admin entity, String phone) {
+    public boolean updatePhone( String phone) {
         if(validPhone(phone)) {
-            entity.setPhone(phone);
+            currentAdmin.setPhone(phone);
             return true;
         }
         else
             return false;
     }
-    public boolean updateAddress(Admin entity, String address) {
+    public boolean updateAddress(String address) {
         if(validAddress(address)) {
-            entity.setAddress(address);
+            currentAdmin.setAddress(address);
             return true;
         }
         else
             return false;
     }
-    public boolean updateUsername(Admin entity, String username) {
+    public boolean updateUsername( String username) {
         if(validUsername(username)) {
-            entity.setUsername(username);
+            currentAdmin.setUsername(username);
             return true;
         }
         else
@@ -163,4 +167,11 @@ public class AdminDAO implements CRUD <Admin> {
     }
 
 
+    public static Admin getCurrentAdmin() {
+        return currentAdmin;
+    }
+
+    public static void setCurrentAdmin(Admin currentAdmin) {
+       AdminDAO.currentAdmin = currentAdmin;
+    }
 }

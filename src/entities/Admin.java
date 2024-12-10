@@ -16,7 +16,11 @@ public class Admin extends Person {
   public Admin(String name, String username, String password) {
       super(name,username,password);
   }
-  public int getWorkingHours() {
+
+    public Admin(String name, String role, String username, String password) {
+    }
+
+    public int getWorkingHours() {
       return workingHours;
   }
   public void setWorkingHours(int workingHours) {

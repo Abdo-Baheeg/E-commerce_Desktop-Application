@@ -12,9 +12,6 @@ public class Database {
     public static ArrayList<Product> availableProducts = new ArrayList<>();
     public static ArrayList<Product> soldProducts = new ArrayList<>();
 
-    public static Customer currentCustomer;
-    public static Admin currentAdmin;
-
     public Database(){}
 
     public static void initDummyData(){

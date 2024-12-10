@@ -15,6 +15,8 @@ import static src.database.Database.*;
 
 public class ProductDAO implements CRUD<Product> {
 
+    CustomerDAO customerDAO = new CustomerDAO();
+
     // validators : ............//
     public static boolean validName(String name) {
         return name != null &&
@@ -78,12 +80,22 @@ public class ProductDAO implements CRUD<Product> {
      public List<Product> getAll() {
          return products;
      }
-     public void addToCart(int id) {
-        Product p = this.read(id);
-        currentCustomer.getCart().addProduct(p);
+
+     public boolean addToCart(Product p) {
+        if(products.contains(p)) {
+            customerDAO.getCurrentCustomer().getCart().getProducts().add(p);
+            customerDAO.calcTotalPrice();
+            return true;
+        }
+        return false;
      }
-     public void removeFromCart(int id) {
-         currentCustomer.getCart().getProducts().removeIf(p -> p.getId() == id);
+     public boolean removeFromCart(Product p) {
+         if(products.contains(p)) {
+             customerDAO.getCurrentCustomer().getCart().getProducts().remove(p);
+             customerDAO.calcTotalPrice();
+             return true;
+         }
+         return false;
      }
      public void updateName(int id, String name) {
         Product p = this.read(id);
@@ -105,12 +117,10 @@ public class ProductDAO implements CRUD<Product> {
         p.setCategory(category);
 
      }
-
      public void delete(int id) {
         Product p = this.read(id);
         products.remove(p);
      }
-
      public static List<Product> search(String name) {
         List<Product> products = new ArrayList<>();
         for (Product product : Database.products) {
@@ -120,18 +130,5 @@ public class ProductDAO implements CRUD<Product> {
         }
         return products;
      }
-
-     public boolean placeOrder(Order.payMethod payMethod) {
-        if (!currentCustomer.getCart().getProducts().isEmpty()) {
-            Order order = new Order(currentCustomer.getCart().getProducts());
-            order.setStatus(Order.Status.PENDING);
-            order.setPayMethod(payMethod);
-            currentCustomer.setOrder(order);
-            return true;
-        }
-        return false;
-     }
-
-
 
  }

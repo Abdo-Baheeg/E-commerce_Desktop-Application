@@ -8,10 +8,13 @@ import src.entities.Product;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.ArrayList;
 import java.util.List;
 import static src.database.Database.*;
 
 public  class CustomerDAO implements CRUD<Customer> {
+    private Customer currentCustomer;
+
 
     // validators : ............//
     public static boolean validName(String name) {
@@ -168,20 +171,38 @@ public  class CustomerDAO implements CRUD<Customer> {
         }
             currentCustomer.getCart().setTotalPrice(total);
     }
-    private boolean validateOrder(Cart cart) {
-        if(cart == null ) {
-            return false;
-        }
-        return true;
-    }
+
     public void deleteCart() {
         currentCustomer.getCart().setProducts(null);
     }
+
     public boolean placeOrder() {
         if(currentCustomer.getCart() != null) {
-            currentCustomer.addOrder(currentCustomer.getCart());
+            ArrayList<Product> p =currentCustomer.getCart().getProducts();
+            Order o = new Order(p);
+            o.setStatus(Order.Status.PENDING);
+            o.setTotalPrice(currentCustomer.getCart().getTotalPrice());
+            currentCustomer.setOrder(o);
             return true;
         }
         return false;
     }
+
+    public void setCurrentCustomer(Customer currentCustomer) {
+        this.currentCustomer = currentCustomer;
+    }
+
+    public Customer getCurrentCustomer() {
+        return this.currentCustomer;
+    }
+
+    public boolean cancelOrder(Order order) {
+        if (order != null && order.getStatus().equals(Order.Status.PENDING)) {
+            currentCustomer.deleteOrder(order);
+            return true;
+        }
+        return false;
+    }
+
+
 }
