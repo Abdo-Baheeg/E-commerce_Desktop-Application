@@ -173,11 +173,14 @@ public  class CustomerDAO implements CRUD<Customer> {
     }
 
     public void deleteCart() {
-        currentCustomer.getCart().setProducts(null);
+        currentCustomer.getCart().setProducts(new ArrayList<>());
     }
 
     public boolean placeOrder() {
         if(currentCustomer.getCart() != null) {
+            if(currentCustomer.getCart().getTotalPrice() > currentCustomer.getBalance()){
+                return false;
+            }
             ArrayList<Product> p =currentCustomer.getCart().getProducts();
             Order o = new Order(p);
             o.setStatus(Order.Status.PENDING);

@@ -8,9 +8,11 @@ public class Cart implements Serializable {
     private static int idCounter=0;
     private ArrayList<Product> products;
     private float totalPrice;
-    public Cart() {}
-    public Cart(Product product) {
-        this.products.add(product);
+
+    public Cart() {
+        this.products = new ArrayList<>();
+        this.id = idCounter++;
+        this.totalPrice = 0;
     }
 
     public int getId() {
@@ -32,10 +34,6 @@ public class Cart implements Serializable {
     }
     public void setTotalPrice(float totalPrice) {
         this.totalPrice = totalPrice;
-    }
-
-    public void addProduct(Product product) {
-        this.products.add(product);
     }
 
 }

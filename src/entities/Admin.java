@@ -8,16 +8,14 @@ public class Admin extends Person {
     private int salary;
 
   public Admin(String name, int age, Gender gender, String address, String phone, String username, String password) {
-      super(name, age, gender, address, phone, username,password);
+      super(name, age,gender, phone, username,password);
   }
   public Admin() {
       super();
   }
-  public Admin(String name, String username, String password) {
-      super(name,username,password);
-  }
 
     public Admin(String name, String role, String username, String password) {
+      super(name, username, password);
     }
 
     public int getWorkingHours() {

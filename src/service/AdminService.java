@@ -23,8 +23,6 @@ public class AdminService {
         }
         return false;
     }
-
-
     public boolean createAdmin(String name, String role, String username, String password) {
         Admin existingAdmin = adminDAO.read(username);
         if (existingAdmin != null) {
@@ -34,23 +32,18 @@ public class AdminService {
         adminDAO.create(admin);
         return true;
     }
-
     public boolean updatePassword(String newPassword) {
         if(AdminDAO.getCurrentAdmin() != null){
             return adminDAO.updatePassword(newPassword);
         }
         return false;
     }
-
-
     public boolean updateUsername(String newUsername) {
         if(AdminDAO.getCurrentAdmin() != null){
            return adminDAO.updateUsername(newUsername);
         }
         return false;
     }
-
-
     public boolean createProduct(String name, String description, float price, int quantity) {
         if(productDAO.read(name) != null){
             return false;
@@ -61,8 +54,6 @@ public class AdminService {
         }
         return false;
     }
-
-
     public boolean updateProduct(int id, Product product) {
         Product existingProduct = productDAO.read(id);
         if (existingProduct == null) {
@@ -71,8 +62,6 @@ public class AdminService {
         productDAO.update(product);
         return true;
     }
-
-
     public boolean deleteProduct(int id) {
         Product product = productDAO.read(id);
         if (product == null) {
@@ -81,18 +70,12 @@ public class AdminService {
         productDAO.delete(id);
         return true;
     }
-
-
     public List<Admin> getAllAdmins() {
         return adminDAO.getAll();
     }
-
-
     public List<Product> getAllProducts() {
         return productDAO.getAll();
     }
-
-
     public Product readProduct(String name) {
         return productDAO.read(name);
     }

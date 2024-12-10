@@ -166,11 +166,9 @@ public class AdminDAO implements CRUD <Admin> {
             return false;
     }
 
-
     public static Admin getCurrentAdmin() {
         return currentAdmin;
     }
-
     public static void setCurrentAdmin(Admin currentAdmin) {
        AdminDAO.currentAdmin = currentAdmin;
     }

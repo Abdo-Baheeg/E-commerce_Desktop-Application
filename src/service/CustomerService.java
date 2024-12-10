@@ -34,7 +34,30 @@ public class CustomerService {
 
     public boolean addToCart(Product product, int quantity) {
         if (product.getStock() >= quantity) {
-            customerDAO.getCurrentCustomer();
+            customerDAO.getCurrentCustomer().getCart().getProducts().add(product);
+        }
+        return false;
+    }
+
+    public boolean removeFromCart(Product product, int quantity) {
+        if (product != null) {
+            customerDAO.getCurrentCustomer().getCart().getProducts().remove(product);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean addToInterests(Product product) {
+        if(product != null) {
+            customerDAO.getCurrentCustomer().getInterests().add(product);
+            return true;
+        }
+        return false;
+    }
+    public boolean removeFromInterests(Product product) {
+        if(product != null) {
+            customerDAO.getCurrentCustomer().getInterests().remove(product);
+            return true;
         }
         return false;
     }
@@ -47,15 +70,15 @@ public class CustomerService {
     }
 
     public List<Product> searchProduct(String productName) {
-        return productDAO.search(productName);
+        return ProductDAO.search(productName);
     }
 
-    public Cart viewCart() {
-        return Database.currentCustomer.getCart();
+    public List<Product> viewCart() {
+        return customerDAO.getCurrentCustomer().getCart().getProducts();
     }
 
     public boolean checkout() {
-        Cart cart = Database.currentCustomer.getCart();
+        Cart cart = customerDAO.getCurrentCustomer().getCart();
         if (cart != null && !cart.getProducts().isEmpty()) {
             customerDAO.calcTotalPrice();
             boolean orderPlaced = customerDAO.placeOrder();

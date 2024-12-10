@@ -6,13 +6,20 @@ import java.util.ArrayList;
 public class Order implements Serializable {
     private final int id;
     private static int idCounter=1;
-    private ArrayList<Product>product = new ArrayList<>();
+    private ArrayList<Product> products = new ArrayList<>();
     private payMethod payMethod;
     private Status status;
     private float totalPrice;
 
+
+    public Order() {
+        this.id = idCounter++;
+        this.totalPrice = 0.0f;
+        this.products = new ArrayList<>();
+        this.status=Status.PENDING;
+    }
     public Order(ArrayList<Product> products) {
-        this.product = products;
+        this.products = products;
         this.status = Status.PENDING;
         this.id = idCounter++;
     }
@@ -37,12 +44,12 @@ public class Order implements Serializable {
         return id;
     }
 
-    public ArrayList<Product> getProduct() {
-        return product;
+    public ArrayList<Product> getProducts() {
+        return products;
     }
 
-    public void setProduct(ArrayList<Product> product) {
-        this.product = product;
+    public void setProducts(ArrayList<Product> products) {
+        this.products = products;
     }
 
     public float getTotalPrice() {

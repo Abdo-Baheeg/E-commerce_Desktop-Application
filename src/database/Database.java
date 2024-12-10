@@ -42,7 +42,17 @@ public class Database {
         saveAdmins();
         saveCustomers();
         saveProducts();
+        saveCategories();
     }
+
+    public static void loadDatabase() throws IOException, ClassNotFoundException {
+        loadAdmins();
+        loadCustomers();
+        loadProducts();
+        loadCategories();
+    }
+
+
     private static void saveProducts() throws IOException {
         File file = new File("src/database/products.csv");
         FileOutputStream fos = new FileOutputStream(file);
@@ -61,11 +71,24 @@ public class Database {
         ObjectOutputStream oos = new ObjectOutputStream(fos);
         oos.writeObject(admins);
     }
+    private static void saveCategories() throws IOException {
+        File file = new File("src/database/categories.csv");
+        FileOutputStream fos = new FileOutputStream(file);
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
+        oos.writeObject(categories);
+    }
 
-    public static void loadDatabase() throws IOException, ClassNotFoundException {
-        loadAdmins();
-        loadCustomers();
-        loadProducts();
+    private static void loadCategories() throws IOException, ClassNotFoundException {
+        File file = new File("src/database/categories.csv");
+        if (file.exists() && file.length() > 0) {
+            try{
+                ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
+                categories = (ArrayList<Category>) ois.readObject();
+            }
+            catch (Exception e){e.printStackTrace();}}
+        else {
+            System.out.println("Categories file is empty. Initializing with default values.");
+        }
     }
     private static void loadAdmins() throws IOException, ClassNotFoundException {
         File file = new File("src/database/admins.csv");
@@ -105,15 +128,17 @@ public class Database {
 
 
     public String generateSalesReport(){
-        String salesReport;
+        String salesReport="";
         if(soldProducts.size() > 0){
             salesReport = "Sold Products:\n";
             for(Product p : soldProducts){
-                salesReport +=p.getId()+""+ p.getName() ;
+                salesReport +=p.getId()+" ,"+ p.getName() + " , sold items: "+ p.getSoldItems();
             }
-            return salesReport;
+        } else if (soldProducts.size() == 0) {
+         return "No sold products";
         }
-        return null;}
+        return salesReport;
+    }
 
     public List<Product> getTopSellingProducts(){
         ArrayList<Product> topProducts = new ArrayList<>();
