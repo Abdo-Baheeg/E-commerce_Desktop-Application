@@ -16,6 +16,8 @@ public class Database {
     public Database(){}
 
     public static void initDummyData(){
+        Date dob = new Date(2000,12,12);
+        customers.add(new Customer("Abdo", Person.Gender.MALE ,"address", "01012012122", "abdo@gmail.com","abdo","abdo2005",dob));
         // initialize 5 admins:
         for (int i = 0; i < 5; i++) {
             admins.add(new Admin("Admin"+i,34, Person.Gender.MALE ,"Address"+i ,"0107823323"+i , "admin" , "admin"));

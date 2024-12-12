@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:controller="src.gui.controllers.LoginController" fx:id="loginAnchorPane" id="loginPane" prefHeight="573.0" prefWidth="725.0" scaleShape="false" snapToPixel="false" style="-fx-background-image: url('../../utils/img/banner-with-abstract-background-with-blue-tones-paper-cutout-waves.jpg');" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox layoutX="199.0" layoutY="90.0" prefHeight="433.0" prefWidth="347.0" style="-fx-alignment: CENTER; -fx-background-radius: 50;">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="150.0" fitWidth="157.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../utils/icons/login.png" />
+                     </image>
+                  </ImageView>
+                  <Label alignment="CENTER" prefHeight="170.0" prefWidth="218.0" text="Customer Login" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font name="Tempus Sans ITC" size="40.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox prefHeight="122.0" prefWidth="392.0">
+               <children>
+                  <GridPane prefHeight="115.0" prefWidth="374.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="204.666748046875" minWidth="10.0" prefWidth="56.55560302734375" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="364.6666259765625" minWidth="10.0" prefWidth="290.77773030598956" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="73.44443130493164" minHeight="10.0" prefHeight="69.88888931274414" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="56.555572509765625" minHeight="10.0" prefHeight="52.11111068725586" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <PasswordField id="passwordField" fx:id="password" prefHeight="45.0" prefWidth="291.0" promptText="Password" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="Times New Roman Italic" size="15.0" />
+                           </font>
+                        </PasswordField>
+                        <TextField id="usernameField" fx:id="username" prefHeight="45.0" prefWidth="291.0" promptText="Username" GridPane.columnIndex="1">
+                           <font>
+                              <Font name="Times New Roman" size="16.0" />
+                           </font>
+                        </TextField>
+                        <ImageView fitHeight="60.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../utils/icons/profile.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="53.0" fitWidth="59.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+                           <image>
+                              <Image url="@../../utils/icons/password.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </GridPane>
+               </children>
+            </HBox>
+            <Separator opacity="0.0" prefHeight="45.0" prefWidth="347.0" />
+            <Button id="loginButton" fx:id="loginButton" alignment="CENTER" mnemonicParsing="false" onAction="#login" prefHeight="62.0" prefWidth="311.0" style="-fx-background-radius: 20; -fx-background-color: green;" text="Log in" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Label fx:id="messageLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="47.0" prefWidth="430.0" textFill="RED">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Separator opacity="0.0" prefHeight="19.0" prefWidth="430.0" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

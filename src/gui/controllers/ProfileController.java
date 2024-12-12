@@ -1,30 +1,48 @@
 package src.gui.controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 
 public class ProfileController {
-    @FXML
-    private Label nameLabel;
 
     @FXML
-    private Label emailLabel;
+    private Label address;
 
     @FXML
-    private Label phoneLabel;
+    private Label age;
 
     @FXML
-    private Label addressLabel;
+    private Button backBtn;
 
     @FXML
-    private void editProfile() {
-        System.out.println("Editing profile...");
+    private Button editBtn;
+
+    @FXML
+    private Label email;
+
+    @FXML
+    private Label gender;
+
+    @FXML
+    private ImageView img;
+
+    @FXML
+    private Label name;
+
+    @FXML
+    private Label username;
+
+    @FXML
+    void backToDashboard(ActionEvent event) {
+
     }
 
-    public void setProfileDetails(String name, String email, String phone, String address) {
-        nameLabel.setText("Name: " + name);
-        emailLabel.setText("Email: " + email);
-        phoneLabel.setText("Phone: " + phone);
-        addressLabel.setText("Address: " + address);
+    @FXML
+    void goToEdit(ActionEvent event) {
+
     }
+
 }

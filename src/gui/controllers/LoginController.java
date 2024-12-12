@@ -7,158 +7,128 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.stage.Modality;
+import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import src.DAO.AdminDAO;
-import src.DAO.CustomerDAO;
-import src.gui.MainApp;
-import src.service.AdminService;
 import src.service.CustomerService;
 
-import java.awt.*;
 import java.io.IOException;
+import java.util.Objects;
 
 public class LoginController {
-    AdminDAO adminDAO = new AdminDAO();
-    CustomerDAO customerDAO = new CustomerDAO();
-    AdminService adminService = new AdminService();
+    public Hyperlink gitHub;
+    public Hyperlink youtube;
+    public Hyperlink facebook;
+    public Hyperlink whatsapp;
+
     CustomerService customerService = new CustomerService();
 
-    // login.fxml Controls: ///
     @FXML
-    private TextField username;
+    private Button aboutUsBtn;
+
     @FXML
-    private PasswordField password;
+    private Button contactUsBtn;
+
     @FXML
-    private Label messageLabel;
+    private Button goToLoginBtn;
+
+    @FXML
+    private Button goToRegisterBtn;
+
+    @FXML
+    private AnchorPane loginAnchorPane;
+
     @FXML
     private Button loginButton;
-    @FXML
-    private Hyperlink registerButton;
-    @FXML
-    private Hyperlink adminLogin;
-    // end of login.fxml Controls
-
-    // Register.fxml Controls:  //
-    @FXML
-    private TextField name;
-    @FXML
-    private TextField email;
-    @FXML
-    private TextField phone;
-    @FXML
-    private TextField address;
-    @FXML
-    private TextField registerUsername;
-    @FXML
-    private TextField registerPassword;
-    @FXML
-    private PasswordField confirmPassword;
-    @FXML
-    private RadioButton Male;
-    @FXML
-    private RadioButton Female;
-    @FXML
-    private DatePicker datePicker;
-    @FXML
-    private Label registerMessage;
-    @FXML
-    private Button submit;
-    @FXML
-    private Button cancel;
-    @FXML
-    private Button reset;
-    // end of Register.fxml Controls //
-
-    // adminLogin.fxml Controls //
-    @FXML
-    private Button adminBackBTN;
 
     @FXML
-    private Button adminLoginBTN;
+    private BorderPane loginPane;
 
     @FXML
-    private Label adminLoginMessage;
+    private Label messageLabel;
 
     @FXML
-    private PasswordField adminPassword;
+    private PasswordField password;
 
     @FXML
-    private TextField adminUsername;
-    ///// end of adminLogin Controls
-
-
-
-    // Event Handling________________::
+    private TextField username;
 
     @FXML
-    public void login(ActionEvent event) throws IOException {
-    String user = username.getText();
-    String pass = password.getText();
+    private RadioButton femaleRadio;
 
-    if(customerService.login(user,pass)){
-      //  MainApp.currentCustomer = customerDAO.read(user);
-      //  messageLabel.setText("Hello," + customerDAO.read(user).getName() +" <3");
+    @FXML
+    private RadioButton maleRadio;
 
-    }
-    else{
-        messageLabel.setText("Username or password is incorrect, please try again");
-    }
+    @FXML
+    private ToggleGroup genderToggleGroup;
+
+    @FXML
+    public void initialize() {
+        genderToggleGroup = new ToggleGroup();
+        femaleRadio.setToggleGroup(genderToggleGroup);
+        maleRadio.setToggleGroup(genderToggleGroup);
     }
 
     @FXML
-    private void handleRegisterButton(ActiveEvent event) {
-        try {
-            // Load the Register FXML file
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/Register.fxml"));
-            Parent registerRoot = loader.load();
+    void goToAboutUs(ActionEvent event) throws IOException {
+        AnchorPane anchorPane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../views/customerApp/about.fxml")));
+        loginPane.setCenter(anchorPane);
+    }
 
-            // Create a new Stage (window) for the Register Form
-            Stage registerStage = new Stage();
-            registerStage.setTitle("Register");
-            registerStage.initModality(Modality.APPLICATION_MODAL); // Block interaction with the login screen
-            registerStage.setResizable(false);
-            registerStage.setScene(new Scene(registerRoot));
-
-            // Show the Register Form
-            registerStage.showAndWait(); // Wait until the Register window is closed
+    @FXML
+    void goToContactUs(ActionEvent event) throws IOException {
+        try{
+            AnchorPane anchorPane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../views/customerApp/contactUs.fxml")));
+            loginPane.setCenter(anchorPane);
         } catch (IOException e) {
-            e.printStackTrace(); // Handle the error (e.g., file not found)
-        }
-
-    }
-
-    @FXML
-     private void handleAdminLogin(ActionEvent event) throws IOException {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("src/gui/adminLogin.fxml"));
-            Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("CCCCCCCCCCCCCCCCCCCCCccc");
+            System.out.println(e.getMessage());
         }
     }
 
     @FXML
-    private void handleBackButton(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
-        Parent root = loader.load();
-        Stage loginStage = new Stage();
-        loginStage.setTitle("Login");
-        loginStage.initModality(Modality.APPLICATION_MODAL);
-        loginStage.setResizable(false);
-        loginStage.setScene(new Scene(root));
-        loginStage.showAndWait();
+    void goToLogin() throws IOException {
+        AnchorPane anchorPane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../views/customerApp/loginPane.fxml")));
+        loginPane.setCenter(anchorPane);
+    }
+    @FXML
+    void goToRegister(ActionEvent event) throws IOException {
+        AnchorPane anchorPane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../views/customerApp/register.fxml")));
+        loginPane.setCenter(anchorPane);
     }
 
     @FXML
-    private void adminLogin(ActionEvent event) throws IOException {
-        String user = adminUsername.getText();
+    void login(ActionEvent event) throws IOException {
+        String username = this.username.getText();
+        String password = this.password.getText();
+
+        if (username.isEmpty() || password.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Please enter a valid username/password");
+            alert.showAndWait();
+            return;
+        }
+        if(!customerService.login(username, password)){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Wrong Credentials");
+            alert.setHeaderText(null);
+            alert.setContentText("Wrong Credentials");
+            alert.showAndWait();
+            return;
+        }
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Login");
+        alert.setHeaderText(null);
+        alert.setContentText(" You are Logged in successfully");
+        alert.showAndWait();
+        Parent newRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../views/customerApp/dashboard.fxml")));
+        Scene newScene = new Scene(newRoot);
+        // Get the current stage
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage.setScene(newScene);
+        stage.show();
     }
+
 }
