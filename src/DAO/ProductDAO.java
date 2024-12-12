@@ -1,11 +1,8 @@
 package src.DAO;
 
 import src.database.Database;
-import src.entities.Cart;
 import src.entities.Category;
-import src.entities.Order;
 import src.entities.Product;
-import src.gui.MainApp;
 
 import java.util.ArrayList;
 import java.util.List;

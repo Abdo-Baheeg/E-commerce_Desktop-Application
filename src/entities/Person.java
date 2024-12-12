@@ -1,5 +1,7 @@
 package src.entities;
 
+import javafx.scene.image.Image;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Calendar;
@@ -16,6 +18,7 @@ public abstract class Person implements Serializable {
     private String email;
     private int age;
     private Date dateOfBirth;
+    private Image image;
 
     public Person(String name, String username, String password) {
         this.password = password;
@@ -49,6 +52,14 @@ public abstract class Person implements Serializable {
 
     public void setGender(Gender gender) {
         this.gender = gender;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
     }
 
     public enum Gender {
