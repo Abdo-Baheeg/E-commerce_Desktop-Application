@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -30,9 +31,6 @@ public class LoginController {
     @FXML
     private Button aboutUsBtn;
 
-
-
-    Image monkey_close = new Image(Objects.requireNonNull(getClass().getResourceAsStream("../utils/gif/monkey-close.gif")));
 
 
     @FXML
@@ -108,6 +106,7 @@ public class LoginController {
         String password = this.password.getText();
 
         if (username.isEmpty() || password.isEmpty()) {
+            setAngry();
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText(null);
@@ -116,6 +115,7 @@ public class LoginController {
             return;
         }
         if(!customerService.login(username, password)){
+            setAngry();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Wrong Credentials");
             alert.setHeaderText(null);
@@ -123,6 +123,8 @@ public class LoginController {
             alert.showAndWait();
             return;
         }
+        Image image = new Image(getClass().getResourceAsStream("../../utils/gif/got-it.gif"));
+        img.setImage(image);
         CustomerDAO customerDAO = new CustomerDAO();
         customerDAO.setCurrentCustomer(customerDAO.read(username));
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -130,15 +132,31 @@ public class LoginController {
         alert.setHeaderText(null);
         alert.setContentText(" You are Logged in successfully");
         alert.showAndWait();
-        Parent newRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../views/customerApp/dashboard.fxml")));
+        Parent newRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../views/dashboard.fxml")));
         Scene newScene = new Scene(newRoot);
         // Get the current stage
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setScene(newScene);
         stage.show();
+        DashboardController.initialize();
     }
-
-    public void setMonkeyClose(ActionEvent actionEvent) {
+    @FXML
+    public void setMonkeyClose(MouseEvent actionEvent) {
+        Image monkey_close = new Image(Objects.requireNonNull(getClass().getResourceAsStream("../../utils/gif/monkey-close.gif")));
         img.setImage(monkey_close);
+    }
+    @FXML
+    public void setMonkeyOpen(MouseEvent event) {
+        Image monkey_open = new Image(Objects.requireNonNull(getClass().getResourceAsStream("../../utils/gif/monkey-open.gif")));
+        img.setImage(monkey_open);
+    }
+    @FXML
+    private void setDefualt() {
+        Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("../../utils/icon/login.png")));
+        img.setImage(image);
+    }
+    private void setAngry(){
+        Image image = new Image(getClass().getResourceAsStream("../../utils/gif/angry.gif"));
+        img.setImage(image);
     }
 }

@@ -26,7 +26,7 @@ public class MainApp extends Application {
             primaryStage.setTitle("Login & Registration");
             primaryStage.setScene(scene);
 
-            primaryStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("utils/icon/icon.png"))));
+            primaryStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("../utils/icon/icon.png"))));
             primaryStage.setMaxWidth(1280);
             primaryStage.setMaxHeight(680);
 
@@ -38,7 +38,7 @@ public class MainApp extends Application {
     }
 
     public static void main(String[] args) {
-        Database.initDummyData();
+        Database.initData();
         launch(args);
     }
 }

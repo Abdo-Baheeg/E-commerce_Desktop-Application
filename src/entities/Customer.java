@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Customer extends Person {
-    private float balance;
+    private double balance = 5000;
     private Cart cart;
     private ArrayList<Order> orders=new ArrayList<>();
     private ArrayList<Product> interests = new ArrayList<>();
@@ -15,7 +15,7 @@ public class Customer extends Person {
         this.balance=1000;
         this.orders=new ArrayList<Order>();
     }
-    public float getBalance() {
+    public double getBalance() {
         return balance;
     }
     public void setBalance(float balance) {

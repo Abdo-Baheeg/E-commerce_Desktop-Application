@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane fx:id="mainPane" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ProductController">
+   <children>
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="447.0" prefWidth="686.0">
+         <bottom>
+            <HBox alignment="CENTER" prefHeight="49.0" prefWidth="600.0" spacing="15.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="backBtn" mnemonicParsing="false" onAction="#back" prefHeight="39.0" prefWidth="85.0" text="Back" />
+                  <Button fx:id="addToInterestsBtn" mnemonicParsing="false" onAction="#addToInterests" prefHeight="4.0" prefWidth="26.0">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../utils/icon/favorite.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="addToCartBtn" mnemonicParsing="false" onAction="#addToCart" prefHeight="38.0" prefWidth="97.0" text="Add to Cart" />
+                  <Spinner fx:id="quantity" prefHeight="33.0" prefWidth="67.0" />
+               </children>
+            </HBox>
+         </bottom>
+         <top>
+            <HBox prefHeight="51.0" prefWidth="437.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label fx:id="ProductName" alignment="CENTER" prefHeight="51.0" prefWidth="691.0" text="name" wrapText="true">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </top>
+         <right>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label fx:id="productCategory" alignment="CENTER" prefHeight="83.0" prefWidth="116.0" text="Categorty">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="productPrice" alignment="CENTER" prefHeight="73.0" prefWidth="116.0" text="price" textAlignment="CENTER">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="productStock" alignment="CENTER" prefHeight="67.0" prefWidth="126.0" text="in stock" textAlignment="CENTER">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </right>
+         <center>
+            <VBox alignment="CENTER_LEFT" BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fx:id="productImg" fitHeight="249.0" fitWidth="412.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../../utils/icon/java.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="productDescription" prefHeight="67.0" prefWidth="562.0" text="Description" wrapText="true" />
+               </children>
+               <BorderPane.margin>
+                  <Insets bottom="15.0" left="16.0" right="15.0" top="15.0" />
+               </BorderPane.margin>
+            </VBox>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

@@ -15,31 +15,242 @@ public class Database {
 
     public Database(){}
 
-    public static void initDummyData(){
-        Date dob = new Date(2000,12,12);
-        customers.add(new Customer("Abdo", Person.Gender.MALE ,"address", "01012012122", "abdo@gmail.com","abdo","abdo2005",dob));
-        // initialize 5 admins:
-        for (int i = 0; i < 5; i++) {
-            admins.add(new Admin("Admin"+i,34, Person.Gender.MALE ,"Address"+i ,"0107823323"+i , "admin" , "admin"));
+    public static void initData(){
+            Date dob = new Date(2005,1,28);
+            customers.add(new Customer("Abdo", Person.Gender.MALE,"Cairo, Egypt", "01016042121","3bdobahig@gmail.com","abdo","1234",dob));
+            admins.add(new Admin("Abdo Bahig","CEO","abdo","1234"));
+            // Initialize Categories
+//            Category laptops = new Category("Laptops", "High-performance computing devices for professional and personal use");
+//            Category smartphones = new Category("Smartphones", "Mobile devices with advanced computing capabilities");
+//            Category tablets = new Category("Tablets", "Portable touchscreen computing devices");
+//            Category accessories = new Category("Accessories", "Supporting devices and add-ons for electronics");
+//
+//            // Add categories to the list
+//            categories.add(laptops);
+//            categories.add(smartphones);
+//            categories.add(tablets);
+//            categories.add(accessories);
+//
+//            // Initialize Products
+//            // Laptops
+//            Product dellLatitude = new Product(
+//                    "Dell Latitude 5555",
+//                    "Intel Core i7 Processor, 32 GB DDR5 Ram, 1 TB SSD, 15.6 inches, Color: Black",
+//                    999.99,
+//                    3,
+//                    laptops,
+//                    "C:\\Users\\Abdelrahman Bahig\\Pictures\\EGYPT\\2686479_389815-PCH2OE-340.jpg"
+//            );
+//            Product macBookPro = new Product(
+//                    "MacBook Pro 16\"",
+//                    "Apple M2 Pro Chip, 16 GB RAM, 512 GB SSD, 16-inch Retina Display, Space Gray",
+//                    2499.99,
+//                    5,
+//                    laptops,
+//                    "C:\\Users\\Abdelrahman Bahig\\Pictures\\EGYPT\\2686479_389815-PCH2OE-340.jpg"
+//            );
+//            Product lenovoThinkPad = new Product(
+//                    "Lenovo ThinkPad X1 Carbon",
+//                    "Intel Core i7, 16 GB RAM, 512 GB SSD, 14-inch, Carbon Fiber Construction",
+//                    1799.99,
+//                    4,
+//                    laptops,
+//                    "C:\\Users\\Abdelrahman Bahig\\Pictures\\EGYPT\\2686479_389815-PCH2OE-340.jpg"
+//            );
+//
+//            // Smartphones
+//            Product iPhone14 = new Product(
+//                    "iPhone 14 Pro",
+//                    "6.1-inch Super Retina XDR Display, A16 Bionic Chip, 128GB, Deep Purple",
+//                    999.99,
+//                    6,
+//                    smartphones,
+//                    "C:\\Users\\Abdelrahman Bahig\\Pictures\\EGYPT\\2686479_389815-PCH2OE-340.jpg"
+//            );
+//            Product samsungS23 = new Product(
+//                    "Samsung Galaxy S23 Ultra",
+//                    "6.8-inch Dynamic AMOLED, 200MP Camera, 512GB, Phantom Black",
+//                    1199.99,
+//                    5,
+//                    smartphones,
+//                    "C:\\Users\\Abdelrahman Bahig\\Pictures\\EGYPT\\2686479_389815-PCH2OE-340.jpg"
+//            );
+//            Product googlePixel7 = new Product(
+//                    "Google Pixel 7",
+//                    "6.3-inch OLED, Google Tensor G2, 128GB, Obsidian",
+//                    599.99,
+//                    4,
+//                    smartphones,
+//                    "C:\\Users\\Abdelrahman Bahig\\Pictures\\EGYPT\\2686479_389815-PCH2OE-340.jpg"
+//            );
+//
+//            // Tablets
+//            Product iPadPro = new Product(
+//                    "iPad Pro 12.9\"",
+//                    "M2 Chip, 128GB, 12.9-inch Liquid Retina XDR Display, Space Gray",
+//                    1099.99,
+//                    5,
+//                    tablets,
+//                    "C:\\Users\\Abdelrahman Bahig\\Pictures\\EGYPT\\2686479_389815-PCH2OE-340.jpg"
+//            );
+//            Product samsungTabS8 = new Product(
+//                    "Samsung Galaxy Tab S8 Ultra",
+//                    "14.6-inch Super AMOLED, 8GB RAM, 128GB, Graphite",
+//                    899.99,
+//                    4,
+//                    tablets,
+//                    "C:\\Users\\Abdelrahman Bahig\\Pictures\\EGYPT\\2686479_389815-PCH2OE-340.jpg"
+//            );
+//            Product microsoftSurface = new Product(
+//                    "Microsoft Surface Pro 9",
+//                    "Intel Evo Platform, 16GB RAM, 512GB SSD, Graphite",
+//                    1599.99,
+//                    3,
+//                    tablets,
+//                    "C:\\Users\\Abdelrahman Bahig\\Pictures\\EGYPT\\2686479_389815-PCH2OE-340.jpg"
+//            );
+//
+//            // Accessories
+//            Product appleAirPods = new Product(
+//                    "Apple AirPods Pro (2nd Generation)",
+//                    "Active Noise Cancellation, Wireless Charging Case, White",
+//                    249.99,
+//                    7,
+//                    accessories,
+//                    "C:\\Users\\Abdelrahman Bahig\\Pictures\\EGYPT\\2686479_389815-PCH2OE-340.jpg"
+//            );
+//            Product sonyHeadphones = new Product(
+//                    "Sony WH-1000XM5 Wireless Noise Cancelling Headphones",
+//                    "Bluetooth, Touch Sensor Controls, Black",
+//                    399.99,
+//                    4,
+//                    accessories,
+//                    "C:\\Users\\Abdelrahman Bahig\\Pictures\\EGYPT\\2686479_389815-PCH2OE-340.jpg"
+//            );
+//            Product ankerPowerBank = new Product(
+//                    "Anker 737 Power Bank (PowerIQ 3.0)",
+//                    "24000mAh, 140W Fast Charging, Compatible with Laptops and Smartphones",
+//                    99.99,
+//                    6,
+//                    accessories,
+//                    "C:\\Users\\Abdelrahman Bahig\\Pictures\\EGYPT\\2686479_389815-PCH2OE-340.jpg"
+//            );
+//            Product logitechMX = new Product(
+//                    "Logitech MX Master 3S Wireless Mouse",
+//                    "Ergonomic Design, Silent Clicks, Bluetooth/USB, Gray",
+//                    99.99,
+//                    5,
+//                    accessories,
+//                    "C:\\Users\\Abdelrahman Bahig\\Pictures\\EGYPT\\2686479_389815-PCH2OE-340.jpg"
+//            );
+//            Product usbcHub = new Product(
+//                    "Anker USB-C Hub",
+//                    "7-in-1, 4K HDMI, SD/microSD Card Reader, 2 USB-A Ports",
+//                    49.99,
+//                    8,
+//                    accessories,
+//                    "C:\\Users\\Abdelrahman Bahig\\Pictures\\EGYPT\\2686479_389815-PCH2OE-340.jpg"
+//            );
+//
+//            // Add products to the list
+//            products.add(dellLatitude);
+//            products.add(macBookPro);
+//            products.add(lenovoThinkPad);
+//            products.add(iPhone14);
+//            products.add(samsungS23);
+//            products.add(googlePixel7);
+//            products.add(iPadPro);
+//            products.add(samsungTabS8);
+//            products.add(microsoftSurface);
+//            products.add(appleAirPods);
+//            products.add(sonyHeadphones);
+//            products.add(ankerPowerBank);
+//            products.add(logitechMX);
+//            products.add(usbcHub);
+
+
+            // Initialize Categories
+            Category laptops = new Category("Laptops", "High-performance computing devices for professional and personal use");
+            Category smartphones = new Category("Smartphones", "Mobile devices with advanced computing capabilities");
+            Category tablets = new Category("Tablets", "Portable touchscreen computing devices");
+            Category accessories = new Category("Accessories", "Supporting devices and add-ons for electronics");
+
+            // Add categories to the list
+            categories.add(laptops);
+            categories.add(smartphones);
+            categories.add(tablets);
+            categories.add(accessories);
+
+            // Initialize Products
+            // Laptops
+            Product dellLatitude = new Product("Dell Latitude 5555",
+                    "Intel Core i7 Processor, 32 GB DDR5 Ram, 1 TB SSD, 15.6 inches, Color: Black",
+                    999.99, 3, laptops);
+            Product macBookPro = new Product("MacBook Pro 16\"",
+                    "Apple M2 Pro Chip, 16 GB RAM, 512 GB SSD, 16-inch Retina Display, Space Gray",
+                    2499.99, 5, laptops);
+            Product lenovoThinkPad = new Product("Lenovo ThinkPad X1 Carbon",
+                    "Intel Core i7, 16 GB RAM, 512 GB SSD, 14-inch, Carbon Fiber Construction",
+                    1799.99, 4, laptops);
+
+            // Smartphones
+            Product iPhone14 = new Product("iPhone 14 Pro",
+                    "6.1-inch Super Retina XDR Display, A16 Bionic Chip, 128GB, Deep Purple",
+                    999.99, 6, smartphones);
+            Product samsungS23 = new Product("Samsung Galaxy S23 Ultra",
+                    "6.8-inch Dynamic AMOLED, 200MP Camera, 512GB, Phantom Black",
+                    1199.99, 5, smartphones);
+            Product googlePixel7 = new Product("Google Pixel 7",
+                    "6.3-inch OLED, Google Tensor G2, 128GB, Obsidian",
+                    599.99, 4, smartphones);
+
+            // Tablets
+            Product iPadPro = new Product("iPad Pro 12.9\"",
+                    "M2 Chip, 128GB, 12.9-inch Liquid Retina XDR Display, Space Gray",
+                    1099.99, 5, tablets);
+            Product samsungTabS8 = new Product("Samsung Galaxy Tab S8 Ultra",
+                    "14.6-inch Super AMOLED, 8GB RAM, 128GB, Graphite",
+                    899.99, 4, tablets);
+            Product microsoftSurface = new Product("Microsoft Surface Pro 9",
+                    "Intel Evo Platform, 16GB RAM, 512GB SSD, Graphite",
+                    1599.99, 3, tablets);
+
+            // Accessories
+            Product appleAirPods = new Product("Apple AirPods Pro (2nd Generation)",
+                    "Active Noise Cancellation, Wireless Charging Case, White",
+                    249.99, 7, accessories);
+            Product sonyHeadphones = new Product("Sony WH-1000XM5 Wireless Noise Cancelling Headphones",
+                    "Bluetooth, Touch Sensor Controls, Black",
+                    399.99, 4, accessories);
+            Product ankerPowerBank = new Product("Anker 737 Power Bank (PowerIQ 3.0)",
+                    "24000mAh, 140W Fast Charging, Compatible with Laptops and Smartphones",
+                    99.99, 6, accessories);
+            Product logitechMX = new Product("Logitech MX Master 3S Wireless Mouse",
+                    "Ergonomic Design, Silent Clicks, Bluetooth/USB, Gray",
+                    99.99, 5, accessories);
+            Product usbcHub = new Product("Anker USB-C Hub",
+                    "7-in-1, 4K HDMI, SD/microSD Card Reader, 2 USB-A Ports",
+                    49.99, 8, accessories);
+
+            // Add products to the list
+            products.add(dellLatitude);
+            products.add(macBookPro);
+            products.add(lenovoThinkPad);
+            products.add(iPhone14);
+            products.add(samsungS23);
+            products.add(googlePixel7);
+            products.add(iPadPro);
+            products.add(samsungTabS8);
+            products.add(microsoftSurface);
+            products.add(appleAirPods);
+            products.add(sonyHeadphones);
+            products.add(ankerPowerBank);
+            products.add(logitechMX);
+            products.add(usbcHub);
         }
 
-        // initialize 10 customers:
 
-//        for (int i = 0; i < 10; i++) {
-//            Random rand = new Random();
-//            int age = rand.nextInt(100);
-//            customers.add(new Customer("Customer"+i, age, Person.Gender.MALE, "Address"+i,null,null ));
-//        }
 
-        // initialize 15 Products
-        for (int i = 0; i < 15; i++) {
-            Random rand = new Random();
-            int quantity = rand.nextInt(10);
-            float price = rand.nextFloat(10000);
-            products.add(new Product("product"+i, "description"+i, price,quantity));
-           
-        }
-    }
     public static void saveDatabase() throws IOException {
         saveAdmins();
         saveCustomers();
@@ -130,16 +341,16 @@ public class Database {
 
 
     public String generateSalesReport(){
-        String salesReport="";
-        if(soldProducts.size() > 0){
-            salesReport = "Sold Products:\n";
+        StringBuilder salesReport= new StringBuilder();
+        if(!soldProducts.isEmpty()){
+            salesReport = new StringBuilder("Sold Products:\n");
             for(Product p : soldProducts){
-                salesReport +=p.getId()+" ,"+ p.getName() + " , sold items: "+ p.getSoldItems();
+                salesReport.append(p.getId()).append(" ,").append(p.getName()).append(" , sold items: ").append(p.getSoldItems());
             }
-        } else if (soldProducts.size() == 0) {
+        } else {
          return "No sold products";
         }
-        return salesReport;
+        return salesReport.toString();
     }
 
     public List<Product> getTopSellingProducts(){
@@ -156,7 +367,7 @@ public class Database {
     }
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         // testing
-//        //Database.initDummyData();
+//        //Database.initData();
 //       // Database.saveDatabase();
 //        System.out.println(admins);
 //        Database.loadDatabase();

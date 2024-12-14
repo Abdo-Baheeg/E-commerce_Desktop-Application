@@ -74,7 +74,7 @@ public class ProductDAO implements CRUD<Product> {
      }
 
      @Override
-     public List<Product> getAll() {
+     public ArrayList<Product> getAll() {
          return products;
      }
 
@@ -118,8 +118,8 @@ public class ProductDAO implements CRUD<Product> {
         Product p = this.read(id);
         products.remove(p);
      }
-     public static List<Product> search(String name) {
-        List<Product> products = new ArrayList<>();
+     public static ArrayList<Product> search(String name) {
+        ArrayList<Product> products = new ArrayList<>();
         for (Product product : Database.products) {
             if (product.getName().equals(name)) {
                 products.add(product);

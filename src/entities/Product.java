@@ -1,5 +1,7 @@
 package src.entities;
 
+import javafx.scene.image.Image;
+
 import java.io.Serializable;
 
 public class Product implements Serializable {
@@ -7,20 +9,29 @@ public class Product implements Serializable {
     private static int idCounter=1;
     private String name;
     private String description;
-    private float price;
+    private double price;
     private int stock;
     private Category category;
     private int soldItems=0;
+    private Image img = new Image("C:\\Users\\Abdelrahman Bahig\\Pictures\\EGYPT\\2686479_389815-PCH2OE-340.jpg");
 
-    public Product(String name, String description, float price, int stock) {
+    public Product(String name, String description, double price, int stock) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.stock = stock;
         this.id = idCounter++;
     }
+    public Product(String name, String description, double price, int stock , Category category, String url) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.stock = stock;
+        this.id = idCounter++;
+        this.img = new Image(url);
+    }
 
-    public Product(String name, String description, float price, int stock, Category category) {
+    public Product(String name, String description, double price, int stock, Category category) {
         this.name = name;
         this.description = description;
         this.price = price;
@@ -29,7 +40,7 @@ public class Product implements Serializable {
         this.id = idCounter++;
     }
 
-    public Product(String productName, float price, int stock, Category category) {
+    public Product(String productName, double price, int stock, Category category) {
         this.name = productName;
         this.price = price;
         this.stock = stock;
@@ -62,8 +73,11 @@ public class Product implements Serializable {
         this.description = description;
     }
 
-    public float getPrice() {
+    public double getPrice() {
         return price;
+    }
+    public String getPriceString() {
+        return String.format("$%.2f", price);
     }
     public void setPrice(float price) {
         this.price = price;
@@ -87,5 +101,13 @@ public class Product implements Serializable {
 
     public void setSoldItems(int soldItems) {
         this.soldItems = soldItems;
+    }
+
+    public Image getImg() {
+        return img;
+    }
+
+    public void setImg(Image img) {
+        this.img = img;
     }
 }

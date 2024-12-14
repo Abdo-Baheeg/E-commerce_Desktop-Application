@@ -4,7 +4,7 @@ package src.entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public abstract class Category implements Serializable {
+public class Category implements Serializable {
     private  String description;
     private String name;
     private final int id;

@@ -14,15 +14,15 @@ import java.util.List;
 
 public class CustomerService {
 
-    private final CustomerDAO customerDAO = new CustomerDAO();
-    private final ProductDAO productDAO = new ProductDAO();
+    private static final CustomerDAO customerDAO = new CustomerDAO();
+    private static final ProductDAO productDAO = new ProductDAO();
 
-    public boolean login(String username, String password) {
+    public static boolean login(String username, String password) {
         Customer customer = customerDAO.read(username);
         return customer != null && customer.getPassword().equals(password);
     }
 
-    public boolean register(String name, String email, String address, String username, String password, String phone, Person.Gender gender, Date dob) {
+    public static boolean register(String name, String email, String address, String username, String password, String phone, Person.Gender gender, Date dob) {
         if (customerDAO.read(username) != null) {
             return false;
         } else if (CustomerDAO.validName(username) && CustomerDAO.validEmail(email) && CustomerDAO.validAddress(address) && CustomerDAO.validPhone(phone) ) {
@@ -32,14 +32,14 @@ public class CustomerService {
         return false;
     }
 
-    public boolean addToCart(Product product, int quantity) {
+    public static boolean addToCart(Product product, int quantity) {
         if (product.getStock() >= quantity) {
             customerDAO.getCurrentCustomer().getCart().getProducts().add(product);
         }
         return false;
     }
 
-    public boolean removeFromCart(Product product, int quantity) {
+    public static boolean removeFromCart(Product product, int quantity) {
         if (product != null) {
             customerDAO.getCurrentCustomer().getCart().getProducts().remove(product);
             return true;
@@ -47,14 +47,14 @@ public class CustomerService {
         return false;
     }
 
-    public boolean addToInterests(Product product) {
+    public static boolean addToInterests(Product product) {
         if(product != null) {
             customerDAO.getCurrentCustomer().getInterests().add(product);
             return true;
         }
         return false;
     }
-    public boolean removeFromInterests(Product product) {
+    public static boolean removeFromInterests(Product product) {
         if(product != null) {
             customerDAO.getCurrentCustomer().getInterests().remove(product);
             return true;
@@ -62,22 +62,15 @@ public class CustomerService {
         return false;
     }
 
-    public void getAllProducts() {
-        List<Product> products = productDAO.getAll();
-        for (Product product : products) {
-            System.out.println(product);
-        }
-    }
-
-    public List<Product> searchProduct(String productName) {
+    public static ArrayList<Product> searchProduct(String productName) {
         return ProductDAO.search(productName);
     }
 
-    public List<Product> viewCart() {
+    public static ArrayList<Product> viewCart() {
         return customerDAO.getCurrentCustomer().getCart().getProducts();
     }
 
-    public boolean checkout() {
+    public static boolean checkout() {
         Cart cart = customerDAO.getCurrentCustomer().getCart();
         if (cart != null && !cart.getProducts().isEmpty()) {
             customerDAO.calcTotalPrice();
@@ -90,7 +83,7 @@ public class CustomerService {
         return false;
     }
 
-    public boolean resetPassword(String email, String newPassword) {
+    public static boolean resetPassword(String email, String newPassword) {
         for (Customer customer : Database.customers) {
             if (customer.getEmail().equals(email)) {
                 if (CustomerDAO.validPassword(newPassword)) {
@@ -100,5 +93,9 @@ public class CustomerService {
             }
         }
         return false;
+    }
+
+    public static Customer getCurrentCustomer() {
+        return customerDAO.getCurrentCustomer() ;
     }
 }

@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 
 <?import javafx.geometry.Insets?>
-<AnchorPane prefHeight="436.0" prefWidth="866.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.gui.controllers.LoginController">
+<AnchorPane prefHeight="436.0" prefWidth="866.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.gui.adminApp.controllers.LoginController">
     <children>
         <GridPane layoutX="486.0" layoutY="17.0" prefHeight="401.0" prefWidth="322.0">
             <columnConstraints>

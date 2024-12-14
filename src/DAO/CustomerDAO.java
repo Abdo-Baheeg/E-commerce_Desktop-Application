@@ -15,7 +15,6 @@ import static src.database.Database.*;
 public  class CustomerDAO implements CRUD<Customer> {
     private Customer currentCustomer;
 
-
     // validators : ............//
     public static boolean validName(String name) {
         return name != null &&
