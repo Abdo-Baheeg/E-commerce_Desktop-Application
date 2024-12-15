@@ -17,7 +17,7 @@ public class Server
         try {
             this.serverSocket = serverSocket;
             this.socket = this.serverSocket.accept();
-            System.out.print("Client connected! ");
+            System.out.print("Client connected!, ");
             //to convert from byte stream(getOutputStream) to char stream(OutputStreamWriter)
             //casting only for efficiency
             this.bufferedWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())); //exception
