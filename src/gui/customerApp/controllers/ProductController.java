@@ -85,7 +85,7 @@ public class ProductController {
         imageView.setMouseTransparent(true);
         imageView.setImage(product.getImg());
         card.setCenter(imageView);
-        card.setBottom();
+        //card.setBottom();
         HBox Hbox = new HBox();
         Hbox.setSpacing(10);
         Hbox.setAlignment(Pos.CENTER);

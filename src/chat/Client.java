@@ -84,6 +84,7 @@ public class Client
         }
     }
 
+
     public static void main(String[] args) throws IOException {
         try {
             String ip = "192.168.1.3";

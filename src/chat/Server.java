@@ -1,5 +1,7 @@
 package src.chat;
 
+import javafx.scene.layout.VBox;
+
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -7,7 +9,7 @@ import java.util.Scanner;
 
 public class Server
 {
-    private ServerSocket serverSocket;
+    private ServerSocket serverSocket;  //listen for incoming connections
     private Socket socket;  //to establish a connection
     private BufferedReader bufferedReader;   //to read messages sent from client
     private BufferedWriter bufferedWriter;   //to send messages to client
@@ -80,6 +82,7 @@ public class Server
             e.printStackTrace();
         }
     }
+
 
     public static void main(String[] args) throws IOException {
         try {
