@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="loginPane" fx:id="loginAnchorPane" prefHeight="573.0" prefWidth="725.0" scaleShape="false" snapToPixel="false" style="-fx-background-image: url('../../utils/img/banner-with-abstract-background-with-blue-tones-paper-cutout-waves.jpg');" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.gui.adminApp.controllers.LoginController">
+<AnchorPane id="loginPane" fx:id="loginAnchorPane" prefHeight="573.0" prefWidth="725.0" scaleShape="false" snapToPixel="false" style="-fx-background-image: url('../../utils/img/banner-with-abstract-background-with-blue-tones-paper-cutout-waves.jpg');" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.gui.customerApp.controllers.LoginController">
    <children>
       <VBox layoutX="199.0" layoutY="90.0" prefHeight="433.0" prefWidth="347.0" style="-fx-alignment: CENTER; -fx-background-radius: 50;">
          <children>

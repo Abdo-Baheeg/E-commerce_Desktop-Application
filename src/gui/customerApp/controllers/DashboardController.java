@@ -3,6 +3,9 @@ package src.gui.customerApp.controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -10,6 +13,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import src.DAO.AdminDAO;
 import src.DAO.CustomerDAO;
@@ -76,8 +80,7 @@ public class DashboardController {
 
     @FXML
     void goToInterests(ActionEvent event) {
-
-    }
+            }
 
     @FXML
     void goToOrders(ActionEvent event) {
@@ -95,6 +98,7 @@ public class DashboardController {
       Stage o= (Stage) logoutBtn.getScene().getWindow();
       o.close();
     }
+
 
     @FXML
     void search(ActionEvent event) {
@@ -116,8 +120,12 @@ public class DashboardController {
             productGrid.setVgap(10);
             for(int i = 0; i < products.size(); i++){
                 ProductController p = new ProductController();
-                productGrid.add(p.createCard(products.get(i)),i%4,i/4);
+              //  productGrid.add(p.createCard(products.get(i)),i%4,i/4);
             }
         }
-    }
+}
+
+
+
+
 

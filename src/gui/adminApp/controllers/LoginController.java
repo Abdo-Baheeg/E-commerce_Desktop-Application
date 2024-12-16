@@ -25,6 +25,7 @@ public class LoginController{
     public Hyperlink facebook;
     public Hyperlink whatsapp;
     public ImageView img;
+    public AnchorPane loginAnchorPane;
     CustomerService customerService = new CustomerService();
 
     @FXML
@@ -61,6 +62,7 @@ public class LoginController{
     @FXML
     private RadioButton maleRadio;    // Make sure this is also declared
 
+    @FXML
     private ToggleGroup genderToggleGroup;
 
     @FXML

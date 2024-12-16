@@ -13,8 +13,7 @@ public class Product implements Serializable {
     private int stock;
     private Category category;
     private int soldItems=0;
-    private Image img = new Image("C:\\Users\\Abdelrahman Bahig\\Pictures\\EGYPT\\2686479_389815-PCH2OE-340.jpg");
-
+    private String imgPath;
     public Product(String name, String description, double price, int stock) {
         this.name = name;
         this.description = description;
@@ -28,7 +27,6 @@ public class Product implements Serializable {
         this.price = price;
         this.stock = stock;
         this.id = idCounter++;
-        this.img = new Image(url);
     }
 
     public Product(String name, String description, double price, int stock, Category category) {
@@ -103,11 +101,11 @@ public class Product implements Serializable {
         this.soldItems = soldItems;
     }
 
-    public Image getImg() {
-        return img;
+    public String getImgPath() {
+        return imgPath;
+    }
+    public void setImgPath(String imgPath) {
+        this.imgPath = imgPath;
     }
 
-    public void setImg(Image img) {
-        this.img = img;
-    }
 }

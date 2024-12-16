@@ -1,156 +1,191 @@
 package src.gui.customerApp.controllers;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
-import javafx.scene.control.Alert;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import src.DAO.CustomerDAO;
-import src.DAO.ProductDAO;
-import src.database.Database;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import src.entities.Product;
-import src.service.CustomerService;
 
 import java.io.IOException;
-import java.util.Objects;
+import java.util.List;
 
 public class ProductController {
-    CustomerService customerService = new CustomerService();
-    ProductDAO productDAO = new ProductDAO();
-    Product product;
-    @FXML
-    private Label ProductName;
-    @FXML
-    private Button addToCartBtn;
-    @FXML
-    private Button addToInterestsBtn;
-    @FXML
-    private Button backBtn;
-    @FXML
-    private AnchorPane mainPane;
-    @FXML
-    private Label productCategory;
-    @FXML
-    private Label productDescription;
-    @FXML
-    private ImageView productImg;
-    @FXML
-    private Label productPrice;
-    @FXML
-    private Label productStock;
-    @FXML
-    private Spinner<Integer> quantity;
+    public Button btnAddToCart;
+    public Spinner spinnerQuantity;
+    public Button btnAddToInterests;
+    public Button btnBack;
+    public Label lblProductDescription;
+    public ImageView imgProductDetail;
+    public Label lblProductStock;
+    public Label lblProductPrice;
+    public Label lblProductCategory;
+    public Label lblProductName;
+    public AnchorPane rootPane;
+    // Product Card View Fields
+    @FXML private Label name;
+    @FXML private Label price;
+    @FXML private ImageView img;
+    @FXML private Button addToInterests;
+    @FXML private Button removeFromCart;
+    @FXML private Button addToCart;
+    @FXML private Spinner<Integer> quantity;
 
-    @FXML
-    void back(ActionEvent event) {
+    // Product Detail View Fields
+    @FXML private AnchorPane mainPane;
+    @FXML private Label ProductName;
+    @FXML private Label productCategory;
+    @FXML private Label productPrice;
+    @FXML private Label productStock;
+    @FXML private Label productDescription;
+    @FXML private ImageView productImg;
+    @FXML private Button backBtn;
+    @FXML private Button addToInterestsBtn;
+    @FXML private Button addToCartBtn;
+    @FXML private Spinner<Integer> detailQuantity;
 
+    // Current product
+    private Product currentProduct;
+
+    // Initialize method called by JavaFX after FXML is loaded
+    @FXML
+    public void initialize() {
+        // Setup quantity spinners
+        setupQuantitySpinner(quantity);
+        setupQuantitySpinner(detailQuantity);
     }
 
+    // Utility method to setup quantity spinner
+    private void setupQuantitySpinner(Spinner<Integer> spinner) {
+        if (spinner != null) {
+            SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, 1);
+            spinner.setValueFactory(valueFactory);
+        }
+    }
 
+    // Method to create a product card as an AnchorPane
+    public static AnchorPane createProductCard(Product product) {
+        try {
+            // Load the FXML for the product card
+            FXMLLoader loader = new FXMLLoader(ProductController.class.getResource("/path/to/your/ProductCard.fxml"));
+            AnchorPane productCard = loader.load();
 
+            // Get the controller and set the product data
+            ProductController controller = loader.getController();
+            controller.setProductForCard(product);
 
-    //////// product card /////////
+            return productCard;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
-    @FXML
-    public Label name;
-    @FXML
-    public Label price;
-    @FXML
-    public Button addToInterests;
-    @FXML
-    public Button addToCart;
-    @FXML
-    public ImageView img;
-    @FXML
-    public Spinner<Integer> q;
-    @FXML
-    public Button removeFromCart;
+    // Set product data to the card
+    public void setProductForCard(Product product) {
+        this.currentProduct = product;
 
-    public BorderPane createCard(Product product) throws IOException {
-        this.product = product;
-        BorderPane card = new BorderPane();
-        ImageView imageView = new ImageView();
-        imageView.setFitHeight(200);
-        imageView.setFitWidth(200);
-        imageView.setPreserveRatio(false);
-        imageView.setMouseTransparent(true);
-        imageView.setImage(product.getImg());
-        card.setCenter(imageView);
-        card.setBottom();
-        HBox Hbox = new HBox();
-        Hbox.setSpacing(10);
-        Hbox.setAlignment(Pos.CENTER);
-        VBox vBox = new VBox();
-
+        // Set name and price
         name.setText(product.getName());
-        price.setText(product.getPriceString());
-        return card;
-    }
-    @FXML
-    public void addToCart(ActionEvent actionEvent) {
-        if(product != null && quantity.getValue() > 0) {
-            CustomerService.addToCart(product, quantity.getValue());
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Success");
-            alert.setHeaderText(null);
-            alert.setContentText("Product added to Cart");
-            alert.showAndWait();
+        price.setText(String.format("$%.2f", product.getPrice()));
+
+        // Set product image
+        if (product.getImgPath() != null) {
+            img.setImage(new Image(product.getImgPath()));
         }
     }
 
+    // Method to open detailed product view popup
     @FXML
-    public void removeFromCart(ActionEvent actionEvent) {
-        if(product != null && CustomerService.getCurrentCustomer().getCart().getProducts().contains(product)) {
-            CustomerService.removeFromCart(product, quantity.getValue());
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Success");
-            alert.setHeaderText(null);
-            alert.setContentText("Product removed from Cart");
-            alert.showAndWait();
+    public void goToDetails() {
+        try {
+            // Load the detailed product view FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/path/to/your/ProductDetailView.fxml"));
+            Parent detailView = loader.load();
+
+            // Get the controller for the detail view
+            ProductController detailController = loader.getController();
+            detailController.setProductForDetailView(currentProduct);
+
+            // Create and configure the popup stage
+            Stage popupStage = new Stage();
+            popupStage.initModality(Modality.APPLICATION_MODAL);
+            popupStage.setTitle("Product Details");
+
+            // Create scene and show
+            Scene scene = new Scene(detailView);
+            popupStage.setScene(scene);
+            popupStage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Error");
-        alert.setHeaderText(null);
-        alert.setContentText("Something went wrong!");
-        alert.showAndWait();
     }
 
-    @FXML
-    public void addToInterests(ActionEvent actionEvent) {
-        if(product != null) {
-            CustomerService.addToInterests(product);
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Success");
-            alert.setHeaderText(null);
-            alert.setContentText("Product added to Interests");
-            alert.showAndWait();
-        }
-    }
-    @FXML
-    public void removeFromInterests(ActionEvent actionEvent) {
-        if(product != null) {
-            CustomerService.removeFromInterests(product);
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Success");
-            alert.setHeaderText(null);
-            alert.setContentText("Product removed from Interests");
-            alert.showAndWait();
-        }
-    }
-    @FXML
-    public void goToDetails(MouseEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../views/detailedProductCard.fxml"));
-        loader.load();
+    // Set product details in the detail view
+    public void setProductForDetailView(Product product) {
+        this.currentProduct = product;
 
+        // Set all labels and image
+        ProductName.setText(product.getName());
+        productCategory.setText(product.getCategory());
+        productPrice.setText(String.format("$%.2f", product.getPrice()));
+        productStock.setText(product.getStock() + " in stock");
+        productDescription.setText(product.getDescription());
+
+        // Set product image
+        if (product.getImgPath() != null) {
+            productImg.setImage(new Image(product.getImgPath()));
+        }
+    }
+
+    // Method to handle back button in detail view
+    @FXML
+    public void back() {
+        // Close the current stage (popup window)
+        Stage stage = (Stage) mainPane.getScene().getWindow();
+        stage.close();
+    }
+
+    // Method to add product to interests (works for both card and detail views)
+    @FXML
+    public void addToInterests() {
+        if (currentProduct != null) {
+            // Implement logic to add product to user's interests
+            System.out.println("Added to interests: " + currentProduct.getName());
+            // You might want to call a service or update a model here
+        }
+    }
+
+    // Method to remove from cart (for product card)
+    @FXML
+    public void removeFromCart() {
+        if (currentProduct != null) {
+            // Implement logic to remove product from cart
+            System.out.println("Removed from cart: " + currentProduct.getName());
+        }
+    }
+
+    // Method to add product to cart (works for both card and detail views)
+    @FXML
+    public void addToCart() {
+        if (currentProduct != null) {
+            // Get selected quantity (check which spinner is available)
+            Spinner<Integer> activeQuantitySpinner = quantity != null ? quantity : detailQuantity;
+            int selectedQuantity = activeQuantitySpinner.getValue();
+
+            // Implement logic to add product to cart
+            System.out.println("Added to cart: " + currentProduct.getName()
+                    + ", Quantity: " + selectedQuantity);
+            // You might want to call a cart service or update a cart model here
+        }
     }
 
 }

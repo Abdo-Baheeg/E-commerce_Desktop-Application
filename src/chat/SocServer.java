@@ -7,7 +7,6 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class SocServer {
-
     public static void main(String[] args) throws Exception {
         System.out.println("Server started!");
         try(ServerSocket ss = new ServerSocket(2024)) {

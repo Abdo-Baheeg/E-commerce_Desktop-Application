@@ -23,7 +23,7 @@
          </Button>
          <Button fx:id="removeFromCart" mnemonicParsing="false" onAction="#removeFromCart" prefHeight="27.0" prefWidth="105.0" text="remove" />
          <Button fx:id="addToCart" mnemonicParsing="false" onAction="#addToCart" prefHeight="27.0" prefWidth="105.0" text="Add to Cart" />
-         <Spinner fx:id="quantity" prefHeight="25.0" prefWidth="65.0" />
+         <Spinner fx:id="quantity1" prefHeight="25.0" prefWidth="65.0" />
       </HBox>
    </bottom>
    <center>

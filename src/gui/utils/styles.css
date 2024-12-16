@@ -4,3 +4,161 @@
     -fx-background-size: cover;
     -fx-background-position: center;
 }
+/* Global Styling */
+.root {
+    -fx-background-color: #f4f4f4;
+    -fx-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Product Detail Container */
+.product-detail-container {
+    -fx-background-color: white;
+    -fx-background-radius: 10px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 5);
+}
+
+/* Header Styling */
+.product-header {
+    -fx-background-color: #f0f0f0;
+    -fx-padding: 10px;
+}
+
+.product-title {
+    -fx-text-fill: #333;
+    -fx-font-weight: bold;
+}
+
+/* Product Info Labels */
+.product-info-sidebar {
+    -fx-background-color: #f9f9f9;
+    -fx-background-radius: 5px;
+}
+
+.product-info-label {
+    -fx-text-fill: #666;
+}
+
+.product-price-label {
+    -fx-text-fill: #007bff;
+    -fx-font-weight: bold;
+}
+
+.product-stock-label {
+    -fx-text-fill: #28a745;
+}
+
+/* Product Image */
+.product-image {
+    -fx-background-color: #f8f9fa;
+    -fx-background-radius: 5px;
+}
+
+.product-description {
+    -fx-text-fill: #212529;
+    -fx-background-color: #f1f3f5;
+    -fx-background-radius: 5px;
+    -fx-padding: 10px;
+}
+
+/* Buttons */
+.btn-primary {
+    -fx-background-color: #007bff;
+    -fx-text-fill: white;
+    -fx-background-radius: 5px;
+}
+
+.btn-primary:hover {
+    -fx-background-color: #0056b3;
+}
+
+.btn-secondary {
+    -fx-background-color: #6c757d;
+    -fx-text-fill: white;
+    -fx-background-radius: 5px;
+}
+
+.btn-secondary:hover {
+    -fx-background-color: #545b62;
+}
+
+.btn-favorite {
+    -fx-background-color: transparent;
+}
+
+.btn-favorite:hover {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 0);
+}
+
+/* Quantity Spinner */
+.spinner {
+    -fx-background-color: #f8f9fa;
+    -fx-background-radius: 5px;
+}
+/* Registration Form Styles */
+.background {
+    -fx-background-color: linear-gradient(to bottom right, #f0f4f8, #e0e8f0);
+}
+
+.container {
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0, 0, 5);
+    -fx-padding: 40;
+}
+
+.title {
+    -fx-text-fill: #2c3e50;
+    -fx-font-weight: bold;
+}
+
+.form-label {
+    -fx-text-fill: #34495e;
+    -fx-font-weight: bold;
+}
+
+.form-input {
+    -fx-background-color: #f1f5f9;
+    -fx-background-radius: 5;
+    -fx-border-color: #d1d8e0;
+    -fx-border-radius: 5;
+    -fx-padding: 10;
+}
+
+.form-input:focused {
+    -fx-border-color: #3498db;
+    -fx-background-color: white;
+}
+
+.radio-button {
+    -fx-text-fill: #34495e;
+}
+
+.btn-primary {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
+}
+
+.btn-primary:hover {
+    -fx-background-color: #2980b9;
+}
+
+.btn-submit {
+    -fx-background-color: #2ecc71;
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.btn-submit:hover {
+    -fx-background-color: #27ae60;
+}
+
+.profile-preview {
+    -fx-border-color: #d1d8e0;
+    -fx-border-radius: 5;
+}
+
+.form-grid {
+}

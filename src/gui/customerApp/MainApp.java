@@ -27,9 +27,6 @@ public class MainApp extends Application {
             primaryStage.setScene(scene);
 
             primaryStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("../utils/icon/icon.png"))));
-            primaryStage.setMaxWidth(1280);
-            primaryStage.setMaxHeight(680);
-
             primaryStage.show();
         } catch (Exception e) {
             System.out.println(e.getMessage());

@@ -1,8 +1,10 @@
 package src.gui.customerApp.controllers;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -13,13 +15,16 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import src.DAO.CustomerDAO;
 import src.service.CustomerService;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.Objects;
+import java.util.ResourceBundle;
 
-public class LoginController {
+public class LoginController implements Initializable {
     public Hyperlink gitHub;
     public Hyperlink youtube;
     public Hyperlink facebook;
@@ -30,56 +35,58 @@ public class LoginController {
 
     @FXML
     private Button aboutUsBtn;
-
-
-
     @FXML
     private Button contactUsBtn;
-
     @FXML
     private Button goToLoginBtn;
-
     @FXML
     private Button goToRegisterBtn;
 
 
     @FXML
     private Button loginButton;
-
     @FXML
     private BorderPane loginPane;
-
     @FXML
     private Label messageLabel;
-
     @FXML
     private PasswordField password;
-
     @FXML
     private TextField username;
 
-    @FXML
-    private RadioButton femaleRadio;  // Ensure this is annotated with @FXML
 
-    @FXML
-    private RadioButton maleRadio;    // Make sure this is also declared
-
-    private ToggleGroup genderToggleGroup;
-
-    @FXML
-    public void initialize() throws IOException {
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        goToLoginBtn.setDisable(true);
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../views/loginPane.fxml"));
+        try {
+            AnchorPane pane = fxmlLoader.load();
+            loginPane.setCenter(pane);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML
     void goToAboutUs(ActionEvent event) throws IOException {
+        goToRegisterBtn.setDisable(false);
+        aboutUsBtn.setDisable(true);
+        contactUsBtn.setDisable(false);
+        goToLoginBtn.setDisable(false);
+
         AnchorPane anchorPane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../views/customerApp/about.fxml")));
         loginPane.setCenter(anchorPane);
     }
 
     @FXML
     void goToContactUs(ActionEvent event) throws IOException {
+        goToRegisterBtn.setDisable(false);
+        aboutUsBtn.setDisable(false);
+        contactUsBtn.setDisable(true);
+        goToLoginBtn.setDisable(false);
+
         try{
-            AnchorPane anchorPane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../views/customerApp/contactUs.fxml")));
+            AnchorPane anchorPane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../views/contactUs.fxml")));
             loginPane.setCenter(anchorPane);
         } catch (IOException e) {
             System.out.println(e.getMessage());
@@ -88,13 +95,23 @@ public class LoginController {
 
     @FXML
     void goToLogin() throws IOException {
-        AnchorPane anchorPane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../views/customerApp/loginPane.fxml")));
+        goToRegisterBtn.setDisable(false);
+        aboutUsBtn.setDisable(false);
+        contactUsBtn.setDisable(false);
+        goToLoginBtn.setDisable(true);
+
+        AnchorPane anchorPane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../views/loginPane.fxml")));
         loginPane.setCenter(anchorPane);
     }
     @FXML
     void goToRegister(ActionEvent event) throws IOException {
-        AnchorPane anchorPane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../views/customerApp/register.fxml")));
-        if (anchorPane != null && !anchorPane.equals(loginPane.getCenter())) {
+        goToRegisterBtn.setDisable(true);
+        aboutUsBtn.setDisable(false);
+        contactUsBtn.setDisable(false);
+        goToLoginBtn.setDisable(false);
+
+        AnchorPane anchorPane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../views/register.fxml")));
+        if (!anchorPane.equals(loginPane.getCenter())) {
         loginPane.setCenter(anchorPane);
         return;
         }
@@ -137,6 +154,7 @@ public class LoginController {
         // Get the current stage
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setScene(newScene);
+        stage.setTitle("EcoMARKET");
         stage.show();
         DashboardController.initialize();
     }
@@ -151,7 +169,7 @@ public class LoginController {
         img.setImage(monkey_open);
     }
     @FXML
-    private void setDefualt() {
+    private void setDefualt(MouseEvent event) {
         Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("../../utils/icon/login.png")));
         img.setImage(image);
     }
@@ -159,4 +177,44 @@ public class LoginController {
         Image image = new Image(getClass().getResourceAsStream("../../utils/gif/angry.gif"));
         img.setImage(image);
     }
+
+
+    // register Handling
+    @FXML
+    private RadioButton Female;
+
+    @FXML
+    private RadioButton Male;
+
+    @FXML
+    private Button choosePhoto;
+
+    @FXML
+    private DatePicker datePicker;
+
+    @FXML
+    private ToggleGroup genderToggleGroup;
+
+    @FXML
+    private Label imgPathLbl;
+
+    @FXML
+    private TextField registerAddress;
+
+    @FXML
+    private TextField registerEmail;
+
+    @FXML
+    private TextField registerName;
+
+    @FXML
+    private PasswordField registerPassword;
+
+    @FXML
+    private TextField registerUsername;
+
+    @FXML
+    private Button submitBtn;
+
+
 }
