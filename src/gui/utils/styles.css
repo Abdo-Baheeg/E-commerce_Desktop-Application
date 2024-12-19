@@ -162,3 +162,48 @@
 
 .form-grid {
 }
+
+
+/* About us Styles */
+.root {
+    -fx-background-color: linear-gradient(to bottom, #e0f7fa, #ffffff);
+}
+
+.header {
+    -fx-font-size: 36px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #00796b;
+    -fx-padding: 10px;
+    -fx-text-alignment: center;
+}
+
+.sub-header {
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #004d40;
+    -fx-padding: 5px;
+    -fx-text-alignment: center;
+}
+
+/* Team Profiles */
+.team-name {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #00796b;
+}
+
+.team-role {
+    -fx-font-size: 14px;
+    -fx-text-fill: #004d40;
+    -fx-font-style: italic;
+}
+
+.view-more-btn {
+    -fx-background-color: tranparent;
+    -fx-text-fill: white;
+    -fx-padding: 5px 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+

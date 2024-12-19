@@ -1,8 +1,12 @@
 package src.database;
 
+import javafx.scene.image.Image;
 import src.entities.*;
 
 import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.time.LocalDate;
 import java.util.*;
 
 public class Database {
@@ -15,10 +19,10 @@ public class Database {
 
     public Database(){}
 
-    public static void initData(){
-            Date dob = new Date(2005,1,28);
-            customers.add(new Customer("Abdo", Person.Gender.MALE,"Cairo, Egypt", "01016042121","3bdobahig@gmail.com","abdo","1234",dob));
+    public static void initData() throws MalformedURLException {
+        //customers.add(new Customer("Abdo", Person.Gender.MALE,"Cairo, Egypt", "01016042121","3bdobahig@gmail.com","abdo","1234"));
             admins.add(new Admin("Abdo Bahig","CEO","abdo","1234"));
+            customers.add(new Customer("abdo","1234"));
             // Initialize Categories
 //            Category laptops = new Category("Laptops", "High-performance computing devices for professional and personal use");
 //            Category smartphones = new Category("Smartphones", "Mobile devices with advanced computing capabilities");
@@ -256,6 +260,7 @@ public class Database {
         saveCustomers();
         saveProducts();
         saveCategories();
+        System.out.println("Database saved");
     }
 
     public static void loadDatabase() throws IOException, ClassNotFoundException {

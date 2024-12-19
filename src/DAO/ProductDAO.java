@@ -78,22 +78,6 @@ public class ProductDAO implements CRUD<Product> {
          return products;
      }
 
-     public boolean addToCart(Product p) {
-        if(products.contains(p)) {
-            customerDAO.getCurrentCustomer().getCart().getProducts().add(p);
-            customerDAO.calcTotalPrice();
-            return true;
-        }
-        return false;
-     }
-     public boolean removeFromCart(Product p) {
-         if(products.contains(p)) {
-             customerDAO.getCurrentCustomer().getCart().getProducts().remove(p);
-             customerDAO.calcTotalPrice();
-             return true;
-         }
-         return false;
-     }
      public void updateName(int id, String name) {
         Product p = this.read(id);
         p.setName(name);

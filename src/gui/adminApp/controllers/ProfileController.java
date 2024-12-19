@@ -51,11 +51,11 @@ public class ProfileController {
 
     @FXML
     public void initialize(){
-        name.setText(customerDAO.getCurrentCustomer().getName());
-        username.setText(customerDAO.getCurrentCustomer().getUsername());
-        email.setText(customerDAO.getCurrentCustomer().getEmail());
-        address.setText(customerDAO.getCurrentCustomer().getAddress());
-        gender.setText(customerDAO.getCurrentCustomer().getGender().toString());
-        img.setImage(customerDAO.getCurrentCustomer().getImage());
+        name.setText(CustomerService.getCurrentCustomer().getName());
+        username.setText(CustomerService.getCurrentCustomer().getUsername());
+        email.setText(CustomerService.getCurrentCustomer().getEmail());
+        address.setText(CustomerService.getCurrentCustomer().getAddress());
+        gender.setText(CustomerService.getCurrentCustomer().getGender().toString());
+        img.setImage(CustomerService.getCurrentCustomer().getImage());
     }
 }

@@ -1,10 +1,8 @@
 package src.entities;
 
 import javafx.scene.image.Image;
-
 import java.io.Serializable;
-import java.util.Date;
-import java.util.Calendar;
+import java.time.LocalDate;
 
 public abstract class Person implements Serializable {
     private int id;
@@ -17,7 +15,7 @@ public abstract class Person implements Serializable {
     private String phone;
     private String email;
     private int age;
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
     private Image image;
 
     public Person(String name, String username, String password) {
@@ -33,7 +31,7 @@ public abstract class Person implements Serializable {
         this.name =username;
     }
 
-    public Person(String name, Gender genderEnum, String address, String phone, String email, String username, String password , Date dateOfBirth) {
+    public Person(String name, Gender genderEnum, String address, String phone, String email, String username, String password , LocalDate dateOfBirth) {
     this.name = name;
     this.gender = genderEnum;
     this.address = address;
@@ -43,7 +41,6 @@ public abstract class Person implements Serializable {
     this.password = password;
     this.id = idCounter++;
     this.dateOfBirth = dateOfBirth;
-    this.setAge();
     }
 
     public Gender getGender() {
@@ -135,27 +132,11 @@ public abstract class Person implements Serializable {
         this.email = email;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
     public int getAge() {
         return age;
     }
-    public void setAge() {
-        Date today = new Date();
-        // Convert both dates to Calendar objects
-        Calendar dobCal = Calendar.getInstance();
-        dobCal.setTime(this.dateOfBirth);
 
-        Calendar todayCal = Calendar.getInstance();
-        todayCal.setTime(today);
-
-        // Calculate age
-        this.age = todayCal.get(Calendar.YEAR) - dobCal.get(Calendar.YEAR);
-
-        // Adjust if the birthday hasn't occurred yet this year
-        if (todayCal.get(Calendar.DAY_OF_YEAR) < dobCal.get(Calendar.DAY_OF_YEAR)) {
-            age--;
-        }
-    }
 }

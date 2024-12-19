@@ -1,7 +1,9 @@
 package src.entities;
 
+import javafx.scene.image.Image;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Customer extends Person {
     private double balance = 5000;
@@ -9,12 +11,19 @@ public class Customer extends Person {
     private ArrayList<Order> orders=new ArrayList<>();
     private ArrayList<Product> interests = new ArrayList<>();
 
-    public Customer(String name, Gender genderEnum, String address, String phone, String email, String username, String password, Date dob) {
+    public Customer(String name, Gender genderEnum, String address, String phone, String email, String username, String password, LocalDate dob, Image img) {
         super( name,  genderEnum,  address,  phone, email,username,password,dob);
+        cart = new Cart();
         this.cart=new Cart();
         this.balance=1000;
         this.orders=new ArrayList<Order>();
     }
+
+    public Customer(String user, String pass) {
+        super(user, pass);
+    }
+
+
     public double getBalance() {
         return balance;
     }
@@ -38,8 +47,5 @@ public class Customer extends Person {
     }
     public Cart getCart() {
         return cart;
-    }
-    public void setCart(Cart cart) {
-        this.cart = cart;
     }
 }

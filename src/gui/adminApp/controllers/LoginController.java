@@ -127,7 +127,6 @@ public class LoginController{
         }
         setCorrect();
         CustomerDAO customerDAO = new CustomerDAO();
-        customerDAO.setCurrentCustomer(customerDAO.read(username));
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Login");
         alert.setHeaderText(null);

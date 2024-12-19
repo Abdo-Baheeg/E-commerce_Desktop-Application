@@ -13,7 +13,7 @@ public class Product implements Serializable {
     private int stock;
     private Category category;
     private int soldItems=0;
-    private String imgPath;
+    private Image image;
     public Product(String name, String description, double price, int stock) {
         this.name = name;
         this.description = description;
@@ -101,11 +101,11 @@ public class Product implements Serializable {
         this.soldItems = soldItems;
     }
 
-    public String getImgPath() {
-        return imgPath;
+    public Image getImg() {
+        return image;
     }
     public void setImgPath(String imgPath) {
-        this.imgPath = imgPath;
+        this.image = new Image( imgPath);
     }
 
 }
