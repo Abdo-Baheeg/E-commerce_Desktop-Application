@@ -22,7 +22,7 @@ public class ProductDAO implements CRUD<Product> {
             }
         }
         return name != null &&
-                name.matches("^[A-Za-z\\s]{2,50}$");
+                name.matches("^[A-Za-z0-9\\s]{2,50}$");
     }
     public static boolean validDescription(String description) {
         return description != null &&

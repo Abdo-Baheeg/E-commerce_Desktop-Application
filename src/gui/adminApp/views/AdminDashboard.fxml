@@ -52,7 +52,7 @@
                <Font size="15.0" />
             </font>
          </Button>
-         <Button fx:id="viewCustomersBtn" alignment="CENTER" contentDisplay="TOP" layoutX="15.0" layoutY="159.0" mnemonicParsing="false" onAction="#viewCustomers" prefHeight="99.0" prefWidth="93.0" styleClass="btn-primary" text="View all Customers" textAlignment="CENTER" wrapText="true">
+         <Button fx:id="viewCustomersBtn" alignment="CENTER" contentDisplay="TOP" layoutX="15.0" layoutY="159.0" mnemonicParsing="false" onAction="#viewCustomers" prefHeight="99.0" prefWidth="99.0" styleClass="btn-primary" text="View all Customers" textAlignment="CENTER" wrapText="true">
             <graphic>
                <ImageView fitHeight="67.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
                   <Image url="@../../utils/icon/all.png" />
@@ -101,7 +101,7 @@
                <Font size="15.0" />
             </font>
          </Button>
-         <Button fx:id="addCategoryBtn" alignment="CENTER" contentDisplay="TOP" layoutX="691.0" layoutY="29.0" mnemonicParsing="false" onAction="#goToAddCategory" prefHeight="75.0" prefWidth="112.0" styleClass="btn-primary" text="Add Category">
+         <Button fx:id="addCategoryBtn" alignment="CENTER" contentDisplay="TOP" layoutX="691.0" layoutY="29.0" mnemonicParsing="false" onAction="#goToAddCategory" prefHeight="75.0" prefWidth="137.0" styleClass="btn-primary" text="Add Category">
             <graphic>
                <ImageView fitHeight="67.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
                   <Image url="@../../utils/icon/dashboard.png" />
@@ -111,19 +111,27 @@
                <Font size="15.0" />
             </font>
          </Button>
-         <Button fx:id="modifyCategoryBtn" alignment="CENTER" contentDisplay="TOP" layoutX="808.0" layoutY="17.0" mnemonicParsing="false" onAction="#goToCategories" prefHeight="75.0" prefWidth="149.0" styleClass="btn-primary" text="View all Categories">
+         <Button fx:id="modifyCategoryBtn" alignment="CENTER" contentDisplay="TOP" layoutX="808.0" layoutY="17.0" mnemonicParsing="false" onAction="#goToCategories" prefHeight="75.0" prefWidth="173.0" styleClass="btn-primary" text="View all Categories">
             <graphic>
                <ImageView fitHeight="67.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@../../utils/icon/menu-button.png" />
-                  </image>
+                  <Image url="@../../utils/icon/menu-button.png"/>
                </ImageView>
             </graphic>
             <font>
                <Font size="15.0" />
             </font>
          </Button>
-         <Separator layoutX="1261.0" layoutY="10.0" opacity="0.0" orientation="VERTICAL" prefHeight="89.0" prefWidth="208.0" />
+         <Button fx:id="addAdminBtn" alignment="CENTER" contentDisplay="TOP" layoutX="653.0" layoutY="17.0" mnemonicParsing="false" onAction="#goToAddAdmin" prefHeight="75.0" prefWidth="178.0" styleClass="btn-primary" text="Add new Admin">
+            <graphic>
+               <ImageView fitHeight="67.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                  <Image url="@../../utils/icon/add.png"/>
+               </ImageView>
+            </graphic>
+            <font>
+               <Font size="15.0" />
+            </font>
+         </Button>
+         <Separator layoutX="1261.0" layoutY="10.0" opacity="0.0" orientation="VERTICAL" prefHeight="89.0" prefWidth="0.0" />
          <ImageView fitHeight="73.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true" styleClass="btn-submit">
             <Image url="@../../utils/icon/logo.png" />
          </ImageView>

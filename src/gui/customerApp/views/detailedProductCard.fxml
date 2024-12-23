@@ -19,7 +19,7 @@
       </top>
 
       <right>
-         <VBox alignment="CENTER" prefHeight="462.0" prefWidth="137.0" spacing="15.0" styleClass="product-info-sidebar" BorderPane.alignment="CENTER">
+         <VBox alignment="CENTER" prefHeight="462.0" prefWidth="137.0" spacing="15.0" styleClass="product-actions" BorderPane.alignment="CENTER">
             <padding>
                <Insets left="10.0" right="10.0" />
             </padding>
@@ -44,7 +44,6 @@
                      </ImageView>
                   </graphic>
                </Button>
-               <Button fx:id="btnBack" mnemonicParsing="false"  prefHeight="39.0" prefWidth="200.0" styleClass="btn-primary" text="Back" />
             </children>
          </VBox>
       </right>

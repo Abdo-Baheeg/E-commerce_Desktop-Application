@@ -33,7 +33,7 @@
                   <Font name="Times New Roman Italic" size="15.0" />
                </font>
             </PasswordField>
-            <TextField id="usernameField" fx:id="username" prefHeight="40.0" prefWidth="261.0" promptText="Username" GridPane.columnIndex="1">
+            <TextField id="usernameField" fx:id="username"  pickOnBounds="false" prefHeight="40.0" prefWidth="261.0" promptText="Username" GridPane.columnIndex="1">
                <font>
                   <Font name="Times New Roman" size="16.0" />
                </font>

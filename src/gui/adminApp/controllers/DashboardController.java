@@ -1,5 +1,7 @@
 package src.gui.adminApp.controllers;
 
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,11 +18,9 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
@@ -37,12 +37,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
+
 import javafx.util.converter.DoubleStringConverter;
 
-import static src.database.Database.customers;
+import static src.database.Database.*;
 
 
 public class DashboardController implements Initializable {
@@ -67,21 +66,186 @@ public class DashboardController implements Initializable {
     public BorderPane mainPane;
     @FXML public Button addCategoryBtn;
     @FXML public Button modifyCategoryBtn;
+    @FXML public Button addAdminBtn;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-       // helloLabel.setText("Hello, " + AdminService.getCurrentAdmin().getName() + "!");
-       // homeBtn.setDisable(true);
-
+       helloLabel.setText("Hello, " + AdminService.getCurrentAdmin().getName() + "!");
+       Thread thread = new Thread(new Runnable() {
+           @Override
+           public void run() {
+               Home();
+           }
+       });
     }
+
+    private void Home() {
+        // Create AnchorPane
+        AnchorPane anchorPane = new AnchorPane();
+        anchorPane.setPrefSize(1100, 600);
+        anchorPane.setStyle("-fx-background-color: #f9f9f9; -fx-padding: 20px;");
+
+        // Title
+        Label title = new Label("Admin Dashboard");
+        title.setFont(Font.font("Arial", FontWeight.BOLD, 24));
+        title.setAlignment(Pos.CENTER);
+
+        VBox mainContent = new VBox(20);
+        mainContent.setPadding(new Insets(20));
+        mainContent.setAlignment(Pos.TOP_CENTER);
+
+        // Pending Orders Section
+        VBox pendingOrdersSection = createPendingOrdersSection();
+        mainContent.getChildren().add(pendingOrdersSection);
+
+        // Notifications Section
+        VBox notificationsSection = createNotificationsSection();
+        mainContent.getChildren().add(notificationsSection);
+
+        // Statistics Section
+        VBox statisticsSection = createStatisticsSection();
+        mainContent.getChildren().add(statisticsSection);
+
+        // Add main content to AnchorPane
+        AnchorPane.setTopAnchor(mainContent, 10.0);
+        AnchorPane.setLeftAnchor(mainContent, 10.0);
+        AnchorPane.setRightAnchor(mainContent, 10.0);
+        AnchorPane.setBottomAnchor(mainContent, 10.0);
+        anchorPane.getChildren().add(mainContent);
+
+        mainPane.setCenter(anchorPane);
+        disableButton(homeBtn);
+    }
+    private VBox createPendingOrdersSection() {
+        VBox section = new VBox(10);
+        section.setPadding(new Insets(20));
+        section.setStyle("-fx-background-color: #ffffff; -fx-padding: 10px; -fx-border-color: #cccccc; -fx-border-radius: 5px; -fx-background-radius: 5px;");
+
+        Label sectionTitle = new Label("Pending Orders");
+        sectionTitle.setFont(Font.font("Arial", FontWeight.BOLD, 18));
+
+        TableView<Order> pendingOrdersTable = new TableView<>();
+        pendingOrdersTable.setItems(FXCollections.observableArrayList(pendingOrders));
+        pendingOrdersTable.setPrefHeight(200);
+
+        TableColumn<Order, String> orderIdColumn = new TableColumn<>("Order ID");
+        orderIdColumn.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getId())));
+        orderIdColumn.setPrefWidth(200);
+
+        TableColumn<Order, Double> totalPriceColumn = new TableColumn<>("Total Price");
+        totalPriceColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>((double) cellData.getValue().getTotalPrice()));
+        totalPriceColumn.setPrefWidth(150);
+
+        TableColumn<Order, Void> actionsColumn = new TableColumn<>("Actions");
+        actionsColumn.setCellFactory(param -> new TableCell<>() {
+            private final Button acceptButton = new Button("Accept");
+            private final Button refuseButton = new Button("Refuse");
+
+            {
+                acceptButton.setStyle("-fx-background-color: #4caf50; -fx-text-fill: white;");
+                refuseButton.setStyle("-fx-background-color: #f44336; -fx-text-fill: white;");
+
+                acceptButton.setOnAction(event -> {
+                    Order order = getTableView().getItems().get(getIndex());
+                    pendingOrders.remove(order);
+                    confirmedOrders.add(order);
+                    order.setStatus(Order.Status.CONFIRMED);
+                    refreshTable(pendingOrdersTable, pendingOrders);
+                });
+
+                refuseButton.setOnAction(event -> {
+                    Order order = getTableView().getItems().get(getIndex());
+                    pendingOrders.remove(order);
+                    order.setStatus(Order.Status.CANCELLED);
+                    refreshTable(pendingOrdersTable, pendingOrders);
+                });
+            }
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    setGraphic(new HBox(10, acceptButton, refuseButton));
+                }
+            }
+        });
+        actionsColumn.setPrefWidth(200);
+
+        pendingOrdersTable.getColumns().addAll(orderIdColumn, totalPriceColumn, actionsColumn);
+        section.getChildren().addAll(sectionTitle, pendingOrdersTable);
+
+        return section;
+    }
+
+    private VBox createNotificationsSection() {
+        VBox section = new VBox(10);
+        section.setPadding(new Insets(20));
+        section.setStyle("-fx-background-color: #ffffff; -fx-padding: 10px; -fx-border-color: #cccccc; -fx-border-radius: 5px; -fx-background-radius: 5px;");
+
+        Label sectionTitle = new Label("Notifications");
+        sectionTitle.setFont(Font.font("Arial", FontWeight.BOLD, 18));
+
+        // Out of Stock
+        Label outOfStockLabel = new Label("Out of Stock Products:");
+        List<Product> outOfStockProducts = products.stream()
+                .filter(product -> product.getStock() == 0)
+                .toList();
+        outOfStockProducts.forEach(product -> section.getChildren().add(new Label("- " + product.getName())));
+
+        // Top-Selling
+        Label topSellingLabel = new Label("Top-Selling Products:");
+        products.stream()
+                .sorted(Comparator.comparingInt(Product::getSoldItems).reversed())
+                .limit(3)
+                .forEach(product -> section.getChildren().add(new Label("- " + product.getName() + " (Sold: " + product.getSoldItems() + ")")));
+
+        section.getChildren().addAll(sectionTitle, outOfStockLabel, topSellingLabel);
+        return section;
+    }
+
+    private VBox createStatisticsSection() {
+        VBox section = new VBox(10);
+        section.setPadding(new Insets(20));
+        section.setStyle("-fx-background-color: #ffffff; -fx-padding: 10px; -fx-border-color: #cccccc; -fx-border-radius: 5px; -fx-background-radius: 5px;");
+
+        Label sectionTitle = new Label("Statistics");
+        sectionTitle.setFont(Font.font("Arial", FontWeight.BOLD, 18));
+
+        int totalOrders = pendingOrders.size() + confirmedOrders.size() + deliveredOrders.size();
+        double totalRevenue = confirmedOrders.stream().mapToDouble(Order::getTotalPrice).sum()
+                + deliveredOrders.stream().mapToDouble(Order::getTotalPrice).sum();
+
+        section.getChildren().addAll(
+                sectionTitle,
+                new Label("Total Orders: " + totalOrders),
+                new Label("Total Revenue: $" + String.format("%.2f", totalRevenue))
+        );
+
+        return section;
+    }
+
 
     @FXML
     public void goToHome(ActionEvent event) throws IOException {
-        goToView("../views/home.fxml");
-        disableButton(homeBtn);
-
+         Home();
     }
+    private static <T> void refreshTable(TableView<T> tableView, List<T> list) {
+        // Validate inputs
+        if (tableView == null || list == null) {
+            throw new IllegalArgumentException("TableView and List cannot be null.");
+        }
+
+        // Update the existing items
+        ObservableList<T> observableList = tableView.getItems();
+        observableList.clear();
+        observableList.addAll(list);
+    }
+
+
+
 
     @FXML
     public void goToAddProduct(ActionEvent event) throws IOException {
@@ -92,13 +256,7 @@ public class DashboardController implements Initializable {
 
     @FXML private void goToModifyProduct(ActionEvent event) throws IOException {
         mainPane.setCenter(createProductTable());
-        homeBtn.setDisable(false);
-        addProductBtn.setDisable(false);
-        modifyBtn.setDisable(false);
-        viewCustomersBtn.setDisable(false);
-        goToProfileBtn.setDisable(false);
-        addCategoryBtn.setDisable(false);
-        modifyBtn.setDisable(true);
+        disableButton(modifyBtn);
     }
 
     @FXML private void goToAddCategory(ActionEvent event) throws IOException {
@@ -222,7 +380,12 @@ public class DashboardController implements Initializable {
             Notifications.create().position(Pos.CENTER).text("Invalid Product Price or Quantity!").showError();
             return;
         }
-        AdminService.createProduct(name,description, (float) price,quantity,imgPath);
+        if (newProductCategory.getValue() == null){
+            Notifications.create()
+                    .text("Select Category!").showWarning();
+            return;
+        }
+        AdminService.createProduct(name,description, (float) price,quantity,newProductCategory.getValue(),imgPath);
         Notifications.create().position(Pos.CENTER).text("Product Added!").showInformation();
         newProductName.clear();
         newProductDescription.clear();
@@ -234,6 +397,8 @@ public class DashboardController implements Initializable {
 
 
     @FXML public void viewCustomers(ActionEvent actionEvent) {
+
+            disableButton(viewCustomersBtn);
 
             ObservableList<Customer> customers = FXCollections.observableArrayList(Database.customers);
             // Create TableView
@@ -297,6 +462,8 @@ public class DashboardController implements Initializable {
     }
 
     @FXML public void goToProfile(ActionEvent actionEvent) {
+        disableButton(goToProfileBtn);
+
         Admin admin = AdminService.getCurrentAdmin();
         // Create AnchorPane
         AnchorPane profilePane = new AnchorPane();
@@ -519,6 +686,118 @@ public class DashboardController implements Initializable {
         goToProfileBtn.setDisable(false);
         addCategoryBtn.setDisable(false);
         modifyCategoryBtn.setDisable(false);
+        addAdminBtn.setDisable(false);
+
         btn.setDisable(true);
     }
+
+    @FXML public void goToAddAdmin(ActionEvent actionEvent) {
+
+        disableButton(addAdminBtn);
+
+        // Create AnchorPane
+        AnchorPane anchorPane = new AnchorPane();
+        anchorPane.setPrefSize(600, 400);
+        anchorPane.setStyle("-fx-background-color: #f9f9f9; -fx-padding: 20px;");
+
+        // Create GridPane for form layout
+        GridPane formGrid = new GridPane();
+        formGrid.setHgap(15);
+        formGrid.setVgap(15);
+        formGrid.setAlignment(Pos.CENTER);
+        formGrid.setStyle("-fx-background-color: #ffffff; -fx-padding: 20px; -fx-border-color: #cccccc; -fx-border-radius: 5px; -fx-background-radius: 5px;");
+
+        // Name field
+        Label nameLabel = new Label("Name:");
+        TextField nameField = new TextField();
+        nameField.setPromptText("Enter admin name");
+
+        // Role field
+        Label roleLabel = new Label("Role:");
+        TextField roleField = new TextField();
+        roleField.setPromptText("Enter role");
+
+        // Working Hours field
+        Label hoursLabel = new Label("Working Hours:");
+        Spinner<Integer> hoursSpinner = new Spinner<>(0, 24, 8);
+        hoursSpinner.setEditable(true);
+
+        // Username field
+        Label usernameLabel = new Label("Username:");
+        TextField usernameField = new TextField();
+        usernameField.setPromptText("Enter username");
+
+        // Password field
+        Label passwordLabel = new Label("Password:");
+        PasswordField passwordField = new PasswordField();
+        passwordField.setPromptText("Enter password");
+
+        // Add components to GridPane
+        formGrid.addRow(0, nameLabel, nameField);
+        formGrid.addRow(1, roleLabel, roleField);
+        formGrid.addRow(2, hoursLabel, hoursSpinner);
+        formGrid.addRow(3, usernameLabel, usernameField);
+        formGrid.addRow(4, passwordLabel, passwordField);
+
+        // Style labels and inputs
+        formGrid.getChildren().forEach(node -> {
+            if (node instanceof Label) {
+                ((Label) node).setStyle("-fx-font-size: 14px; -fx-font-weight: bold;");
+            }
+            if (node instanceof TextField || node instanceof PasswordField || node instanceof Spinner) {
+                node.setStyle("-fx-font-size: 14px; -fx-padding: 5px; -fx-border-color: #cccccc; -fx-background-color: #ffffff;");
+            }
+        });
+
+        // Buttons
+        Button submitButton = new Button("Submit");
+        submitButton.setStyle("-fx-background-color: #4caf50; -fx-text-fill: white; -fx-padding: 8px 15px;");
+        submitButton.setOnAction(event -> {
+            // Validation example
+            if (nameField.getText().isEmpty() || roleField.getText().isEmpty() || usernameField.getText().isEmpty() || passwordField.getText().isEmpty()) {
+                showAlert("Validation Error", "Please fill all required fields", Alert.AlertType.ERROR);
+                return;
+            }
+            // Replace with actual validation methods
+            System.out.println("Admin added: " + nameField.getText());
+        });
+
+        Button cancelButton = new Button("Cancel");
+        cancelButton.setStyle("-fx-background-color: #f44336; -fx-text-fill: white; -fx-padding: 8px 15px;");
+        cancelButton.setOnAction(event -> {
+            // Clear fields
+            nameField.clear();
+            roleField.clear();
+            hoursSpinner.getValueFactory().setValue(8);
+            usernameField.clear();
+            passwordField.clear();
+        });
+
+        HBox buttonsBox = new HBox(15, submitButton, cancelButton);
+        buttonsBox.setAlignment(Pos.CENTER);
+
+        // Create VBox to hold the form
+        VBox vbox = new VBox(20, formGrid, buttonsBox);
+        vbox.setAlignment(Pos.CENTER);
+
+        // Add VBox to AnchorPane
+        AnchorPane.setTopAnchor(vbox, 10.0);
+        AnchorPane.setLeftAnchor(vbox, 10.0);
+        AnchorPane.setRightAnchor(vbox, 10.0);
+        AnchorPane.setBottomAnchor(vbox, 10.0);
+        anchorPane.getChildren().add(vbox);
+
+        mainPane.setCenter(anchorPane);
+    }
+
+    private static void showAlert(String title, String content, Alert.AlertType alertType) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
+
+
+
 }

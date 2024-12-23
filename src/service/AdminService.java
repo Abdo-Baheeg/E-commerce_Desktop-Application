@@ -75,11 +75,11 @@ public class AdminService {
         }
         return false;
     }
-    public static boolean createProduct(String name, String description, float price, int quantity, String image) {
+    public static boolean createProduct(String name, String description, float price, int quantity, Category value, String image) {
         if(productDAO.read(name) != null){
             return false;
         } else if (ProductDAO.validName(name)&&ProductDAO.validDescription(description)&& price >0 && quantity>0) {
-            Product product = new Product(name, description, price, quantity,image);
+            Product product = new Product(name, description, price, quantity,value,image);
             productDAO.create(product);
             return true;
         }

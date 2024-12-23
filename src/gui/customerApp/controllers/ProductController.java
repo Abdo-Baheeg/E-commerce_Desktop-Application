@@ -209,7 +209,9 @@ public class ProductController {
             price.setText(String.format("$%.2f", product.getPrice()));
             if(product.getImgPath() != null)
                 img.setImage(new Image("file:///" + product.getImgPath().replace("\\", "/")));
-            valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, product.getStock(),1);
+            if(product.getStock() > 0){
+                valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, product.getStock(), 1);}
+            else{ quantity.setDisable(true) ;}
             quantity.setValueFactory(valueFactory);
             if (CustomerService.getCurrentCustomer().getInterests().contains(product)){
                 productCardInterest.setImage(interest);}
@@ -223,14 +225,16 @@ public class ProductController {
         // Update UI elements with product details
         if (product != null) {
             lblProductCategory.setWrapText(true);
-            lblProductCategory.setText("Category: "+product.getCategory().getName());
+            if (product.getCategory()!= null)lblProductCategory.setText("Category: "+product.getCategory().getName());
             lblProductDescription.setText(product.getDescription());
             lblProductName.setText(product.getName());
             lblProductPrice.setWrapText(true);
             lblProductPrice.setText("Price: "+String.format("$%.2f", product.getPrice()));
             lblProductStock.setText("in Stock "+ product.getStock());
             imgProductDetail.setImage( new Image("file:///" + product.getImgPath().replace("\\", "/")));
-            valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, product.getStock(), 1);
+            if(product.getStock() > 0){
+                valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, product.getStock(), 1);}
+            else{ spinnerQuantity.setDisable(true) ;}
             spinnerQuantity.setValueFactory(valueFactory);
             if (CustomerService.getCurrentCustomer().getInterests().contains(product)){
                 interested.setImage(interest);}
@@ -323,7 +327,6 @@ public class ProductController {
             detailedProductStage.show();
             detailedProductStage.centerOnScreen();
             detailedProductStage.setTitle(this.product.getName());
-            btnBack.setOnAction(event1 -> detailedProductStage.close());
 
         }
 

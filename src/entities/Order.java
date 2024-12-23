@@ -71,7 +71,7 @@ public class Order implements Serializable {
     }
 
     public enum Status{
-        PENDING, CONFIRMED, DELIVERED
+        PENDING, CONFIRMED, DELIVERED,CANCELLED
     }
 
 

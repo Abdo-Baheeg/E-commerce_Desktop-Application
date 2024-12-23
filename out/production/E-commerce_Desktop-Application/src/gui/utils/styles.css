@@ -198,13 +198,6 @@
     -fx-font-style: italic;
 }
 
-.view-more-btn {
-    -fx-background-color: tranparent;
-    -fx-text-fill: white;
-    -fx-padding: 5px 10px;
-    -fx-border-radius: 5px;
-    -fx-background-radius: 5px;
-}
 
 .table-view {
     -fx-background-color: #f9f9f9;

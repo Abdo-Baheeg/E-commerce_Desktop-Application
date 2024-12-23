@@ -24,7 +24,7 @@ public class Database {
     public static void initData() throws MalformedURLException {
         //customers.add(new Customer("Abdo", Person.Gender.MALE,"Cairo, Egypt", "01016042121","3bdobahig@gmail.com","abdo","1234"));
             admins.add(new Admin("Abdo Bahig","CEO","abdo","1234","C:\\Users\\Abdelrahman Bahig\\Desktop\\E-commerce_Application\\src\\gui\\utils\\icon\\user (4).png"));
-            customers.add(new Customer("abdo","1234"));
+            customers.add(new Customer("Abdo Bahig", Person.Gender.MALE,"Address1","010","email","abdo","1234", LocalDate.of(2005,1,28),"C:\\Users\\Abdelrahman Bahig\\Desktop\\man (2).png"));
             customers.get(0).setBalance(1000000);
             // Initialize Categories
 //            Category laptops = new Category("Laptops", "High-performance computing devices for professional and personal use");
@@ -190,54 +190,56 @@ public class Database {
 
             // Initialize Products
             // Laptops
+
+            String initialImg = "C:/Users/Abdelrahman Bahig/Downloads/order.png";
             Product dellLatitude = new Product("Dell Latitude 5555",
                     "Intel Core i7 Processor, 32 GB DDR5 Ram, 1 TB SSD, 15.6 inches, Color: Black",
-                    999.99, 3, laptops);
+                    999.99, 3, laptops,initialImg);
             Product macBookPro = new Product("MacBook Pro 16\"",
                     "Apple M2 Pro Chip, 16 GB RAM, 512 GB SSD, 16-inch Retina Display, Space Gray",
-                    2499.99, 5, laptops);
+                    2499.99, 5, laptops,initialImg);
             Product lenovoThinkPad = new Product("Lenovo ThinkPad X1 Carbon",
                     "Intel Core i7, 16 GB RAM, 512 GB SSD, 14-inch, Carbon Fiber Construction",
-                    1799.99, 4, laptops);
+                    1799.99, 4, laptops,initialImg);
 
             // Smartphones
             Product iPhone14 = new Product("iPhone 14 Pro",
                     "6.1-inch Super Retina XDR Display, A16 Bionic Chip, 128GB, Deep Purple",
-                    999.99, 6, smartphones);
+                    999.99, 6, smartphones,initialImg);
             Product samsungS23 = new Product("Samsung Galaxy S23 Ultra",
                     "6.8-inch Dynamic AMOLED, 200MP Camera, 512GB, Phantom Black",
-                    1199.99, 5, smartphones);
+                    1199.99, 5, smartphones,initialImg);
             Product googlePixel7 = new Product("Google Pixel 7",
                     "6.3-inch OLED, Google Tensor G2, 128GB, Obsidian",
-                    599.99, 4, smartphones);
+                    599.99, 4, smartphones,initialImg);
 
             // Tablets
             Product iPadPro = new Product("iPad Pro 12.9\"",
                     "M2 Chip, 128GB, 12.9-inch Liquid Retina XDR Display, Space Gray",
-                    1099.99, 5, tablets);
+                    1099.99, 5, tablets,initialImg);
             Product samsungTabS8 = new Product("Samsung Galaxy Tab S8 Ultra",
                     "14.6-inch Super AMOLED, 8GB RAM, 128GB, Graphite",
-                    899.99, 4, tablets);
+                    899.99, 4, tablets,initialImg);
             Product microsoftSurface = new Product("Microsoft Surface Pro 9",
                     "Intel Evo Platform, 16GB RAM, 512GB SSD, Graphite",
-                    1599.99, 3, tablets);
+                    1599.99, 3, tablets,initialImg);
 
             // Accessories
             Product appleAirPods = new Product("Apple AirPods Pro (2nd Generation)",
                     "Active Noise Cancellation, Wireless Charging Case, White",
-                    249.99, 7, accessories);
+                    249.99, 7, accessories,initialImg);
             Product sonyHeadphones = new Product("Sony WH-1000XM5 Wireless Noise Cancelling Headphones",
                     "Bluetooth, Touch Sensor Controls, Black",
-                    399.99, 4, accessories);
+                    399.99, 4, accessories,initialImg);
             Product ankerPowerBank = new Product("Anker 737 Power Bank (PowerIQ 3.0)",
                     "24000mAh, 140W Fast Charging, Compatible with Laptops and Smartphones",
-                    99.99, 6, accessories);
+                    99.99, 6, accessories,initialImg);
             Product logitechMX = new Product("Logitech MX Master 3S Wireless Mouse",
                     "Ergonomic Design, Silent Clicks, Bluetooth/USB, Gray",
-                    99.99, 5, accessories);
+                    99.99, 5, accessories,initialImg);
             Product usbcHub = new Product("Anker USB-C Hub",
                     "7-in-1, 4K HDMI, SD/microSD Card Reader, 2 USB-A Ports",
-                    49.99, 8, accessories);
+                    49.99, 8, accessories,initialImg);
 
             // Add products to the list
             products.add(dellLatitude);

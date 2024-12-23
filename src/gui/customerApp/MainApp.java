@@ -12,6 +12,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import src.database.Database;
 
+import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.Objects;
@@ -53,7 +54,7 @@ public class MainApp extends Application {
     }
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-      Database.loadDatabase();
+        Database.loadDatabase();
         launch(args);
     }
 }

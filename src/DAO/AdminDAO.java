@@ -33,7 +33,7 @@ public class AdminDAO implements CRUD <Admin> {
     }
     public static boolean validPhone(String phone) {
         return phone != null &&
-                phone.matches("^\\d{10}$");
+                phone.matches("^\\d{11}$");
     }
     public static boolean validAddress(String address) {
         return address != null &&

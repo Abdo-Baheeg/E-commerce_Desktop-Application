@@ -37,7 +37,7 @@ public class CustomerService {
     }
     public static boolean validPhone(String phone) {
         return phone != null &&
-                phone.matches("^\\d{10}$");
+                phone.matches("^\\d{11}$");
     }
     public static boolean validAddress(String address) {
         return address != null &&
@@ -221,6 +221,9 @@ public class CustomerService {
                 return false;
             }
             ArrayList<CartItem> p =currentCustomer.getCart().getProducts();
+            for (CartItem i : currentCustomer.getCart().getProducts()){
+                i.getProduct().setSoldItems(i.getProduct().getSoldItems()+i.getQuantity());
+            }
             Order o = new Order(p);
             o.setStatus(Order.Status.PENDING);
             o.setTotalPrice(currentCustomer.getCart().getTotalPrice());

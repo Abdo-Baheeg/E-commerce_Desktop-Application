@@ -29,6 +29,8 @@ public class Product implements Serializable {
         this.price = price;
         this.stock = stock;
         this.id = idCounter++;
+        this.category = category;
+        this.imgPath = url;
     }
 
     public Product(String name, String description, double price, int stock, Category category) {

@@ -262,9 +262,13 @@ public class DashboardController implements Initializable {
         Customer currentCustomer = CustomerService.getCurrentCustomer();
 
         // Photo Section
-        ImageView profilePhoto = new ImageView(new Image("file:///" + currentCustomer.getImgPath().replace("\\", "/")));
+        ImageView profilePhoto = new ImageView();
+        if(CustomerService.getCurrentCustomer().getImgPath() != null){
+           Image img =new Image("file:///" + currentCustomer.getImgPath().replace("\\", "/"));
+           profilePhoto.setImage(img);
+        }
         profilePhoto.setFitHeight(400);
-        profilePhoto.setFitWidth(400);
+        profilePhoto.setFitWidth(600);
         profilePhoto.setPreserveRatio(true);
         profilePhoto.setStyle("-fx-border-color: #4caf50; -fx-border-width: 2px; -fx-border-radius: 100px; -fx-background-radius: 100px;");
 
@@ -294,7 +298,6 @@ public class DashboardController implements Initializable {
         genderBox.setValue(currentCustomer.getGender().name());
         genderBox.setStyle("-fx-font-size: 16px; -fx-padding: 8px; -fx-border-color: #cccccc; -fx-border-radius: 5px;");
 
-        TextField usernameField = createStyledTextField(currentCustomer.getUsername(), "Username");
         TextField addressField = createStyledTextField(currentCustomer.getAddress(), "Address");
         TextField phoneField = createStyledTextField(currentCustomer.getPhone(), "Phone Number");
         TextField emailField = createStyledTextField(currentCustomer.getEmail(), "Email");
@@ -306,7 +309,6 @@ public class DashboardController implements Initializable {
                 createLabeledField("Name:", nameField),
                 createLabeledField("Date of Birth:", dobPicker),
                 createLabeledField("Gender:", genderBox),
-                createLabeledField("Username:", usernameField),
                 createLabeledField("Address:", addressField),
                 createLabeledField("Phone Number:", phoneField),
                 createLabeledField("Email:", emailField),
@@ -324,10 +326,6 @@ public class DashboardController implements Initializable {
             }
             if (!CustomerService.validDateOfBirth(dobPicker.getValue())){
                 showAlert(Alert.AlertType.ERROR,"invalid date of birth","You must be older than 16 years!");
-                return;
-            }
-            if (!CustomerService.validUsername(usernameField.getText())){
-                showAlert(Alert.AlertType.ERROR,"invalid username","please enter unique username, should contain letters");
                 return;
             }
             if (!CustomerService.validAddress(addressField.getText())){
@@ -353,7 +351,6 @@ public class DashboardController implements Initializable {
             currentCustomer.setName(nameField.getText());
             currentCustomer.setDateOfBirth(dobPicker.getValue());
             currentCustomer.setGender(Person.Gender.valueOf(genderBox.getValue().toUpperCase()));
-            currentCustomer.setUsername(usernameField.getText());
             currentCustomer.setAddress(addressField.getText());
             currentCustomer.setPhone(phoneField.getText());
             currentCustomer.setEmail(emailField.getText());
