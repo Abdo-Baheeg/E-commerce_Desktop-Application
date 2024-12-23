@@ -38,8 +38,11 @@ public class LoginController{
         }
         if(AdminService.login(username, password)){
             System.out.println("Login Successful");
-            Parent newRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../views/AdminDashboard.fxml")));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../views/AdminDashboard.fxml"));
+            Parent newRoot = fxmlLoader.load();
             Scene newScene = new Scene(newRoot);
+            DashboardController controller = fxmlLoader.getController();
+            controller.Home();
             // Get the current stage
             Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             stage.setResizable(true);

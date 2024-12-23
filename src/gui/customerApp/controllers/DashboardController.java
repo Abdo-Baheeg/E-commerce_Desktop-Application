@@ -413,6 +413,7 @@ public class DashboardController implements Initializable {
 
     @FXML
     void search(ActionEvent event) {
+        homeBtn.setDisable(false);
         String search = searchField.getText();
         ProductDAO productDAO = new ProductDAO();
         productsGrid.getChildren().clear();

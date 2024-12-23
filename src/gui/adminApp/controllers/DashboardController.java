@@ -1,5 +1,6 @@
 package src.gui.adminApp.controllers;
 
+import javafx.application.Platform;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -44,7 +45,7 @@ import javafx.util.converter.DoubleStringConverter;
 import static src.database.Database.*;
 
 
-public class DashboardController implements Initializable {
+public class DashboardController {
 
     @FXML
     public Button goToProfileBtn;
@@ -69,18 +70,9 @@ public class DashboardController implements Initializable {
     @FXML public Button addAdminBtn;
 
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-       helloLabel.setText("Hello, " + AdminService.getCurrentAdmin().getName() + "!");
-       Thread thread = new Thread(new Runnable() {
-           @Override
-           public void run() {
-               Home();
-           }
-       });
-    }
 
-    private void Home() {
+
+    void Home() {
         // Create AnchorPane
         AnchorPane anchorPane = new AnchorPane();
         anchorPane.setPrefSize(1100, 600);
@@ -269,6 +261,7 @@ public class DashboardController implements Initializable {
             AnchorPane pane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(path)));
             mainPane.setCenter(pane);
         }catch (IOException e){
+            System.out.println(Objects.requireNonNull(getClass().getResource(path)));
             System.out.println(e.getMessage());
             System.out.println("Error");
         }
