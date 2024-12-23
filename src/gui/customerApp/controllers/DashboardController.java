@@ -30,6 +30,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.ResourceBundle;
+import java.util.function.Function;
 
 public class DashboardController implements Initializable {
 
@@ -250,6 +251,12 @@ public class DashboardController implements Initializable {
 
     @FXML
     void goToProfile(ActionEvent event) throws IOException {
+        cartBtn.setDisable(false);
+        interestsBtn.setDisable(false);
+        ordersBtn.setDisable(false);
+        addCreditsBtn.setDisable(false);
+        profileBtn.setDisable(true);
+
 
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setFitToWidth(true);
@@ -316,38 +323,47 @@ public class DashboardController implements Initializable {
                 createLabeledField("Confirm Password:", confirmPasswordField)
         );
 
-        // Save Button
+// Save Button
         Button saveBtn = new Button("Save Changes");
         saveBtn.setStyle("-fx-background-color: #4caf50; -fx-text-fill: white; -fx-padding: 10px 20px; -fx-font-size: 16px; -fx-border-radius: 20px; -fx-background-radius: 20px;");
+
         saveBtn.setOnAction(event2 -> {
-            if (!CustomerService.validName(nameField.getText())) {
-                showAlert(Alert.AlertType.ERROR, "Invalid Name", "Please enter a valid name.");
+            // Validate fields
+            if (!validateField(nameField.getText(), "Invalid Name", "Please enter a valid name.", CustomerService::validName)) {
+                nameField.setStyle("-fx-border-color: red;");
                 return;
             }
-            if (!CustomerService.validDateOfBirth(dobPicker.getValue())){
-                showAlert(Alert.AlertType.ERROR,"invalid date of birth","You must be older than 16 years!");
+            if (!validateField(dobPicker.getValue(), "Invalid Date of Birth", "You must be older than 16 years!", CustomerService::validDateOfBirth)) {
+                dobPicker.setStyle("-fx-border-color: red;");
                 return;
             }
-            if (!CustomerService.validAddress(addressField.getText())){
-                showAlert(Alert.AlertType.ERROR,"Invalid address", "Please try again with valid address");
+            if (!validateField(addressField.getText(), "Invalid Address", "Please try again with a valid address.", CustomerService::validAddress)) {
+                addressField.setStyle("-fx-border-color: red;");
                 return;
             }
-            if (!CustomerService.validPhone(phoneField.getText())) {
-                showAlert(Alert.AlertType.ERROR, "Invalid Phone Number", "Please enter a valid phone number.");
+            if (!validateField(phoneField.getText(), "Invalid Phone Number", "Please enter a valid phone number.", CustomerService::validPhone)) {
+                phoneField.setStyle("-fx-border-color: red;");
                 return;
             }
-            if (!CustomerService.validEmail(emailField.getText())) {
-                showAlert(Alert.AlertType.ERROR, "Invalid Email", "Please enter a valid email address.");
+            if (!validateField(emailField.getText(), "Invalid Email", "Please enter a valid email address.", CustomerService::validEmail)) {
+                emailField.setStyle("-fx-border-color: red;");
                 return;
             }
-            if (!passwordField.getText().equals(confirmPasswordField.getText()) ) {
+            if (!passwordField.getText().equals(confirmPasswordField.getText())) {
                 showAlert(Alert.AlertType.ERROR, "Password Mismatch", "Passwords do not match!");
+                passwordField.setStyle("-fx-border-color: red;");
+                confirmPasswordField.setStyle("-fx-border-color: red;");
                 return;
             }
-            if (!CustomerService.validPassword(passwordField.getText())){
-                showAlert(Alert.AlertType.ERROR,"Weak Password","Please enter password consists of at least 6 characters, A-Z & a-z & 0-9 & special character");
+            if (!validateField(passwordField.getText(), "Weak Password", "Password must contain at least 6 characters, including uppercase, lowercase, numbers, and special characters.", CustomerService::validPassword)) {
+                passwordField.setStyle("-fx-border-color: red;");
                 return;
             }
+
+            // Reset invalid styles
+            resetFieldStyles(nameField, dobPicker, addressField, phoneField, emailField, passwordField, confirmPasswordField);
+
+            // Update customer details
             currentCustomer.setName(nameField.getText());
             currentCustomer.setDateOfBirth(dobPicker.getValue());
             currentCustomer.setGender(Person.Gender.valueOf(genderBox.getValue().toUpperCase()));
@@ -356,14 +372,32 @@ public class DashboardController implements Initializable {
             currentCustomer.setEmail(emailField.getText());
             currentCustomer.setPassword(passwordField.getText());
 
+            // Show success message
             showAlert(Alert.AlertType.INFORMATION, "Profile Updated", "Your profile has been updated successfully!");
         });
+
 
         // Layout
         profileContainer.getChildren().addAll(photoSection, fieldsSection, saveBtn);
         scrollPane.setContent(profileContainer);
         mainBorderPane.setCenter(scrollPane);
     }
+// Utility Methods
+
+        private <T> boolean validateField(T fieldValue, String errorTitle, String errorMessage, Function<T, Boolean> validator) {
+            if (!validator.apply(fieldValue)) {
+                showAlert(Alert.AlertType.ERROR, errorTitle, errorMessage);
+                return false;
+            }
+            return true;
+        }
+
+        private void resetFieldStyles(Control... fields) {
+            for (Control field : fields) {
+                field.setStyle(null);
+            }
+        }
+
 
     private HBox createLabeledField(String labelText, Node inputField) {
         Label label = new Label(labelText);

@@ -11,8 +11,8 @@
             <Label alignment="CENTER" prefHeight="48.0" prefWidth="397.0" styleClass="header" stylesheets="@../../utils/styles.css" text="Add New Product" textAlignment="CENTER" />
             <GridPane prefHeight="319.0" prefWidth="396.0" vgap="10.0">
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="206.66668701171875" minWidth="10.0" prefWidth="82.0" />
-                <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="386.66668701171875" minWidth="10.0" prefWidth="314.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="206.66668701171875" minWidth="10.0" prefWidth="74.0" />
+                <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="386.66668701171875" minWidth="10.0" prefWidth="322.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints maxHeight="115.33334350585938" minHeight="10.0" prefHeight="59.99999364217122" vgrow="SOMETIMES" />
@@ -22,7 +22,7 @@
                   <RowConstraints maxHeight="113.99997456868488" minHeight="10.0" prefHeight="54.66667683919269" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label text="Product name" wrapText="true">
+                  <Label prefHeight="43.0" prefWidth="75.0" text="Product name" wrapText="true">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -42,7 +42,7 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="newProductName" prefHeight="37.0" prefWidth="340.0" GridPane.columnIndex="1" />
+                  <TextField fx:id="newProductName" prefHeight="37.0" prefWidth="320.0" GridPane.columnIndex="1" />
                   <TextArea fx:id="newProductDescription" prefHeight="128.0" prefWidth="322.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <HBox alignment="CENTER_LEFT" fillHeight="false" prefHeight="55.0" prefWidth="331.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <children>
@@ -58,7 +58,7 @@
                   </HBox>
                   <Button fx:id="choosePhotoBtn" mnemonicParsing="false" onAction="#choosePhoto" prefHeight="30.0" prefWidth="339.0" styleClass="btn-submit" text="Click to Pick a photo" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <Label prefHeight="51.0" prefWidth="104.0" text="Category" GridPane.rowIndex="3" />
-                  <ChoiceBox fx:id="newProductCategory" onMouseEntered="#populateChoiceBox" onMouseDragEntered="#populateChoiceBox" onMouseClicked="#populateChoiceBox" prefHeight="31.0" prefWidth="318.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <ChoiceBox fx:id="newProductCategory" onMouseClicked="#populateChoiceBox" onMouseDragEntered="#populateChoiceBox" onMouseEntered="#populateChoiceBox" prefHeight="31.0" prefWidth="318.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                </children>
             </GridPane>
             <Label fx:id="imgPathLbl" prefHeight="42.0" prefWidth="397.0" />

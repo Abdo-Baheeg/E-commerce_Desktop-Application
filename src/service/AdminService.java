@@ -54,7 +54,11 @@ public class AdminService {
         return categoryDAO.getAll();
     }
 
-    public boolean createAdmin(String name, String role, String username, String password) {
+    public static void update(Admin admin) {
+        adminDAO.update(admin);
+    }
+
+    public static boolean createAdmin(String name, String role, String username, String password) {
         Admin existingAdmin = adminDAO.read(username);
         if (existingAdmin != null) {
             return false;

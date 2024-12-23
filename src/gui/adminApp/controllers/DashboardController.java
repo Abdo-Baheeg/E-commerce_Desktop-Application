@@ -27,6 +27,7 @@ import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
 import org.controlsfx.control.Notifications;
 import org.jetbrains.annotations.NotNull;
+import src.DAO.AdminDAO;
 import src.DAO.CategoryDAO;
 import src.DAO.ProductDAO;
 import src.database.Database;
@@ -73,6 +74,7 @@ public class DashboardController {
 
 
     void Home() {
+        helloLabel.setText("Hello, "+AdminService.getCurrentAdmin().getName()+"!");
         // Create AnchorPane
         AnchorPane anchorPane = new AnchorPane();
         anchorPane.setPrefSize(1100, 600);
@@ -292,6 +294,8 @@ public class DashboardController {
         }
         AdminService.CreateCategory(category, description);
         Notifications.create().position(Pos.CENTER).text("Category Added!").showInformation();
+        categoryName.clear();
+        categoryDescription.clear();
     }
 
     //////////////////////////////////////////////////////////////////////
@@ -454,13 +458,14 @@ public class DashboardController {
         }
     }
 
-    @FXML public void goToProfile(ActionEvent actionEvent) {
+    @FXML
+    public void goToProfile(ActionEvent actionEvent) {
         disableButton(goToProfileBtn);
 
         Admin admin = AdminService.getCurrentAdmin();
+
         // Create AnchorPane
         AnchorPane profilePane = new AnchorPane();
-
 
         // Create ImageView for Photo
         ImageView photo = new ImageView();
@@ -475,23 +480,62 @@ public class DashboardController {
         photo.setPreserveRatio(true);
         photo.setStyle("-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0, 4, 4);");
 
-        // Create Labels for Admin Info
-        Label nameLabel = new Label("Name: " + admin.getName());
-        nameLabel.setFont(new Font("Arial", 18));
+        // Create Labels and TextFields for Admin Info
+        Label nameLabel = new Label("Name:");
+        nameLabel.setFont(new Font("Arial", 16));
         nameLabel.setStyle("-fx-text-fill: #00796b;");
 
-        Label roleLabel = new Label("Role: " + admin.getRole());
-        roleLabel.setFont(new Font("Arial", 16));
-        roleLabel.setStyle("-fx-text-fill: #004d40;");
+        TextField nameField = new TextField(admin.getName());
+        nameField.setPromptText("Enter your name");
 
-        Label workingHoursLabel = new Label("Working Hours: " + admin.getWorkingHours());
-        workingHoursLabel.setFont(new Font("Arial", 16));
-        workingHoursLabel.setStyle("-fx-text-fill: #004d40;");
+        Label usernameLabel = new Label("Username:");
+        usernameLabel.setFont(new Font("Arial", 16));
+        usernameLabel.setStyle("-fx-text-fill: #00796b;");
+
+        TextField usernameField = new TextField(admin.getUsername());
+        usernameField.setPromptText("Enter your username");
+
+        Label passwordLabel = new Label("Password:");
+        passwordLabel.setFont(new Font("Arial", 16));
+        passwordLabel.setStyle("-fx-text-fill: #00796b;");
+
+        PasswordField passwordField = new PasswordField();
+        passwordField.setPromptText("Enter your password");
+
+        // Create Buttons for Updating
+        Button updateButton = new Button("Update");
+        updateButton.setStyle("-fx-background-color: #4caf50; -fx-text-fill: white;");
+        updateButton.setOnAction(event -> {
+            if (AdminDAO.validName(nameField.getText()) && AdminDAO.validUsername(usernameField.getText()) && AdminDAO.validPassword(passwordField.getText())) {
+                admin.setName(nameField.getText());
+                admin.setUsername(usernameField.getText());
+                admin.setPassword(passwordField.getText());
+                AdminService.update(admin);
+                Notifications.create()
+                        .title("Profile Updated")
+                        .text("Your profile has been successfully updated.")
+                        .position(Pos.BOTTOM_RIGHT)
+                        .showInformation();
+            } else {
+                Notifications.create()
+                        .title("Validation Failed")
+                        .text("Please ensure all fields are filled correctly.")
+                        .position(Pos.BOTTOM_RIGHT)
+                        .showError();
+            }
+        });
+
+        Button cancelButton = new Button("Cancel");
+        cancelButton.setStyle("-fx-background-color: #f44336; -fx-text-fill: white;");
+        cancelButton.setOnAction(event -> mainPane.setCenter(null)); // Clear the center pane
+
+        HBox buttonBox = new HBox(10, updateButton, cancelButton);
+        buttonBox.setAlignment(Pos.CENTER);
 
         // Create VBox for Layout
-        VBox contentBox = new VBox(10, photo, nameLabel, roleLabel, workingHoursLabel);
+        VBox contentBox = new VBox(15, photo, nameLabel, nameField, usernameLabel, usernameField, passwordLabel, passwordField, buttonBox);
         contentBox.setStyle("-fx-alignment: center; -fx-padding: 20px; -fx-background-color: #f0f4c3; -fx-border-color: #8bc34a; -fx-border-radius: 10;");
-        contentBox.setPrefWidth(300);
+        contentBox.setPrefWidth(400);
 
         // Add VBox to AnchorPane
         AnchorPane.setTopAnchor(contentBox, 20.0);
@@ -500,8 +544,8 @@ public class DashboardController {
         profilePane.getChildren().add(contentBox);
 
         mainPane.setCenter(profilePane);
-
     }
+
 
     public static AnchorPane createProductTable() {
         AnchorPane root = new AnchorPane();
@@ -746,13 +790,39 @@ public class DashboardController {
         Button submitButton = new Button("Submit");
         submitButton.setStyle("-fx-background-color: #4caf50; -fx-text-fill: white; -fx-padding: 8px 15px;");
         submitButton.setOnAction(event -> {
-            // Validation example
+
             if (nameField.getText().isEmpty() || roleField.getText().isEmpty() || usernameField.getText().isEmpty() || passwordField.getText().isEmpty()) {
                 showAlert("Validation Error", "Please fill all required fields", Alert.AlertType.ERROR);
                 return;
             }
-            // Replace with actual validation methods
-            System.out.println("Admin added: " + nameField.getText());
+            if(!AdminDAO.validName(nameField.getText())) {
+                Notifications.create()
+                        .title("Invalid name").text("please enter a valid name")
+                        .showError();
+                return;
+            }
+            if (!AdminDAO.validUsername(usernameField.getText())) {
+                Notifications.create()
+                        .title("Invalid username").text("please enter a valid username")
+                        .showError();
+                return;
+            }
+            if (!AdminDAO.validPassword(passwordField.getText())) {
+                Notifications.create()
+                        .title("Invalid password").text("please enter a valid password")
+                        .showError();
+                return;
+            }
+            AdminService.createAdmin(nameField.getText(),roleField.getText(),usernameField.getText(),passwordField.getText());
+            Notifications.create()
+                    .title("Admin Created")
+                    .text("Admin created successfully")
+                    .showInformation();
+            nameField.clear();
+            roleField.clear();
+            usernameField.clear();
+            passwordField.clear();
+
         });
 
         Button cancelButton = new Button("Cancel");

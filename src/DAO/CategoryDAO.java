@@ -19,7 +19,7 @@ public class CategoryDAO implements CRUD<Category>{
     }
     public static boolean validDescription(String description) {
         return description != null &&
-                description.matches("^[A-Za-z\\s]{2,250}$");
+                description.matches("^[A-Za-z0-9 ,.\\s]{2,1000}$");
     }
 
 
