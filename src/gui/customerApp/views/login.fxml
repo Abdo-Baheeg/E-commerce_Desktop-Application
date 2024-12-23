@@ -10,7 +10,7 @@
    <top>
       <HBox alignment="CENTER_RIGHT" prefHeight="107.0" prefWidth="919.0" spacing="15.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
          <HBox alignment="CENTER" prefHeight="107.0" prefWidth="644.0" spacing="20.0">
-            <Button fx:id="goToLoginBtn" contentDisplay="TOP" defaultButton="true" mnemonicParsing="false" onAction="#goToLogin" prefHeight="65.0" prefWidth="286.0" style="-fx-background-color: green; -fx-background-radius: 50;" text="Log in" textFill="WHITE">
+            <Button fx:id="goToLoginBtn" disable="true" contentDisplay="TOP" defaultButton="true" mnemonicParsing="false" onAction="#goToLogin" prefHeight="65.0" prefWidth="286.0" style="-fx-background-color: green; -fx-background-radius: 50;" text="Log in" textFill="WHITE">
                <font>
                   <Font name="Tempus Sans ITC" size="31.0" />
                </font>
@@ -56,7 +56,76 @@
       </VBox>
    </right>
    <center>
-
+      <AnchorPane id="loginPane" fx:id="loginAnchorPane" prefHeight="573.0" prefWidth="725.0" scaleShape="false"
+                  snapToPixel="false"
+                  style="-fx-background-imgPath: url('../../utils/img/banner-with-abstract-background-with-blue-tones-paper-cutout-waves.jpg');"
+                  xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+                 >
+         <VBox layoutX="199.0" layoutY="90.0" prefHeight="433.0" prefWidth="347.0"
+               style="-fx-alignment: CENTER; -fx-background-radius: 50;">
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <ImageView fx:id="img" fitHeight="150.0" fitWidth="157.0" nodeOrientation="INHERIT" pickOnBounds="true"
+                          preserveRatio="true">
+                  <Image url="@../../utils/icon/login.png"/>
+               </ImageView>
+               <Label alignment="CENTER" prefHeight="170.0" prefWidth="218.0" text="Customer Login"
+                      textAlignment="CENTER" wrapText="true">
+                  <font>
+                     <Font name="Tempus Sans ITC" size="40.0"/>
+                  </font>
+               </Label>
+            </HBox>
+            <HBox prefHeight="122.0" prefWidth="392.0">
+               <GridPane prefHeight="115.0" prefWidth="374.0">
+                  <columnConstraints>
+                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="204.666748046875" minWidth="10.0"
+                                        prefWidth="56.55560302734375"/>
+                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="364.6666259765625" minWidth="10.0"
+                                        prefWidth="290.77773030598956"/>
+                  </columnConstraints>
+                  <rowConstraints>
+                     <RowConstraints maxHeight="73.44443130493164" minHeight="10.0" prefHeight="69.88888931274414"
+                                     vgrow="SOMETIMES"/>
+                     <RowConstraints maxHeight="56.555572509765625" minHeight="10.0" prefHeight="52.11111068725586"
+                                     vgrow="SOMETIMES"/>
+                  </rowConstraints>
+                  <PasswordField id="passwordField" fx:id="password" onAction="#login"
+                                 onMouseClicked="#setMonkeyClose" onMousePressed="#setMonkeyClose" onMouseExited="#setDefault" prefHeight="45.0"
+                                 prefWidth="291.0" promptText="Password" GridPane.columnIndex="1"
+                                 GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Times New Roman Italic" size="15.0"/>
+                     </font>
+                  </PasswordField>
+                  <TextField id="usernameField" onMouseClicked="#setMonkeyOpen" onMouseExited="#setDefault" fx:id="username" onAction="#login" prefHeight="45.0"
+                             prefWidth="291.0" promptText="Username" GridPane.columnIndex="1">
+                     <font>
+                        <Font name="Times New Roman" size="16.0"/>
+                     </font>
+                  </TextField>
+                  <ImageView fitHeight="60.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                     <Image url="@../../utils/icon/profile.png"/>
+                  </ImageView>
+                  <ImageView fitHeight="53.0" fitWidth="59.0" nodeOrientation="INHERIT" pickOnBounds="true"
+                             preserveRatio="true" GridPane.rowIndex="1">
+                     <Image url="@../../utils/icon/password.png"/>
+                  </ImageView>
+               </GridPane>
+            </HBox>
+            <Separator opacity="0.0" prefHeight="45.0" prefWidth="347.0"/>
+            <Button id="loginButton" fx:id="loginButton" alignment="CENTER" mnemonicParsing="false" onAction="#login"
+                    prefHeight="62.0" prefWidth="311.0" style="-fx-background-radius: 20; -fx-background-color: green;"
+                    text="Log in" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="20.0"/>
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND"/>
+               </cursor>
+            </Button>
+            <Separator opacity="0.0" prefHeight="19.0" prefWidth="430.0"/>
+         </VBox>
+      </AnchorPane>
    </center>
 
 </BorderPane>

@@ -7,7 +7,7 @@
 <?import javafx.scene.text.*?>
 
 
-<AnchorPane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.gui.customerApp.controllers.ProfileController">
+<AnchorPane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="401.0" prefWidth="601.0">
          <center>
@@ -16,9 +16,9 @@
                   <HBox alignment="CENTER" layoutX="7.0" layoutY="7.0" prefHeight="265.0" prefWidth="591.0" spacing="15.0">
                      <children>
                         <ImageView fx:id="img" fitHeight="173.0" fitWidth="156.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
+
                               <Image url="@../../utils/img/dollar.png" />
-                           </image>
+
                         </ImageView>
                         <GridPane prefHeight="257.0" prefWidth="277.0">
                           <columnConstraints>
@@ -118,7 +118,7 @@
          <bottom>
             <HBox alignment="CENTER" prefHeight="49.0" prefWidth="601.0" spacing="20.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="editBtn" mnemonicParsing="false" onAction="#goToEdit" prefHeight="30.0" prefWidth="150.0" text="Edit your Info" />
+                  <Button fx:id="editBtn" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Edit your Info" />
                </children>
             </HBox>
          </bottom>

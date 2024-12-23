@@ -4,6 +4,7 @@ import src.database.Database;
 import src.entities.Admin;
 import src.entities.Customer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static src.database.Database.admins;
@@ -79,8 +80,8 @@ public class AdminDAO implements CRUD <Admin> {
 
     @Override
     public  Admin read(String username) {
-        for (Admin admin : admins) {
-            if (admin.getUsername().equals(username)) {
+        for (Admin admin : admins){
+            if (username.equals(admin.getUsername())) {
                 return admin;
             }
         }
@@ -102,7 +103,7 @@ public class AdminDAO implements CRUD <Admin> {
     }
 
     @Override
-    public List<Admin> getAll() {
+    public ArrayList<Admin> getAll() {
         return admins;
     }
 

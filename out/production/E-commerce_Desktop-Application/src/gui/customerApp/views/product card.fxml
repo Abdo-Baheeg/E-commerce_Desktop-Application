@@ -4,32 +4,47 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="324.0" prefWidth="326.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.gui.customerApp.controllers.ProductController">
-   <top>
-      <HBox alignment="CENTER" prefHeight="55.0" prefWidth="326.0" BorderPane.alignment="CENTER">
-         <Label fx:id="name" prefHeight="55.0" prefWidth="227.0" text="Label" />
-         <Label fx:id="price" prefHeight="55.0" prefWidth="119.0" text="Label" />
-      </HBox>
-   </top>
-   <bottom>
-      <HBox alignment="CENTER" prefHeight="34.0" prefWidth="326.0" spacing="15.0" BorderPane.alignment="CENTER">
-         <Button fx:id="addToInterests" mnemonicParsing="false" onAction="#addToInterests" prefHeight="36.0" prefWidth="41.0" style="-fx-background-color: transparent;">
-            <graphic>
-               <ImageView fitHeight="39.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
-                  <Image url="@../../utils/icon/favorite.png" />
-               </ImageView>
-            </graphic>
-         </Button>
-         <Button fx:id="removeFromCart" mnemonicParsing="false" onAction="#removeFromCart" prefHeight="27.0" prefWidth="105.0" text="remove" />
-         <Button fx:id="addToCart" mnemonicParsing="false" onAction="#addToCart" prefHeight="27.0" prefWidth="105.0" text="Add to Cart" />
-         <Spinner fx:id="quantity1" prefHeight="25.0" prefWidth="65.0" />
-      </HBox>
-   </bottom>
-   <center>
-      <ImageView fx:id="img" fitHeight="200.0" fitWidth="300.0" onMouseClicked="#goToDetails" pickOnBounds="true" BorderPane.alignment="CENTER" />
-   </center>
-   <padding>
-      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-   </padding>
-</BorderPane>
+<AnchorPane fx:id="productCard" style="-fx-background-radius: 30; -fx-background-color: transparent;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.gui.customerApp.controllers.ProductController">
+   <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="275.0" style="-fx-background-radius: 20;" styleClass="background" stylesheets="@../../utils/styles.css">
+      <top>
+         <HBox alignment="CENTER" prefHeight="36.0" prefWidth="255.0" BorderPane.alignment="CENTER">
+            <Label fx:id="name" prefHeight="27.0" prefWidth="204.0" text="Label" />
+            <Label fx:id="price" prefHeight="35.0" prefWidth="74.0" text="Label" />
+         </HBox>
+      </top>
+      <bottom>
+         <HBox alignment="CENTER" prefHeight="16.0" prefWidth="72.0" spacing="5.0" BorderPane.alignment="CENTER">
+            <Button fx:id="expand" mnemonicParsing="false" onAction="#expand" prefHeight="25.0" prefWidth="31.0" style="-fx-background-color: transparent;">
+               <graphic>
+                  <ImageView fitHeight="31.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                     <Image url="@../../utils/icon/expand.png" />
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="addToInterests" mnemonicParsing="false" onAction="#handleInterests" prefHeight="36.0" prefWidth="41.0" style="-fx-background-color: transparent;">
+               <graphic>
+                  <ImageView fx:id="productCardInterest" fitHeight="50.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                     <Image url="@../../utils/icon/favorite.png" />
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="addToCart" mnemonicParsing="false" onAction="#addToCart" prefHeight="13.0" prefWidth="145.0" text="Add to Cart" wrapText="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Spinner fx:id="quantity" editable="true" prefHeight="25.0" prefWidth="109.0" />
+         </HBox>
+      </bottom>
+      <center>
+         <ImageView fx:id="img" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" BorderPane.alignment="CENTER">
+            <Image url="@../../utils/icon/java.png" />
+         </ImageView>
+      </center>
+      <padding>
+         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+      </padding>
+   </BorderPane>
+</AnchorPane>

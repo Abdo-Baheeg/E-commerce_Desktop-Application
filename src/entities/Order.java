@@ -1,25 +1,27 @@
 package src.entities;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Order implements Serializable {
     private final int id;
     private static int idCounter=1;
-    private ArrayList<Product> products = new ArrayList<>();
+    private ArrayList<CartItem> Items = new ArrayList<>();
     private payMethod payMethod;
     private Status status;
     private float totalPrice;
+    private LocalDate date;
 
 
     public Order() {
         this.id = idCounter++;
         this.totalPrice = 0.0f;
-        this.products = new ArrayList<>();
+        this.Items = new ArrayList<>();
         this.status=Status.PENDING;
     }
-    public Order(ArrayList<Product> products) {
-        this.products = products;
+    public Order(ArrayList<CartItem> Items) {
+        this.Items = Items;
         this.status = Status.PENDING;
         this.id = idCounter++;
     }
@@ -44,12 +46,12 @@ public class Order implements Serializable {
         return id;
     }
 
-    public ArrayList<Product> getProducts() {
-        return products;
+    public ArrayList<CartItem> getItems() {
+        return Items;
     }
 
-    public void setProducts(ArrayList<Product> products) {
-        this.products = products;
+    public void setItems(ArrayList<CartItem> items) {
+        this.Items = items;
     }
 
     public float getTotalPrice() {
@@ -58,6 +60,14 @@ public class Order implements Serializable {
 
     public void setTotalPrice(float totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     public enum Status{

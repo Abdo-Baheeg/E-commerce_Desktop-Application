@@ -14,15 +14,18 @@ public class Database {
     public static ArrayList<Admin> admins = new ArrayList<>();
     public static ArrayList<Product> products = new ArrayList<>();
     public static ArrayList<Category> categories = new ArrayList<>();
+    public static ArrayList<Order> pendingOrders = new ArrayList<>();
+    public static ArrayList<Order> confirmedOrders = new ArrayList<>();
+    public static ArrayList<Order> deliveredOrders = new ArrayList<>();
     public static ArrayList<Product> availableProducts = new ArrayList<>();
     public static ArrayList<Product> soldProducts = new ArrayList<>();
 
-    public Database(){}
 
     public static void initData() throws MalformedURLException {
         //customers.add(new Customer("Abdo", Person.Gender.MALE,"Cairo, Egypt", "01016042121","3bdobahig@gmail.com","abdo","1234"));
-            admins.add(new Admin("Abdo Bahig","CEO","abdo","1234"));
+            admins.add(new Admin("Abdo Bahig","CEO","abdo","1234","C:\\Users\\Abdelrahman Bahig\\Desktop\\E-commerce_Application\\src\\gui\\utils\\icon\\user (4).png"));
             customers.add(new Customer("abdo","1234"));
+            customers.get(0).setBalance(1000000);
             // Initialize Categories
 //            Category laptops = new Category("Laptops", "High-performance computing devices for professional and personal use");
 //            Category smartphones = new Category("Smartphones", "Mobile devices with advanced computing capabilities");
@@ -268,6 +271,23 @@ public class Database {
         loadCustomers();
         loadProducts();
         loadCategories();
+        for (Customer c : customers){
+            if(!c.getOrders().isEmpty()){
+                for (Order o : c.getOrders()){
+                    if(o.getStatus() == Order.Status.PENDING){
+                        pendingOrders.add(o);
+                        continue;
+                    }
+                    if(o.getStatus() == Order.Status.CONFIRMED){
+                        confirmedOrders.add(o);
+                        continue;
+                    }
+                    deliveredOrders.add(o);
+                }
+            }
+        }
+
+        System.out.println("Database loaded");
     }
 
 
@@ -337,7 +357,10 @@ public class Database {
             try {
                 ObjectInputStream ois = new ObjectInputStream(new FileInputStream("src/database/products.csv"));
                 products = (ArrayList<Product>) ois.readObject();
-            }catch (Exception e){e.printStackTrace();}
+
+            }catch (Exception e){
+                System.out.println(e.getMessage());
+            }
         } else {
             System.out.println("Products file is empty. Initializing with default values.");
         }

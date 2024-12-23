@@ -1,28 +1,59 @@
 package src.service;
 
 import src.DAO.AdminDAO;
+import src.DAO.CategoryDAO;
 import src.DAO.ProductDAO;
 import src.entities.Admin;
+import src.entities.Category;
 import src.entities.Product;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class AdminService {
-    private final AdminDAO adminDAO = new AdminDAO();
-    private final ProductDAO productDAO = new ProductDAO();
+    private static final AdminDAO adminDAO = new AdminDAO();
+    private static Admin currentAdmin;
+    private static final ProductDAO productDAO = new ProductDAO();
+    private static final CategoryDAO categoryDAO = new CategoryDAO();
 
 
-    public boolean login(String username, String password) {
+
+    public static boolean login(String username, String password) {
         Admin admin = adminDAO.read(username);
         if (admin != null ) {
             if(admin.getPassword().equals(password)){
-                AdminDAO.setCurrentAdmin(admin);
+                currentAdmin = admin;
                 return true;
             }
             return false;
         }
         return false;
     }
+
+    public static Admin getCurrentAdmin() {
+        return currentAdmin;
+    }
+
+    public static void CreateCategory(String categoryName, String description) {
+        Category category = new Category(categoryName, description);
+        categoryDAO.create(category);
+    }
+
+    public static ArrayList<Category> getAllCategories() {
+        return categoryDAO.getAll();
+    }
+
+    public static boolean deleteCategory(Category category) {
+        if (category != null) {
+            categoryDAO.delete(category);
+            return true;
+        }
+        return false;
+    }
+
+    public static ArrayList<Category> getCategories() {
+        return categoryDAO.getAll();
+    }
+
     public boolean createAdmin(String name, String role, String username, String password) {
         Admin existingAdmin = adminDAO.read(username);
         if (existingAdmin != null) {
@@ -44,11 +75,11 @@ public class AdminService {
         }
         return false;
     }
-    public boolean createProduct(String name, String description, float price, int quantity) {
+    public static boolean createProduct(String name, String description, float price, int quantity, String image) {
         if(productDAO.read(name) != null){
             return false;
         } else if (ProductDAO.validName(name)&&ProductDAO.validDescription(description)&& price >0 && quantity>0) {
-            Product product = new Product(name, description, price, quantity);
+            Product product = new Product(name, description, price, quantity,image);
             productDAO.create(product);
             return true;
         }
@@ -62,7 +93,7 @@ public class AdminService {
         productDAO.update(product);
         return true;
     }
-    public boolean deleteProduct(int id) {
+    public static boolean deleteProduct(int id) {
         Product product = productDAO.read(id);
         if (product == null) {
             return false;
@@ -70,10 +101,10 @@ public class AdminService {
         productDAO.delete(id);
         return true;
     }
-    public List<Admin> getAllAdmins() {
+    public ArrayList<Admin> getAllAdmins() {
         return adminDAO.getAll();
     }
-    public List<Product> getAllProducts() {
+    public static ArrayList<Product> getAllProducts() {
         return productDAO.getAll();
     }
     public Product readProduct(String name) {

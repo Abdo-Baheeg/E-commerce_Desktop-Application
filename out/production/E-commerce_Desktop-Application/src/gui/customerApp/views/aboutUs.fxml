@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane styleClass="root" stylesheets="@../../utils/styles.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+   <VBox alignment="TOP_CENTER" prefHeight="586.0" prefWidth="911.0" spacing="20" stylesheets="@../../utils/styles.css">
+      <!-- Title Section -->
+      <Label prefHeight="64.0" prefWidth="356.0" styleClass="header" text="Reach out our team" />
+
+      <!-- Team Profiles Section -->
+      <HBox alignment="CENTER" fillHeight="false" prefHeight="211.0" prefWidth="878.0" spacing="20.0">
+         <!-- Individual Team Member Profiles -->
+         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="150.0" spacing="10">
+            <ImageView fx:id="teamPhoto1" fitHeight="100" fitWidth="100" />
+            <Label styleClass="team-name" text="Abdelrahman Bahig" />
+            <HBox alignment="CENTER" prefHeight="9.0" prefWidth="200.0" spacing="5.0">
+               <Button prefHeight="15.0" prefWidth="27.0" styleClass="view-more-btn">
+                  <graphic>
+                     <ImageView fitHeight="25.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../../utils/icon/whatsapp.png" />
+                     </ImageView>
+                  </graphic>
+               </Button>
+               <Button layoutX="87.0" layoutY="10.0" prefHeight="15.0" prefWidth="27.0" styleClass="view-more-btn">
+                  <graphic>
+                     <ImageView fitHeight="25.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../../utils/icon/github.png" />
+                     </ImageView>
+                  </graphic>
+               </Button>
+               <Button layoutX="113.0" layoutY="10.0" prefHeight="15.0" prefWidth="27.0" styleClass="view-more-btn">
+                  <graphic>
+                     <ImageView fitHeight="25.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../../utils/icon/linkedin.png" />
+                     </ImageView>
+                  </graphic>
+               </Button>
+            </HBox>
+         </VBox>
+         <VBox alignment="CENTER" layoutX="371.0" layoutY="10.0" prefHeight="200.0" prefWidth="150.0" spacing="10">
+            <ImageView fx:id="teamPhoto11" fitHeight="100" fitWidth="100" />
+            <Label styleClass="team-name" text="Mohamed Osama" />
+            <HBox alignment="CENTER" prefHeight="9.0" prefWidth="200.0" spacing="5.0">
+               <Button prefHeight="15.0" prefWidth="27.0" styleClass="view-more-btn">
+                  <graphic>
+                     <ImageView fitHeight="25.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../../utils/icon/whatsapp.png" />
+                     </ImageView>
+                  </graphic>
+               </Button>
+               <Button layoutX="87.0" layoutY="10.0" prefHeight="15.0" prefWidth="27.0" styleClass="view-more-btn">
+                  <graphic>
+                     <ImageView fitHeight="25.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../../utils/icon/github.png" />
+                     </ImageView>
+                  </graphic>
+               </Button>
+               <Button layoutX="113.0" layoutY="10.0" prefHeight="15.0" prefWidth="27.0" styleClass="view-more-btn">
+                  <graphic>
+                     <ImageView fitHeight="25.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../../utils/icon/linkedin.png" />
+                     </ImageView>
+                  </graphic>
+               </Button>
+            </HBox>
+         </VBox>
+         <VBox alignment="CENTER" layoutX="451.0" layoutY="10.0" prefHeight="200.0" prefWidth="150.0" spacing="10">
+            <ImageView fx:id="teamPhoto111" fitHeight="100" fitWidth="100" />
+            <Label styleClass="team-name" text="Maria Hany" />
+            <HBox alignment="CENTER" prefHeight="9.0" prefWidth="200.0" spacing="5.0">
+               <Button prefHeight="15.0" prefWidth="27.0" styleClass="view-more-btn">
+                  <graphic>
+                     <ImageView fitHeight="25.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../../utils/icon/whatsapp.png" />
+                     </ImageView>
+                  </graphic>
+               </Button>
+               <Button layoutX="87.0" layoutY="10.0" prefHeight="15.0" prefWidth="27.0" styleClass="view-more-btn">
+                  <graphic>
+                     <ImageView fitHeight="25.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../../utils/icon/github.png" />
+                     </ImageView>
+                  </graphic>
+               </Button>
+               <Button layoutX="113.0" layoutY="10.0" prefHeight="15.0" prefWidth="27.0" styleClass="view-more-btn">
+                  <graphic>
+                     <ImageView fitHeight="25.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../../utils/icon/linkedin.png" />
+                     </ImageView>
+                  </graphic>
+               </Button>
+            </HBox>
+         </VBox>
+         <VBox alignment="CENTER" layoutX="531.0" layoutY="10.0" prefHeight="200.0" prefWidth="150.0" spacing="10">
+            <ImageView fx:id="teamPhoto1111" fitHeight="100" fitWidth="100" />
+            <Label styleClass="team-name" text="Rossete Attya" />
+            <HBox alignment="CENTER" prefHeight="9.0" prefWidth="200.0" spacing="5.0">
+               <Button prefHeight="15.0" prefWidth="27.0" styleClass="view-more-btn">
+                  <graphic>
+                     <ImageView fitHeight="25.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../../utils/icon/whatsapp.png" />
+                     </ImageView>
+                  </graphic>
+               </Button>
+               <Button layoutX="87.0" layoutY="10.0" prefHeight="15.0" prefWidth="27.0" styleClass="view-more-btn">
+                  <graphic>
+                     <ImageView fitHeight="25.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../../utils/icon/github.png" />
+                     </ImageView>
+                  </graphic>
+               </Button>
+               <Button layoutX="113.0" layoutY="10.0" prefHeight="15.0" prefWidth="27.0" styleClass="view-more-btn">
+                  <graphic>
+                     <ImageView fitHeight="25.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../../utils/icon/linkedin.png" />
+                     </ImageView>
+                  </graphic>
+               </Button>
+            </HBox>
+         </VBox>
+         <VBox alignment="CENTER" layoutX="611.0" layoutY="10.0" prefHeight="200.0" prefWidth="150.0" spacing="10">
+            <ImageView fx:id="teamPhoto11111" fitHeight="100" fitWidth="100" />
+            <Label styleClass="team-name" text="Karim Nasrat" />
+            <HBox alignment="CENTER" prefHeight="9.0" prefWidth="200.0" spacing="5.0">
+               <Button prefHeight="15.0" prefWidth="27.0" styleClass="view-more-btn">
+                  <graphic>
+                     <ImageView fitHeight="25.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../../utils/icon/whatsapp.png" />
+                     </ImageView>
+                  </graphic>
+               </Button>
+               <Button layoutX="87.0" layoutY="10.0" prefHeight="15.0" prefWidth="27.0" styleClass="view-more-btn">
+                  <graphic>
+                     <ImageView fitHeight="25.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../../utils/icon/github.png" />
+                     </ImageView>
+                  </graphic>
+               </Button>
+               <Button layoutX="113.0" layoutY="10.0" prefHeight="15.0" prefWidth="27.0" styleClass="view-more-btn">
+                  <graphic>
+                     <ImageView fitHeight="25.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../../utils/icon/linkedin.png" />
+                     </ImageView>
+                  </graphic>
+               </Button>
+            </HBox>
+         </VBox>
+      </HBox>
+      <Label maxWidth="1083.0" prefHeight="249.0" prefWidth="1083.0" text="We are a team of five passionate engineering students from Ain Shams University, Faculty of Engineering. This project is part of our Object-Oriented Programming (OOP) course, showcasing our dedication to learning and innovation. Our mission is to innovate solutions that simplify lives, foster collaboration, and push the boundaries of technology while growing as a team of passionate developers." textFill="#145c40" wrapText="true">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <VBox.margin>
+            <Insets bottom="11.0" left="11.0" right="11.0" top="11.0" />
+         </VBox.margin>
+      </Label>
+      <opaqueInsets>
+         <Insets bottom="11.0" left="11.0" right="11.0" top="11.0" />
+      </opaqueInsets>
+      <padding>
+         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+      </padding>
+   </VBox>
+</AnchorPane>

@@ -7,6 +7,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import src.database.Database;
 
@@ -22,7 +24,6 @@ public class MainApp extends Application {
             Parent root = loader.load();
             Scene scene = new Scene(root);
 
-
             // Set the Stage
             primaryStage.setTitle("Login & Registration");
             primaryStage.setScene(scene);
@@ -37,12 +38,12 @@ public class MainApp extends Application {
                 alert.showAndWait();
                 event.consume();
                 if (alert.getResult() == ButtonType.OK){
+                    primaryStage.close();
                     try {
                         Database.saveDatabase();
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
-                    primaryStage.close();
                 }
             });
         } catch (Exception e) {
@@ -52,8 +53,7 @@ public class MainApp extends Application {
     }
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-        Database.initData();
-        Database.loadDatabase();
+      Database.loadDatabase();
         launch(args);
     }
 }

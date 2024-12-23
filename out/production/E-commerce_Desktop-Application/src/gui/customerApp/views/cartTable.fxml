@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane fx:controller="src.gui.customerApp.controllers.DashboardController" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <TableView fx:id="cartTableView" prefHeight="200.0" prefWidth="740.0" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn fx:id="nameCol" editable="false" prefWidth="300.0" text="Product name" />
+          <TableColumn fx:id="priceCol" editable="false" maxWidth="94.0" minWidth="0.0" prefWidth="100.0" text="Price" />
+            <TableColumn fx:id="categoryCol" editable="false" prefWidth="150.0" text="Category" />
+            <TableColumn fx:id="quantityCol" minWidth="3.33331298828125" prefWidth="100.0" text="Quantity" />
+            <TableColumn fx:id="actionCol" minWidth="0.0" prefWidth="100.0" text="Action" />
+        </columns>
+      </TableView>
+   </center>
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="65.0" prefWidth="764.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="cartPriceLabel" prefHeight="65.0" prefWidth="279.0" styleClass="product-price-label" stylesheets="@../../utils/styles.css" text="Total price" />
+            <Button fx:id="checkoutButton" contentDisplay="TOP" mnemonicParsing="false" onAction="#checkout" prefHeight="50.0" prefWidth="115.0" style="-fx-background-color: white;" text="Checkout">
+               <graphic>
+                  <ImageView fitHeight="52.0" fitWidth="68.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../utils/icon/buy.gif" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+   </bottom>
+</BorderPane>

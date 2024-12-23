@@ -4,9 +4,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import src.DAO.CustomerDAO;
+import src.service.AdminService;
 import src.service.CustomerService;
+
+import java.util.Objects;
 
 public class ProfileController {
     CustomerService customerService = new CustomerService();
@@ -56,6 +60,6 @@ public class ProfileController {
         email.setText(CustomerService.getCurrentCustomer().getEmail());
         address.setText(CustomerService.getCurrentCustomer().getAddress());
         gender.setText(CustomerService.getCurrentCustomer().getGender().toString());
-        img.setImage(CustomerService.getCurrentCustomer().getImage());
+        img.setImage( new Image(Objects.requireNonNull(getClass().getResourceAsStream(AdminService.getCurrentAdmin().getImgPath()))));
     }
 }

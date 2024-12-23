@@ -16,12 +16,14 @@ public abstract class Person implements Serializable {
     private String email;
     private int age;
     private LocalDate dateOfBirth;
-    private Image image;
+    private String imgPath;
 
-    public Person(String name, String username, String password) {
+    public Person(String name, String username, String password,String imgPath) {
+        this.name = name;
+        this.username = username;
         this.password = password;
         this.id = idCounter++;
-        this.name =name;
+        this.imgPath = imgPath;
     }
 
     public Person(String username, String password) {
@@ -31,7 +33,7 @@ public abstract class Person implements Serializable {
         this.name =username;
     }
 
-    public Person(String name, Gender genderEnum, String address, String phone, String email, String username, String password , LocalDate dateOfBirth) {
+    public Person(String name, Gender genderEnum, String address, String phone, String email, String username, String password, LocalDate dob, String img) {
     this.name = name;
     this.gender = genderEnum;
     this.address = address;
@@ -40,7 +42,8 @@ public abstract class Person implements Serializable {
     this.username = username;
     this.password = password;
     this.id = idCounter++;
-    this.dateOfBirth = dateOfBirth;
+    this.dateOfBirth = dob;
+    this.imgPath = img;
     }
 
     public Gender getGender() {
@@ -51,12 +54,16 @@ public abstract class Person implements Serializable {
         this.gender = gender;
     }
 
-    public Image getImage() {
-        return image;
+    public String getImgPath() {
+        return imgPath;
     }
 
-    public void setImage(Image image) {
-        this.image = image;
+    public void setImgPath(String imgPath) {
+        this.imgPath = imgPath;
+    }
+
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
     }
 
     public enum Gender {

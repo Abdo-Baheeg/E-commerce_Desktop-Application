@@ -16,6 +16,11 @@ public class ProductDAO implements CRUD<Product> {
 
     // validators : ............//
     public static boolean validName(String name) {
+        for (Product p : products) {
+            if (p.getName().equals(name)) {
+                return false;
+            }
+        }
         return name != null &&
                 name.matches("^[A-Za-z\\s]{2,50}$");
     }
@@ -105,7 +110,7 @@ public class ProductDAO implements CRUD<Product> {
      public static ArrayList<Product> search(String name) {
         ArrayList<Product> products = new ArrayList<>();
         for (Product product : Database.products) {
-            if (product.getName().equals(name)) {
+            if (product.getName().contains(name)) {
                 products.add(product);
             }
         }

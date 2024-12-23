@@ -38,6 +38,12 @@ public class Category implements Serializable {
     public void setProducts(ArrayList<Product> products) {
         this.products = products;
     }
+
+    @Override
+    public String toString() {
+        return this.name; // or another attribute you'd like to display
+    }
+
 }
 
 

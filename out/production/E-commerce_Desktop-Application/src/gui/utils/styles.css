@@ -206,4 +206,116 @@
     -fx-background-radius: 5px;
 }
 
+.table-view {
+    -fx-background-color: #f9f9f9;
+}
+
+.table-column-header {
+    -fx-background-color: #00796b;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+/* General Container Styles */
+.product-detail-container {
+    -fx-background-color: linear-gradient(to bottom, #ffffff, #f0f8ff);
+    -fx-border-color: #dcdcdc;
+    -fx-border-radius: 10px;
+    -fx-padding: 10px;
+}
+
+/* Header Styles */
+.product-header {
+    -fx-background-color: #00796b;
+    -fx-padding: 10px;
+    -fx-border-radius: 10px 10px 0 0;
+}
+
+.product-title {
+    -fx-text-fill: white;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+
+/* Sidebar Styles */
+.product-info-sidebar {
+    -fx-background-color: #e0f7fa;
+    -fx-padding: 15px;
+    -fx-border-radius: 0 10px 10px 0;
+    -fx-spacing: 10px;
+}
+
+.product-info-label,
+.product-price-label,
+.product-stock-label {
+    -fx-text-fill: #004d40;
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+}
+
+/* Center Content Styles */
+.product-imgPath {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0, 0);
+    -fx-border-color: #dcdcdc;
+    -fx-border-radius: 10px;
+}
+
+.product-description {
+    -fx-text-fill: #333333;
+    -fx-font-size: 16px;
+    -fx-padding: 10px;
+    -fx-background-color: #f9f9f9;
+    -fx-border-color: #e0e0e0;
+    -fx-border-radius: 10px;
+    -fx-wrap-text: true;
+}
+
+/* Bottom Actions */
+.product-actions {
+    -fx-background-color: #f0f8ff;
+    -fx-padding: 10px;
+    -fx-border-radius: 0 0 10px 10px;
+}
+
+.btn-primary {
+    -fx-background-color: #00796b;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px 15px;
+}
+
+.btn-primary:hover {
+    -fx-background-color: #00574b;
+}
+
+.btn-secondary {
+    -fx-background-color: #e0e0e0;
+    -fx-text-fill: #333333;
+    -fx-font-size: 14px;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px 15px;
+}
+
+.btn-secondary:hover {
+    -fx-background-color: #c0c0c0;
+}
+
+.btn-favorite {
+    -fx-background-color: transparent;
+    -fx-padding: 5px;
+    -fx-border-radius: 50%;
+}
+
+.btn-favorite:hover {
+    -fx-background-color: #ffebee;
+}
+
+/* Spinner */
+.spinner {
+    -fx-border-color: #dcdcdc;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
+}
+
+
 

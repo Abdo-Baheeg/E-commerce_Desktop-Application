@@ -77,7 +77,7 @@ public class CustomerService {
         return customer != null && customer.getPassword().equals(password);
     }
 
-    public static boolean register(String name, String email, String address, String username, String password, String phone, Person.Gender gender, LocalDate dob, Image img) {
+    public static boolean register(String name, String email, String address, String username, String password, String phone, Person.Gender gender, LocalDate dob, String img) {
         if (customerDAO.read(username) != null) {
             return false;
         } else if (validName(username) && validEmail(email) && validAddress(address) && validPhone(phone) ) {
@@ -91,16 +91,17 @@ public class CustomerService {
 
     public static boolean addToCart(@org.jetbrains.annotations.NotNull Product product, int quantity) {
         if (product.getStock() >= quantity) {
-            currentCustomer.getCart().getProducts().add(product);
+            CartItem cartItem = new CartItem(product, quantity);
+            currentCustomer.getCart().getProducts().add(cartItem);
             updateTotalPrice(product, quantity);
         }
         return false;
     }
 
-    public static boolean removeFromCart(Product product, int quantity) {
-        if (product != null) {
-            updateTotalPrice(product, -quantity);
-            currentCustomer.getCart().getProducts().remove(product);
+    public static boolean removeFromCart(CartItem cartItem) {
+        if (cartItem != null) {
+            updateTotalPrice(cartItem.getProduct(), -1 * cartItem.getQuantity());
+            currentCustomer.getCart().getProducts().remove(cartItem);
             return true;
         }
         return false;
@@ -125,7 +126,7 @@ public class CustomerService {
         return ProductDAO.search(productName);
     }
 
-    public static ArrayList<Product> viewCart() {
+    public static ArrayList<CartItem> viewCart() {
         return currentCustomer.getCart().getProducts();
     }
 
@@ -219,11 +220,15 @@ public class CustomerService {
             if(currentCustomer.getCart().getTotalPrice() > currentCustomer.getBalance()){
                 return false;
             }
-            ArrayList<Product> p =currentCustomer.getCart().getProducts();
+            ArrayList<CartItem> p =currentCustomer.getCart().getProducts();
             Order o = new Order(p);
             o.setStatus(Order.Status.PENDING);
             o.setTotalPrice(currentCustomer.getCart().getTotalPrice());
+            o.setDate(LocalDate.now());
+            currentCustomer.setBalance((float) (currentCustomer.getBalance() - currentCustomer.getCart().getTotalPrice()));
             currentCustomer.setOrder(o);
+            currentCustomer.getCart().setTotalPrice(0);
+            currentCustomer.getCart().setProducts(new ArrayList<>());
             return true;
         }
         return false;

@@ -1,5 +1,8 @@
 package src.gui.customerApp.controllers;
 
+
+import javafx.geometry.Pos;
+import org.controlsfx.control.Notifications;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -18,6 +21,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import org.controlsfx.control.Notifications;
 import src.DAO.CustomerDAO;
 import src.entities.Person;
 import src.service.CustomerService;
@@ -33,12 +37,10 @@ import java.util.ResourceBundle;
 
 public class LoginController {
 
-        public ImageView img;
-    public AnchorPane loginAnchorPane;
+       @FXML public ImageView img;
+    public AnchorPane registerPane;
 
-    CustomerService customerService = new CustomerService();
-
-        @FXML
+    @FXML
         private Button contactUsBtn;
         @FXML
         private Button goToLoginBtn;
@@ -110,36 +112,23 @@ public class LoginController {
             String password = this.password.getText();
 
             if (username.isEmpty() || password.isEmpty()) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText(null);
-                alert.setContentText("Please enter a valid username/password");
-                alert.showAndWait();
+                Notifications.create().text("Please Enter username and password").darkStyle().position(Pos.CENTER).showError();
                 return;
             }
-            if(!customerService.login(username, password)){
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Wrong Credentials");
-                alert.setHeaderText(null);
-                alert.setContentText("Wrong Credentials");
-                alert.showAndWait();
+            if(CustomerService.login(username, password)){
+                Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("../../utils/gif/got-it.gif")));
+                img.setImage(image);
+                Notifications.create().darkStyle().position(Pos.CENTER).title("Logged in Successfully").text("Welcome, "+CustomerService.getCurrentCustomer().getName()).showInformation();
+                Parent newRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../views/dashboard.fxml")));
+                Scene newScene = new Scene(newRoot);
+                // Get the current stage
+                Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+                stage.setScene(newScene);
+                stage.setTitle("EcoMARKET");
+                stage.show();
                 return;
             }
-            Image image = new Image(getClass().getResourceAsStream("../../utils/gif/got-it.gif"));
-            img.setImage(image);
-            CustomerDAO customerDAO = new CustomerDAO();
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Login");
-            alert.setHeaderText(null);
-            alert.setContentText(" You are Logged in successfully");
-            alert.showAndWait();
-            Parent newRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../views/dashboard.fxml")));
-            Scene newScene = new Scene(newRoot);
-            // Get the current stage
-            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            stage.setScene(newScene);
-            stage.setTitle("EcoMARKET");
-            stage.show();
+            Notifications.create().darkStyle().position(Pos.CENTER).title("Invalid Credentials").showError();
         }
         @FXML
         public void setMonkeyClose(MouseEvent actionEvent) {
@@ -218,7 +207,7 @@ public class LoginController {
 
             if (selectedFile != null) {
                 imgPathLbl.setText(selectedFile.getName());
-                 image = new Image(selectedFile.toURI().toString());
+                imgPath = selectedFile.getAbsolutePath();
             }
         }
 
@@ -233,91 +222,55 @@ public class LoginController {
             Person.Gender gender = Person.Gender.MALE;
             LocalDate dob = datePicker.getValue();
             if (!CustomerService.validName(name)) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText(null);
-                alert.setContentText("Please enter a valid name");
-                alert.showAndWait();
+                Notifications.create().darkStyle().position(Pos.CENTER).text("Please Enter Your name Correctly").showError();
                 return;
             }
             if (!CustomerService.validEmail(email)) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText(null);
-                alert.setContentText("Please enter a valid email");
-                alert.showAndWait();
+                Notifications.create().darkStyle().position(Pos.CENTER).text("Please Enter Your Email Correctly").showError();
                 return;
             }
             if (!CustomerService.validAddress(address)) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText(null);
-                alert.setContentText("Please enter a valid address");
-                alert.showAndWait();
+                Notifications.create().darkStyle().position(Pos.CENTER).text("Please Enter Your Address Correctly").showError();
                 return;
             }
             if (!CustomerService.validUsername(username)) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText(null);
-                alert.setContentText("Please enter a valid username");
-                alert.showAndWait();
+                Notifications.create().darkStyle().position(Pos.CENTER).text("Please Enter unique Username").showError();
                 return;
             }
             if (!CustomerService.validPassword(password)) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText(null);
-                alert.setContentText("Please enter a valid password");
-                alert.showAndWait();
+                Notifications.create().darkStyle().position(Pos.CENTER).text("Please Enter Password Contains: (A-Z, a-z, 0-9 and Special character)").showError();
+                return;
+            }
+            if (!CustomerService.validPhone(phone)) {
+                Notifications.create().text("Please Enter Phone Number").darkStyle().showError();
                 return;
             }
             if (!Male.isSelected() || Female.isSelected()) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText(null);
-                alert.setContentText("Please select a gender");
-                alert.showAndWait();
+                Notifications.create().darkStyle().position(Pos.CENTER).text("Please Select your Gender").showError();
                 return;
             }
             if (!CustomerService.validDateOfBirth(dob)) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText(null);
-                alert.setContentText("Please enter a valid date of birth");
-                alert.showAndWait();
+                Notifications.create().darkStyle().position(Pos.CENTER).text("Age warning").text("check for your birthday, if it is correct, You are not eligible for using our Site").showError();
                 return;
             }
-            if (image == null) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText(null);
-                alert.setContentText("Please enter a valid image");
-                alert.showAndWait();
+            if (imgPath == null) {
+                Notifications.create().darkStyle().position(Pos.CENTER).text("Please Choose a photo").showError();
                 return;
             }
             if(Female.isSelected()){
                 gender = Person.Gender.FEMALE;
             }
-            System.out.println("HHHHHHHHHHHHHHHHHHH");
-            CustomerService.register(name,email,address,username,password,phone,gender,dob,image);
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Success");
-                alert.setHeaderText(null);
-                alert.setContentText("Successfully registered");
-                alert.showAndWait();
+            if(CustomerService.register(name,email,address,username,password,phone,gender,dob,imgPath)) {
+                Notifications.create().darkStyle().position(Pos.BOTTOM_LEFT).title("Registered Successfully").text("Welcome, " + name).show();
 
                 Parent newRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../views/dashboard.fxml")));
                 Scene newScene = new Scene(newRoot);
                 // Get the current stage
-                Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 stage.setScene(newScene);
                 stage.setTitle("EcoMARKET");
                 stage.show();
-
-
-
-
+            }
     }
 
 }

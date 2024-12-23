@@ -1,61 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-
-<BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <center>
-      <TableView editable="true" prefHeight="600.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
-        <columns>
-          <TableColumn prefWidth="180.66668701171875" text="Name" />
-          <TableColumn prefWidth="478.00006103515625" text="Description" />
-            <TableColumn prefWidth="221.9998779296875" text="Category" />
-            <TableColumn prefWidth="110.0" text="Price" />
-            <TableColumn prefWidth="119.3333740234375" text="in Stock" />
-            <TableColumn prefWidth="88.0" text="Sold Items" />
-        </columns>
-         <padding>
-            <Insets left="10.0" right="10.0" />
-         </padding>
-         <columnResizePolicy>
-            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-         </columnResizePolicy>
-      </TableView>
-   </center>
-   <bottom>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="553.0" prefWidth="594.0" stylesheets="@../../utils/styles.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.gui.adminApp.controllers.DashboardController">
+   <children>
+      <VBox fillWidth="false" layoutX="104.0" layoutY="10.0" prefHeight="514.0" prefWidth="397.0">
          <children>
-            <Button mnemonicParsing="false" prefHeight="55.0" prefWidth="300.0" style="-fx-background-radius: 30;" text="Back" />
-            <Button mnemonicParsing="false" prefHeight="55.0" prefWidth="300.0" style="-fx-background-radius: 30;" text="Delete" />
+            <Label alignment="CENTER" prefHeight="48.0" prefWidth="397.0" styleClass="header" stylesheets="@../../utils/styles.css" text="Add New Product" textAlignment="CENTER" />
+            <GridPane prefHeight="319.0" prefWidth="396.0" vgap="10.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="206.66668701171875" minWidth="10.0" prefWidth="82.0" />
+                <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="386.66668701171875" minWidth="10.0" prefWidth="314.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="115.33334350585938" minHeight="10.0" prefHeight="59.99999364217122" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="182.66665267944336" minHeight="10.0" prefHeight="135.3333396911621" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="145.6666564941406" minHeight="3.666656494140625" prefHeight="48.666656494140625" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="145.6666564941406" minHeight="10.0" prefHeight="48.666656494140625" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="113.99997456868488" minHeight="10.0" prefHeight="54.66667683919269" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Product name" wrapText="true">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label text="Price" wrapText="true" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="66.0" prefWidth="151.0" text="Product Description" wrapText="true" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="25.0" prefWidth="87.0" text="Photo" wrapText="true" GridPane.rowIndex="4">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="newProductName" prefHeight="37.0" prefWidth="340.0" GridPane.columnIndex="1" />
+                  <TextArea fx:id="newProductDescription" prefHeight="128.0" prefWidth="322.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <HBox alignment="CENTER_LEFT" fillHeight="false" prefHeight="55.0" prefWidth="331.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <children>
+                        <TextField fx:id="newProductPrice" prefHeight="37.0" prefWidth="115.0" />
+                        <Separator opacity="0.0" orientation="VERTICAL" prefHeight="0.0" prefWidth="26.0" />
+                        <Label text="Quantity" wrapText="true">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="newProductQuantity" prefHeight="37.0" prefWidth="81.0" />
+                     </children>
+                  </HBox>
+                  <Button fx:id="choosePhotoBtn" mnemonicParsing="false" onAction="#choosePhoto" prefHeight="30.0" prefWidth="339.0" styleClass="btn-submit" text="Click to Pick a photo" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Label prefHeight="51.0" prefWidth="104.0" text="Category" GridPane.rowIndex="3" />
+                  <ChoiceBox fx:id="newProductCategory" onMouseEntered="#populateChoiceBox" onMouseDragEntered="#populateChoiceBox" onMouseClicked="#populateChoiceBox" prefHeight="31.0" prefWidth="318.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+               </children>
+            </GridPane>
+            <Label fx:id="imgPathLbl" prefHeight="42.0" prefWidth="397.0" />
+            <Separator opacity="0.0" prefHeight="12.0" prefWidth="397.0" />
+            <Button fx:id="submitNewProduct" mnemonicParsing="false" onAction="#addProduct" prefHeight="43.0" prefWidth="514.0" styleClass="btn-submit" text="Submit" />
          </children>
-      </HBox>
-   </bottom>
-   <top>
-      <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="50.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
-         <padding>
-            <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-         </padding>
-         <children>
-            <Label prefHeight="152.0" prefWidth="1053.0" text="Products Deletion or Modifacation" textFill="WHITE">
-               <font>
-                  <Font size="47.0" />
-               </font>
-            </Label>
-            <ImageView fitHeight="105.0" fitWidth="144.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@Picsart_24-12-02_21-49-23-476.png" />
-               </image>
-            </ImageView>
-         </children>
-      </HBox>
-   </top>
-</BorderPane>
+      </VBox>
+   </children>
+</AnchorPane>

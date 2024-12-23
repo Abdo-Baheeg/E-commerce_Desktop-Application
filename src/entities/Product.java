@@ -13,7 +13,9 @@ public class Product implements Serializable {
     private int stock;
     private Category category;
     private int soldItems=0;
-    private Image image;
+    private String imgPath  ;
+
+
     public Product(String name, String description, double price, int stock) {
         this.name = name;
         this.description = description;
@@ -46,6 +48,15 @@ public class Product implements Serializable {
         this.category = category;
     }
 
+    public Product(String name, String description, double price, int quantity, String imgPath) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.stock = quantity;
+        this.imgPath = imgPath;
+        this.id = idCounter++;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -54,14 +65,12 @@ public class Product implements Serializable {
         return name;
     }
 
-    public void setCategory(String category) {
-        this.category.setName(category);
-    }
-    public String getCategory() {
-        return category.toString();
-    }
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public Category getCategory() {
+        return category;
     }
 
     public String getDescription() {
@@ -77,7 +86,7 @@ public class Product implements Serializable {
     public String getPriceString() {
         return String.format("$%.2f", price);
     }
-    public void setPrice(float price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
@@ -101,11 +110,11 @@ public class Product implements Serializable {
         this.soldItems = soldItems;
     }
 
-    public Image getImg() {
-        return image;
+    public String getImgPath() {
+        return imgPath;
     }
     public void setImgPath(String imgPath) {
-        this.image = new Image( imgPath);
+        this.imgPath =  imgPath;
     }
 
 }

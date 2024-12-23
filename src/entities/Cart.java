@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Cart implements Serializable {
     private int id;
     private static int idCounter=0;
-    private ArrayList<Product> products;
+    private ArrayList<CartItem> products;
     private float totalPrice;
 
     public Cart() {
@@ -22,10 +22,10 @@ public class Cart implements Serializable {
         this.id = id;
     }
 
-    public ArrayList<Product> getProducts() {
+    public ArrayList<CartItem> getProducts() {
         return products;
     }
-    public void setProducts(ArrayList<Product> products) {
+    public void setProducts(ArrayList<CartItem> products) {
         this.products = products;
     }
 

@@ -3,11 +3,17 @@ package src.DAO;
 import src.database.Database;
 import src.entities.Category;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryDAO implements CRUD<Category>{
 
     public static boolean validName(String name) {
+        for (Category c : Database.categories){
+            if (c.getName().equals(name)){
+                return false;
+            }
+        }
         return name != null &&
                 name.matches("^[A-Za-z\\s]{2,50}$");
     }
@@ -66,7 +72,7 @@ public class CategoryDAO implements CRUD<Category>{
     }
 
     @Override
-    public List<Category> getAll() {
+    public ArrayList<Category> getAll() {
         return Database.categories;
     }
 

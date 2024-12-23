@@ -7,12 +7,12 @@ import java.util.ArrayList;
 
 public class Customer extends Person {
     private double balance = 5000;
-    private Cart cart;
+    private Cart cart = new Cart();
     private ArrayList<Order> orders=new ArrayList<>();
     private ArrayList<Product> interests = new ArrayList<>();
 
-    public Customer(String name, Gender genderEnum, String address, String phone, String email, String username, String password, LocalDate dob, Image img) {
-        super( name,  genderEnum,  address,  phone, email,username,password,dob);
+    public Customer(String name, Gender genderEnum, String address, String phone, String email, String username, String password, LocalDate dob, String img) {
+        super( name,  genderEnum,  address,  phone, email,username,password,dob,img);
         cart = new Cart();
         this.cart=new Cart();
         this.balance=1000;

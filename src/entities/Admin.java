@@ -14,8 +14,14 @@ public class Admin extends Person {
       super();
   }
 
+    public Admin(String name, String role, String username, String password,String img) {
+      super(name, username, password,img);
+      this.role = role;
+    }
+
     public Admin(String name, String role, String username, String password) {
-      super(name, username, password);
+      super(name,username,password,null);
+      this.role = role;
     }
 
     public int getWorkingHours() {
