@@ -3,7 +3,7 @@ package src.database;
 import src.entities.*;
 
 import java.io.*;
-import java.util.*;
+import java.util.*;    //for array list
 
 public class Database {
     public static ArrayList<Customer> customers = new ArrayList<>();
@@ -15,8 +15,10 @@ public class Database {
     public static Customer currentCustomer;
     public static Admin currentAdmin;
 
+    //no-arg constructor
     public Database(){}
 
+    //initialize data "dummy data"
     public static void initDummyData(){
         // initialize 5 admins:
         for (int i = 0; i < 5; i++) {
